@@ -26,4 +26,4 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 . "$HOME/.cargo/env"
-. "/home/samemaru/.deno/env"
+. "$HOME/.deno/env"

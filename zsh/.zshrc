@@ -10,7 +10,7 @@ fi
 export PATH="/usr/local/go/bin:$PATH"
 export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/sbin:$PATH"
 export PATH="/snap/bin:$PATH"
-export PATH="/home/samemaru/go/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
 
 if [ -f "$HOME/.cargo/env" ]; then
   . "$HOME/.cargo/env"
@@ -38,7 +38,7 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-export PATH="$PATH:/home/samemaru/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
 
 if command -v batcat &> /dev/null; then
   alias cat='batcat --style=plain'
@@ -66,7 +66,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # 重複していたPATH記述を整理
-export PATH="/home/samemaru/.nvm/versions/node/v22.21.0/bin:/home/samemaru/go/bin:/snap/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/sbin:/home/samemaru/.local/share/zinit/polaris/bin:/home/samemaru/.cargo/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/home/samemaru/.local/bin:/usr/local/go/bin:$PATH"
+export PATH="$HOME/.nvm/versions/node/v22.21.0/bin:$HOME/go/bin:/snap/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/sbin:$HOME/.local/share/zinit/polaris/bin:$HOME/.cargo/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:$HOME/.local/bin:/usr/local/go/bin:$PATH"
 
 bindkey '^[[1;5D' backward-word
 bindkey '^[[1;5C' forward-word
@@ -81,11 +81,15 @@ export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 . "$DENO_INSTALL/env"
 export PATH="/usr/local/bin:/usr/bin:/bin:$HOME/.local/bin:$PATH"
-. "/home/samemaru/.deno/env"
+. "$HOME/.deno/env"
 
 export PATH="$HOME/development/flutter/bin:$PATH"
-export PATH=$PATH:/mnt/c/Users/nakayama/AppData/Local/Android/Sdk/platform-tools
-alias adb="/mnt/c/Users/nakayama/AppData/Local/Android/Sdk/platform-tools/adb.exe"
+# Windows username (dynamic)
+export WIN_USER=$(cmd.exe /c "echo %USERNAME%" 2>/dev/null | tr -d '\r')
+if [[ -n "$WIN_USER" ]]; then
+  export PATH=$PATH:/mnt/c/Users/$WIN_USER/AppData/Local/Android/Sdk/platform-tools
+  alias adb="/mnt/c/Users/$WIN_USER/AppData/Local/Android/Sdk/platform-tools/adb.exe"
+fi
 
 export GDK_BACKEND=x11
 

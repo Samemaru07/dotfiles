@@ -20,6 +20,7 @@ config.text_background_opacity = 0.92
 config.window_background_opacity = 0.92
 config.font = wezterm.font("JetBrains Mono", { weight = "Regular" })
 config.line_height = 0.98
+config.use_ime = false
 
 -- 背景設定
 local bg_path = wezterm.home_dir .. "\\Pictures\\壁紙\\ターミナル\\ハーラちゃん.png"
@@ -218,14 +219,26 @@ local function get_cwd_path(pane)
             path = "/mnt/" .. drive:lower() .. "/" .. rest
         end
 
-        -- 5. Map TUFGamingB550Plus to ~/win (using absolute path for safety)
-        local win_mnt = "/mnt/c/Users/TUFGamingB550Plus"
-        -- Check ignoring case for robust path matching
-        if path:lower():sub(1, #win_mnt) == win_mnt:lower() then
-            local suffix = path:sub(#win_mnt + 1)
-            -- Ensure we match the directory exactly or as a parent
-            if suffix == "" or suffix:sub(1, 1) == "/" then
-                path = "/home/samemaru/win" .. suffix
+        -- 5. Map Windows user profile to ~/win
+        -- WSL環境で、wezterm.home_dir は Windows側のホームパス (C:\Users\Name)
+        local win_home = wezterm.home_dir:gsub("\\", "/")
+        
+        -- Windowsホームパスを /mnt/c/Users/Name 形式に変換
+        local win_drive, win_rest = win_home:match("^([A-Za-z]):/(.*)")
+        if win_drive then
+            local win_mnt_base = "/mnt/" .. win_drive:lower() .. "/" .. win_rest
+            
+            -- パスがWindowsのホームディレクトリ配下かチェック (大文字小文字無視)
+            if path:lower():sub(1, #win_mnt_base) == win_mnt_base:lower() then
+                local suffix = path:sub(#win_mnt_base + 1)
+                -- ディレクトリ区切り、または完全一致を確認
+                if suffix == "" or suffix:sub(1, 1) == "/" then
+                    -- WSL側のユーザー名を取得してパスを構築
+                    local wsl_user = os.getenv("USER")
+                    if wsl_user then
+                        path = "/home/" .. wsl_user .. "/win" .. suffix
+                    end
+                end
             end
         end
 
