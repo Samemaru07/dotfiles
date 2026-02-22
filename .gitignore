@@ -1,0 +1,4 @@
+.ssh/
+.config/gh/
+.gitconfig.local
+.zsh_history
