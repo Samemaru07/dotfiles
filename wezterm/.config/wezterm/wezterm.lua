@@ -15,15 +15,24 @@ config.initial_rows = 45
 config.freetype_load_flags = "DEFAULT"
 config.freetype_load_target = "Normal"
 config.freetype_render_target = "Normal"
-config.front_end = "WebGpu"
+config.front_end = "OpenGL"
 config.text_background_opacity = 0.92
 config.window_background_opacity = 0.92
 config.font = wezterm.font("JetBrains Mono", { weight = "Regular" })
 config.line_height = 0.98
 config.use_ime = false
+-- config.win32_system_cursor = true
 
 -- 背景設定
-local bg_path = wezterm.home_dir .. "\\Pictures\\壁紙\\ターミナル\\ハーラちゃん.png"
+local bg_path
+
+if wezterm.target_triple:find("windows") then
+    -- Windows版 WezTerm → WSL 内 dotfiles を参照
+    bg_path = "\\\\wsl$\\Ubuntu\\home\\samemaru\\dotfiles\\assets\\terminal\\hala.png"
+else
+    -- Arch Linux / Linux版 WezTerm
+    bg_path = "/home/samemaru/dotfiles/assets/terminal/hala.png"
+end
 
 config.background = {
     {
@@ -222,12 +231,12 @@ local function get_cwd_path(pane)
         -- 5. Map Windows user profile to ~/win
         -- WSL環境で、wezterm.home_dir は Windows側のホームパス (C:\Users\Name)
         local win_home = wezterm.home_dir:gsub("\\", "/")
-        
+
         -- Windowsホームパスを /mnt/c/Users/Name 形式に変換
         local win_drive, win_rest = win_home:match("^([A-Za-z]):/(.*)")
         if win_drive then
             local win_mnt_base = "/mnt/" .. win_drive:lower() .. "/" .. win_rest
-            
+
             -- パスがWindowsのホームディレクトリ配下かチェック (大文字小文字無視)
             if path:lower():sub(1, #win_mnt_base) == win_mnt_base:lower() then
                 local suffix = path:sub(#win_mnt_base + 1)
