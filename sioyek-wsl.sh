@@ -38,7 +38,9 @@ fi
 
 WIN_PDF_PATH=$(wslpath -w "$PDF_FILE")
 
-CMD_ARGS=("--reuse-window")
+# Use --reuse-window to prevent opening new instances
+# Use --nofocus to prevent Sioyek from stealing focus (keep nvim active)
+CMD_ARGS=("--reuse-window" "--nofocus")
 
 if [[ -n "$TEX_FILE" ]]; then
     WIN_TEX_PATH=$(wslpath -w "$TEX_FILE")
