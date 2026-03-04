@@ -66,7 +66,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # 重複していたPATH記述を整理
-export PATH="$HOME/.nvm/versions/node/v22.21.0/bin:$HOME/go/bin:/snap/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/sbin:$HOME/.local/share/zinit/polaris/bin:$HOME/.cargo/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:$HOME/.local/bin:/usr/local/go/bin:$PATH"
+export PATH="$HOME/go/bin:/snap/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/sbin:$HOME/.local/share/zinit/polaris/bin:$HOME/.cargo/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:$HOME/.local/bin:/usr/local/go/bin:$PATH"
 
 bindkey '^[[1;5D' backward-word
 bindkey '^[[1;5C' forward-word
@@ -91,7 +91,7 @@ if [[ -n "$WIN_USER" ]]; then
   alias adb="/mnt/c/Users/$WIN_USER/AppData/Local/Android/Sdk/platform-tools/adb.exe"
 fi
 
-export GDK_BACKEND=x11
+# GDK_BACKEND is set to "wayland,x11" by hyprland.conf; do not override here
 
 # --- Added for zathura/vimtex over SSH ---
 if [[ -n "$SSH_CONNECTION" && -z "$DISPLAY" ]]; then
