@@ -5,28 +5,30 @@ if wezterm.config_builder then
     config = wezterm.config_builder()
 end
 
+local is_windows = wezterm.target_triple:find("windows") ~= nil
+
 config.automatically_reload_config = true
 
 -- 基本設定
 config.font_size = 10.5
-config.default_prog = { "wsl.exe", "-d", "Ubuntu", "--cd", "~" }
+-- config.default_prog = { "wsl.exe", "-d", "Ubuntu", "--cd", "~" }
 config.initial_cols = 160
 config.initial_rows = 45
 config.freetype_load_flags = "DEFAULT"
 config.freetype_load_target = "Normal"
 config.freetype_render_target = "Normal"
-config.front_end = "OpenGL"
+config.front_end = "WebGpu"
 config.text_background_opacity = 0.92
 config.window_background_opacity = 0.92
 config.font = wezterm.font("JetBrains Mono", { weight = "Regular" })
 config.line_height = 0.98
-config.use_ime = false
+config.use_ime = true
 -- config.win32_system_cursor = true
 
 -- 背景設定
 local bg_path
 
-if wezterm.target_triple:find("windows") then
+if is_windows then
     -- Windows版 WezTerm → WSL 内 dotfiles を参照
     bg_path = "\\\\wsl$\\Ubuntu\\home\\samemaru\\dotfiles\\assets\\terminal\\hala.png"
 else
@@ -262,28 +264,38 @@ config.keys = {
         key = "%",
         mods = "LEADER|SHIFT",
         action = wezterm.action_callback(function(window, pane)
-            local args = { "wsl.exe", "-d", "Ubuntu" }
             local cwd = get_cwd_path(pane)
-            if cwd then
-                -- CD inside the shell to avoid path conversion issues
-                args = { "wsl.exe", "-d", "Ubuntu", "-e", "bash", "-c", "cd '" .. cwd .. "'; exec zsh" }
+            local split_opts = { direction = "Right" }
+            if is_windows then
+                local args = { "wsl.exe", "-d", "Ubuntu" }
+                if cwd then
+                    args = { "wsl.exe", "-d", "Ubuntu", "-e", "bash", "-c", "cd '" .. cwd .. "'; exec zsh" }
+                end
+                split_opts.args = args
+            elseif cwd then
+                split_opts.cwd = cwd
             end
-            pane:split({ direction = "Right", args = args })
+            pane:split(split_opts)
         end),
     },
 
     -- 横分割(上下に2枚)
     {
-        key = '"', -- 修正: '""' から '"' へ変更
+        key = '"',
         mods = "LEADER|SHIFT",
         action = wezterm.action_callback(function(window, pane)
-            local args = { "wsl.exe", "-d", "Ubuntu" }
             local cwd = get_cwd_path(pane)
-            if cwd then
-                -- CD inside the shell to avoid path conversion issues
-                args = { "wsl.exe", "-d", "Ubuntu", "-e", "bash", "-c", "cd '" .. cwd .. "'; exec zsh" }
+            local split_opts = { direction = "Bottom" }
+            if is_windows then
+                local args = { "wsl.exe", "-d", "Ubuntu" }
+                if cwd then
+                    args = { "wsl.exe", "-d", "Ubuntu", "-e", "bash", "-c", "cd '" .. cwd .. "'; exec zsh" }
+                end
+                split_opts.args = args
+            elseif cwd then
+                split_opts.cwd = cwd
             end
-            pane:split({ direction = "Bottom", args = args })
+            pane:split(split_opts)
         end),
     },
 
@@ -459,38 +471,16 @@ config.keys = {
         key = "g",
         mods = "LEADER",
         action = wezterm.action_callback(function(window, pane)
-            local args = { "wsl.exe", "-d", "Ubuntu" }
             local cwd = get_cwd_path(pane)
 
-            -- デバッグ用: 生のパスを取得
-            local raw_cwd_obj = pane:get_current_working_dir()
-            local raw_path = "nil"
-            if raw_cwd_obj then
-                raw_path = raw_cwd_obj.file_path
+            local cmd = (cwd and ("cd '" .. cwd .. "' && ") or "") .. "lazygit || read"
+
+            local args
+            if is_windows then
+                args = { "wsl.exe", "-d", "Ubuntu", "-e", "bash", "-c", cmd }
+            else
+                args = { "bash", "-c", cmd }
             end
-
-            local cmd = "lazygit"
-            -- デバッグコマンドの構築
-            -- 1. WezTermが受け取っている生のパスを表示
-            -- 2. 変換後のパスを表示
-            -- 3. cd 実行
-            -- 4. 実際のカレントディレクトリを表示
-            -- 5. .gitの存在確認
-            cmd = "echo '=== WezTerm Debug Info ==='; "
-                .. "echo 'Raw Path (from pane): "
-                .. raw_path
-                .. "'; "
-                .. "echo 'Converted Path:       "
-                .. (cwd or "nil")
-                .. "'; "
-                .. (cwd and ("cd '" .. cwd .. "' && ") or "")
-                .. "echo 'Final PWD:            ' $PWD; "
-                .. "if [ -d .git ]; then echo 'Status: .git found'; else echo 'Status: No .git found'; fi; "
-                .. "echo '=========================='; "
-                .. "lazygit || read"
-
-            -- Use bash to cd then run lazygit
-            args = { "wsl.exe", "-d", "Ubuntu", "-e", "bash", "-c", cmd }
 
             window:perform_action(
                 wezterm.action.SpawnCommandInNewWindow({
@@ -589,4 +579,5 @@ config.key_tables = {
     },
 }
 
+config.enable_wayland = false
 return config
