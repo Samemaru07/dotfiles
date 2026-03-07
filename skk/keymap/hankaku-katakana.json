@@ -1,6 +1,6 @@
 {
     "include": [
-        "default/katakana"
+        "default/hankaku-katakana"
     ],
     "define": {
         "keymap": {
@@ -8,7 +8,7 @@
             "Q": "start-preedit",
             "l": "",
             "L": "set-input-mode-wide-latin",
-            "C-q": "set-input-mode-hankaku-katakana",
+            "C-q": "set-input-mode-hiragana",
             "C-j": "commit"
         }
     }
