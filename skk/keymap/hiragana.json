@@ -4,6 +4,7 @@
     ],
     "define": {
         "keymap": {
+            "Escape": "abort",
             "q": "set-input-mode-katakana",
             "Q": "start-preedit",
             "l": "",

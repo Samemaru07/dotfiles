@@ -4,6 +4,7 @@
     ],
     "define": {
         "keymap": {
+            "Escape": "abort",
             "q": "set-input-mode-hiragana",
             "Q": "start-preedit",
             "l": "",
