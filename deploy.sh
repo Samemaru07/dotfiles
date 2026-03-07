@@ -13,3 +13,7 @@ ln -snf "$DOTFILES_DIR/fastfetch/config.jsonc" "$HOME/.config/fastfetch/config.j
 mkdir -p "$HOME/.config/wofi"
 ln -snf "$DOTFILES_DIR/wofi/config" "$HOME/.config/wofi/config"
 ln -snf "$DOTFILES_DIR/wofi/style.css" "$HOME/.config/wofi/style.css"
+mkdir -p "$HOME/.local/share/libskk/rules/myrule/keymap"
+ln -snf "$DOTFILES_DIR/skk/metadata.json" "$HOME/.config/libskk/rules/myrule/metadata.json"
+ln -snf "$DOTFILES_DIR/skk/keymap/hiragana.json" "$HOME/.config/libskk/rules/myrule/keymap/hiragana.json"
+ln -snf "$DOTFILES_DIR/skk/keymap/katakana.json" "$HOME/.config/libskk/rules/myrule/keymap/katakana.json"
