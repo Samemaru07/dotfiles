@@ -34,7 +34,7 @@ fi
 source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+zinit light romkatv/powerlevel10k
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
