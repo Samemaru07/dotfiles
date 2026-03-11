@@ -15,11 +15,14 @@ ln -snf "$DOTFILES_DIR/applications/org.wezfurlong.wezterm.desktop" "$HOME/.loca
 mkdir -p "$HOME/.config/wofi"
 ln -snf "$DOTFILES_DIR/wofi/config" "$HOME/.config/wofi/config"
 ln -snf "$DOTFILES_DIR/wofi/style.css" "$HOME/.config/wofi/style.css"
-mkdir -p "$HOME/.local/share/libskk/rules/myrule/keymap"
-ln -snf "$DOTFILES_DIR/skk/metadata.json" "$HOME/.config/libskk/rules/myrule/metadata.json"
-ln -snf "$DOTFILES_DIR/skk/keymap/hiragana.json" "$HOME/.config/libskk/rules/myrule/keymap/hiragana.json"
-ln -snf "$DOTFILES_DIR/skk/keymap/katakana.json" "$HOME/.config/libskk/rules/myrule/keymap/katakana.json"
+# SKK (Arch Linux only; skip on WSL/Ubuntu)
+if ! grep -qi microsoft /proc/version 2>/dev/null; then
+    mkdir -p "$HOME/.config/libskk/rules/myrule/keymap"
+    ln -snf "$DOTFILES_DIR/skk/metadata.json" "$HOME/.config/libskk/rules/myrule/metadata.json"
+    ln -snf "$DOTFILES_DIR/skk/keymap/hiragana.json" "$HOME/.config/libskk/rules/myrule/keymap/hiragana.json"
+    ln -snf "$DOTFILES_DIR/skk/keymap/katakana.json" "$HOME/.config/libskk/rules/myrule/keymap/katakana.json"
+fi
 sudo mkdir -p "/etc/sddm.conf.d"
-sudo ln -snf "$DOTFILES_DIR/dotfiles/sddm/theme.conf" "/etc/sddm.conf.d/theme.conf"
-sudo ln -snf "$DOTFILES_DIR/dotfiles/sddm/Suger-Candy/theme.conf" "/usr/share/sddm/themes/Sugar-Candy/theme.conf"
-sudo ln -snf "$DOTFILES_DIR/dotfiles/assets/lock/angel.png" "/usr/share/sddm/Sugar-Candy/Backgrounds/angel.png"
+sudo ln -snf "$DOTFILES_DIR/sddm/theme.conf" "/etc/sddm.conf.d/theme.conf"
+sudo ln -snf "$DOTFILES_DIR/sddm/Sugar-Candy/theme.conf" "/usr/share/sddm/themes/Sugar-Candy/theme.conf"
+sudo ln -snf "$DOTFILES_DIR/assets/lock/angel.png" "/usr/share/sddm/Sugar-Candy/Backgrounds/angel.png"
