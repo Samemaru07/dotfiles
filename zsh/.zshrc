@@ -81,7 +81,6 @@ export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 . "$DENO_INSTALL/env"
 export PATH="/usr/local/bin:/usr/bin:/bin:$HOME/.local/bin:$PATH"
-. "$HOME/.deno/env"
 
 export PATH="$HOME/development/flutter/bin:$PATH"
 # Windows username (dynamic)
