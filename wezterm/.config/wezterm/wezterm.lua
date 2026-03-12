@@ -580,4 +580,9 @@ config.key_tables = {
 }
 
 config.enable_wayland = false
+
+wezterm.on("format-window-title", function(tab, pane, tabs, panes, config)
+    return "WezTerm"
+end)
+
 return config
