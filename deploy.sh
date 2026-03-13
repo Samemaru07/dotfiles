@@ -35,3 +35,10 @@ ln -snf "$DOTFILES_DIR/hypr/scripts/clock-kitty.conf" "$HOME/.config/hypr/script
 ln -snf "$DOTFILES_DIR/hypr/scripts/clock.py" "$HOME/.config/hypr/scripts/clock.py"
 ln -snf "$DOTFILES_DIR/hypr/scripts/monitor-watch.sh" "$HOME/.config/hypr/scripts/monitor-watch.sh"
 ln -snf "$DOTFILES_DIR/hypr/scripts/photo-widget.sh" "$HOME/.config/hypr/scripts/monitor-watch.sh"
+
+mkdir -p "$HOME/.config/eww/scripts"
+ln -snf "$DOTFILES_DIR/eww/eww.scss" "$HOME/.config/eww/eww.scss"
+ln -snf "$DOTFILES_DIR/eww/eww.yuck" "$HOME/.config/eww/eww.yuck"
+for f in "$DOTFILES_DIR/eww/scripts/"*; do 
+    ln -snf "$f" "$HOME/.config/eww/scripts/$(basename "$f")"
+done
