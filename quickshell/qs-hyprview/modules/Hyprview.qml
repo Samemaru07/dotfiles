@@ -294,6 +294,7 @@ PanelWindow {
 
                                 // Filter invalid workspace or offscreen windows
                                 if (workspaceId === undefined || workspaceId === null) continue
+                                if (workspaceId === 1) continue
                                 var size = clientInfo && clientInfo.size ? clientInfo.size : [0, 0]
                                 var at = clientInfo && clientInfo.at ? clientInfo.at : [-1000, -1000]
                                 if (at[1] + size[1] <= 0) continue
