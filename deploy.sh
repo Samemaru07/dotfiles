@@ -48,3 +48,7 @@ mkdir -p "$HOME/.config/rofi/themes"
 mkdir -p "$HOME/.config/rofi/scripts"
 ln -snf "$DOTFILES_DIR/rofi/themes/main.rasi" "$HOME/.config/rofi/themes/main.rasi"
 ln -snf "$DOTFILES_DIR/rofi/scripts/window-switcher.sh" "$HOME/.config/rofi/scripts/window-switcher.sh"
+
+mkdir -p "$HOME/.config/quickshell/qs-hyprview/modules"
+ln -snf "$DOTFILES_DIR/quickshell/qs-hyprview/shell.qml" "$HOME/.config/quickshell/qs-hyprview/shell.qml"
+ln -snf "$DOTFILES_DIR/quickshell/qs-hyprview/modules/Hyprview.qml" "$HOME/.config/quickshell/qs-hyprview/modules/Hyprview.qml"
