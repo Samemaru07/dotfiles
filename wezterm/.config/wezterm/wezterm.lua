@@ -30,10 +30,13 @@ local bg_path
 
 if is_windows then
     -- Windows版 WezTerm → WSL 内 dotfiles を参照
-    bg_path = "\\\\wsl$\\Ubuntu\\home\\samemaru\\dotfiles\\assets\\terminal\\hala.png"
+    -- wezterm.home_dir は "C:\Users\<WindowsUser>" 形式。WSLユーザー名が異なる場合は
+    -- 環境変数 WSL_USER を設定してください (例: setx WSL_USER "yourname")
+    local wsl_user = os.getenv("WSL_USER") or wezterm.home_dir:match("Users\\(.+)$") or "ubuntu"
+    bg_path = "\\\\wsl$\\Ubuntu\\home\\" .. wsl_user .. "\\dotfiles\\assets\\terminal\\hala.png"
 else
     -- Arch Linux / Linux版 WezTerm
-    bg_path = "/home/samemaru/dotfiles/assets/terminal/hala.png"
+    bg_path = (os.getenv("HOME") or wezterm.home_dir) .. "/dotfiles/assets/terminal/hala.png"
 end
 
 config.background = {
@@ -582,7 +585,11 @@ config.key_tables = {
 config.enable_wayland = false
 
 wezterm.on("format-window-title", function(tab, pane, tabs, panes, config)
-    return "WezTerm"
+    local title = tab.tab_title
+    if title and #title > 0 then
+        return title
+    end
+    return tab.active_pane.title
 end)
 
 return config

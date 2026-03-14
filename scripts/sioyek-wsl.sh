@@ -1,6 +1,12 @@
 #!/bin/bash
 # Wrapper script for Sioyek on WSL to handle path conversion and forward search
 
+# Resolve Windows username dynamically (falls back to cmd.exe if $WIN_USER not set)
+WIN_USER="${WIN_USER:-$(cmd.exe /c "echo %USERNAME%" 2>/dev/null | tr -d '\r')}"
+
+# Path to sioyek.exe — override via SIOYEK_EXE environment variable if needed
+SIOYEK_EXE="${SIOYEK_EXE:-/mnt/c/Users/$WIN_USER/System/sioyek-release-windows/sioyek-release-windows/sioyek.exe}"
+
 # Initialize variables
 PDF_FILE=""
 TEX_FILE=""
@@ -61,6 +67,6 @@ if [[ ${#OTHER_ARGS[@]} -gt 0 ]]; then
 fi
 
 # Execute Sioyek
-"/mnt/c/Users/TUFGamingB550Plus/System/sioyek-release-windows/sioyek-release-windows/sioyek.exe" "${CMD_ARGS[@]}" >/dev/null 2>&1 &
+"$SIOYEK_EXE" "${CMD_ARGS[@]}" >/dev/null 2>&1 &
 
 

@@ -34,7 +34,7 @@ fi
 source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+zinit light romkatv/powerlevel10k
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -81,7 +81,6 @@ export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 . "$DENO_INSTALL/env"
 export PATH="/usr/local/bin:/usr/bin:/bin:$HOME/.local/bin:$PATH"
-. "$HOME/.deno/env"
 
 export PATH="$HOME/development/flutter/bin:$PATH"
 # Windows username (dynamic)
