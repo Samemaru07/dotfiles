@@ -24,7 +24,9 @@ PanelWindow {
     property bool animateWindows: false
     property var lastPositions: {}
 
-    anchors { top: true; bottom: true; left: true; right: true }
+    anchors { top: false; bottom: false; left: false; right: false }
+    implicitWidth: 1200
+    implicitHeight: 800
     color: "transparent"
     Image {
         anchors.fill: parent
