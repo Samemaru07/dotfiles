@@ -228,6 +228,7 @@ Item {
                 live: root.liveCapture && root.isActive
                 paintCursor: false
                 visible: root.isActive && thumbContainer.wHandle && hasContent
+                opacity: 0.7
 
                 layer.enabled: true
                 layer.effect: OpacityMask {
