@@ -362,6 +362,7 @@ PanelWindow {
 
                 SearchBox {
                     id: searchBox
+                    visible: false
                     onTextChanged: function(text) {
                         root.animateWindows = true
                         exposeArea.searchText = text
