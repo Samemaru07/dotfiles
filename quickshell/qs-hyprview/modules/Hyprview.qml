@@ -26,6 +26,12 @@ PanelWindow {
 
     anchors { top: true; bottom: true; left: true; right: true }
     color: "transparent"
+    Image {
+        anchors.fill: parent
+        source: "/home/samemaru/dotfiles/assets/quickshell/misato.jpg"
+        fillMode: Image.PreserveAspectCrop
+        opacity: 0.8
+    }
     visible: isActive
 
     // LayerShell Configs
