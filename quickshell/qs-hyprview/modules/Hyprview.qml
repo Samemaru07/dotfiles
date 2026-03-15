@@ -77,10 +77,25 @@ PanelWindow {
     }
 
     Image {
+        id: bgImage
+
         anchors.fill: parent
         source: "/home/samemaru/dotfiles/assets/quickshell/misato.jpg"
         fillMode: Image.PreserveAspectCrop
         opacity: 0.9
+        layer.enabled: true
+
+        layer.effect: OpacityMask {
+
+            maskSource: Rectangle {
+                width: bgImage.width
+                height: bgImage.height
+                radius: 24
+                visible: false
+            }
+
+        }
+
     }
 
     // --- IPC & EVENTS ---

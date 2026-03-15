@@ -219,7 +219,7 @@ Item {
                     maskSource: Rectangle {
                         width: thumb.width
                         height: thumb.height
-                        radius: 16
+                        radius: 24
                     }
 
                 }
@@ -236,7 +236,7 @@ Item {
             height: titleText.implicitHeight + 12
             x: (card.width - width) / 2
             y: card.height - height - (card.height * 0.08)
-            radius: 12
+            radius: 16
             color: thumbContainer.hovered ? "#FFffffff" : "#CCffffff"
             border.width: 1
             border.color: "#44000000"
@@ -248,7 +248,7 @@ Item {
                 width: parent.width - 16
                 text: hWin.title
                 color: thumbContainer.hovered ? "#ff1e1e2e" : "#cc1e1e2e"
-                font.pixelSize: thumbContainer.hovered ? 13 : 12
+                font.pixelSize: thumbContainer.hovered ? 16 : 16
                 elide: Text.ElideRight
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
