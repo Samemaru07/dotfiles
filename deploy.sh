@@ -54,3 +54,4 @@ ln -snf "$DOTFILES_DIR/quickshell/qs-hyprview/shell.qml" "$HOME/.config/quickshe
 ln -snf "$DOTFILES_DIR/quickshell/qs-hyprview/modules/Hyprview.qml" "$HOME/.config/quickshell/qs-hyprview/modules/Hyprview.qml"
 mkdir -p "$HOME/.config/quickshell/qs-hyprview/layouts"
 ln -snf "$DOTFILES_DIR/quickshell/qs-hyprview/layouts/MasonryLayout.qml" "$HOME/.config/quickshell/qs-hyprview/layouts/MasonryLayout.qml"
+ln -snf "$DOTFILES_DIR/quickshell/qs-hyprview/layouts/ColumnarLayout.qml" "$HOME/.config/quickshell/qs-hyprview/layouts/ColumnarLayout.qml"
