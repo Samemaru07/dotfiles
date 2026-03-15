@@ -150,6 +150,7 @@ PanelWindow {
 
         // Helper for horizontal navigation
         function moveSelectionHorizontal(delta) {
+            var total = winRepeater.count;
             var start = exposeArea.currentIndex;
             for (var step = 1; step <= total; ++step) {
                 var candidate = (start + delta * step + total) % total;
@@ -161,8 +162,8 @@ PanelWindow {
             }
         }
 
-        // Helper for vertical navigation
         function moveSelectionVertical(dir) {
+            var total = winRepeater.count;
             var startIndex = exposeArea.currentIndex;
             var currentItem = winRepeater.itemAt(startIndex);
             if (!currentItem || !currentItem.visible) {
@@ -368,7 +369,7 @@ PanelWindow {
                             // Layout-generated coordinates
                             targetX: modelData.x
                             targetY: modelData.y
-                            targetZ: (visible && (exposeArea.currentIndex === index)) ? 1000 : modelData.zIndex || 0
+                            targetZ: (modelData && visible && (exposeArea.currentIndex === index)) ? 1000 : (modelData && modelData.zIndex !== undefined ? modelData.zIndex : 0)
                             targetRotation: modelData.rotation || 0
                             hovered: visible && (exposeArea.currentIndex === index)
                             moveCursorToActiveWindow: root.moveCursorToActiveWindow
