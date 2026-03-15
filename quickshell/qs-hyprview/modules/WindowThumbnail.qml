@@ -41,7 +41,9 @@ Item {
             return ;
 
         root.toggleExpose();
-        Hyprland.dispatch("focuswindow address:0x" + hWin.address);
+        Qt.callLater(function() {
+            Hyprland.dispatch("focuswindow address:0x" + hWin.address);
+        });
     }
 
     function closeWindow() {
