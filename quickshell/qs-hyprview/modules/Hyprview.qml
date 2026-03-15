@@ -381,6 +381,7 @@ PanelWindow {
                             thumbW: modelData.width
                             thumbH: modelData.height
                             clientInfo: hWin.lastIpcObject
+                            workspaceId: modelData ? (modelData.workspaceId ?? 0) : 0
                             // Layout-generated coordinates
                             targetX: modelData.x
                             targetY: modelData.y

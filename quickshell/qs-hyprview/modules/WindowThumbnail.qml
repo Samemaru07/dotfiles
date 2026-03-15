@@ -17,6 +17,7 @@ Item {
     property real thumbH: -1
     property var clientInfo: {
     }
+    property int workspaceId: 0
     property bool hovered: false
     property real targetX: -1000
     property real targetY: -1000
@@ -224,6 +225,31 @@ Item {
 
                 }
 
+            }
+
+        }
+
+        Rectangle {
+            id: workspaceBadge
+
+            z: 101
+            width: workspaceText.implicitWidth + 16
+            height: workspaceText.implicitHeight + 8
+            x: 8
+            y: 8
+            radius: 8
+            color: "#CC3174f0"
+            border.width: 1
+            border.color: "#44ffffff"
+
+            Text {
+                id: workspaceText
+
+                anchors.centerIn: parent
+                text: "WS " + workspaceId
+                color: "white"
+                font.pixelSize: 11
+                font.bold: true
             }
 
         }
