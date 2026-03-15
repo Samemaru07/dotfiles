@@ -52,3 +52,5 @@ ln -snf "$DOTFILES_DIR/rofi/scripts/window-switcher.sh" "$HOME/.config/rofi/scri
 mkdir -p "$HOME/.config/quickshell/qs-hyprview/modules"
 ln -snf "$DOTFILES_DIR/quickshell/qs-hyprview/shell.qml" "$HOME/.config/quickshell/qs-hyprview/shell.qml"
 ln -snf "$DOTFILES_DIR/quickshell/qs-hyprview/modules/Hyprview.qml" "$HOME/.config/quickshell/qs-hyprview/modules/Hyprview.qml"
+mkdir -p "$HOME/.config/quickshell/qs-hyprview/layouts"
+ln -snf "$DOTFILES_DIR/quickshell/qs-hyprview/layouts/MasonryLayout.qml" "$HOME/.config/quickshell/qs-hyprview/layouts/MasonryLayout.qml"
