@@ -1,6 +1,6 @@
 #!/bin/bash
 
-wifi_info=$(LC_ALL=C nmcli -t -f active,ssid,signal dev wifi | grep '^yes')
+wifi_info=$(nmcli -t -f active,ssid,signal dev wifi 2>/dev/null | grep -v '^いいえ' | grep -v '^$')
 
 if [[ -z "$wifi_info" ]]; then
     echo '{"icon": "󰤭", "ssid": "Disconnected", "strength": 0}'

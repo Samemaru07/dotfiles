@@ -55,3 +55,6 @@ ln -snf "$DOTFILES_DIR/quickshell/qs-hyprview/modules/Hyprview.qml" "$HOME/.conf
 mkdir -p "$HOME/.config/quickshell/qs-hyprview/layouts"
 ln -snf "$DOTFILES_DIR/quickshell/qs-hyprview/layouts/MasonryLayout.qml" "$HOME/.config/quickshell/qs-hyprview/layouts/MasonryLayout.qml"
 ln -snf "$DOTFILES_DIR/quickshell/qs-hyprview/layouts/ColumnarLayout.qml" "$HOME/.config/quickshell/qs-hyprview/layouts/ColumnarLayout.qml"
+
+mkdir -p "/etc/NetworkManager/"
+sudo ln -snf "$DOTFILES_DIR/etc/NetworkManager/NetworkManager.conf" "/etc/NetworkManager/NetworkManager.conf"
