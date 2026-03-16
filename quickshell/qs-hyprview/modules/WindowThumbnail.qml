@@ -240,7 +240,7 @@ Item {
             x: 8
             y: 8
             radius: 8
-            color: "#CC3174f0"
+            color: workspaceId === 2 ? "#CC3174f0" : workspaceId === 3 ? "#CCa855f7" : "#CC666666"
             border.width: 1
             border.color: "#44ffffff"
 
