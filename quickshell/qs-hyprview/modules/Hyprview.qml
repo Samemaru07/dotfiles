@@ -374,21 +374,36 @@ PanelWindow {
                         model: windowLayoutModel
 
                         delegate: WindowThumbnail {
-                            // Model data
-                            hWin: modelData.win
-                            wHandle: hWin.wayland
-                            winKey: String(hWin.address)
-                            thumbW: modelData.width
-                            thumbH: modelData.height
-                            clientInfo: hWin.lastIpcObject
+                            visible: modelData !== null && modelData !== undefined && !modelData.isDivider
+                            hWin: modelData && !modelData.isDivider ? modelData.win : null
+                            wHandle: hWin ? hWin.wayland : null
+                            winKey: hWin ? String(hWin.address) : ""
+                            thumbW: modelData && !modelData.isDivider ? modelData.width : 0
+                            thumbH: modelData && !modelData.isDivider ? modelData.height : 0
+                            clientInfo: hWin ? hWin.lastIpcObject : {
+                            }
                             workspaceId: modelData ? (modelData.workspaceId ?? 0) : 0
-                            // Layout-generated coordinates
-                            targetX: modelData.x
-                            targetY: modelData.y
-                            targetZ: (modelData && visible && (exposeArea.currentIndex === index)) ? 1000 : (modelData && modelData.zIndex !== undefined ? modelData.zIndex : 0)
-                            targetRotation: modelData.rotation || 0
-                            hovered: visible && (exposeArea.currentIndex === index)
+                            targetX: modelData ? modelData.x : 0
+                            targetY: modelData ? modelData.y : 0
+                            targetZ: (modelData && !modelData.isDivider && visible && (exposeArea.currentIndex === index)) ? 1000 : (modelData && modelData.zIndex !== undefined ? modelData.zIndex : 0)
+                            targetRotation: modelData && modelData.rotation ? modelData.rotation : 0
+                            hovered: modelData !== null && modelData !== undefined && !modelData.isDivider && visible && (exposeArea.currentIndex === index)
                             moveCursorToActiveWindow: root.moveCursorToActiveWindow
+                        }
+
+                    }
+
+                    Repeater {
+                        model: windowLayoutModel
+
+                        delegate: Rectangle {
+                            visible: modelData !== null && modelData !== undefined && modelData.isDivider === true
+                            x: modelData ? modelData.x : 0
+                            y: modelData ? modelData.y : 0
+                            width: 2
+                            height: modelData ? modelData.height : 0
+                            color: "#44ffffff"
+                            radius: 1
                         }
 
                     }

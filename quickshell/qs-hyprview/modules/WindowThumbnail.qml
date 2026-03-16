@@ -274,7 +274,7 @@ Item {
 
                 anchors.centerIn: parent
                 width: parent.width - 16
-                text: hWin.title
+                text: hWin ? hWin.title : ""
                 color: thumbContainer.hovered ? "#ff1e1e2e" : "#cc1e1e2e"
                 font.pixelSize: thumbContainer.hovered ? 16 : 16
                 elide: Text.ElideRight
