@@ -17,7 +17,7 @@ config.initial_rows = 45
 config.freetype_load_flags = "DEFAULT"
 config.freetype_load_target = "Normal"
 config.freetype_render_target = "Normal"
-config.front_end = "WebGpu"
+config.front_end = "OpenGL"
 config.text_background_opacity = 0.92
 config.window_background_opacity = 0.92
 config.font = wezterm.font("JetBrains Mono", { weight = "Regular" })
