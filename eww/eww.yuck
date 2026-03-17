@@ -52,15 +52,47 @@
     "./scripts/getsinks.sh"
 )
 
-(defwidget sink-item [id name desc active]
-    (eventbox :cursor "pointer"
-              :onclick "pactl set-default-sink ${name} && eww update sinks=$(./scripts/getsinks.sh)"
-              (box :class "sink-item ${active == "true" ? "sink-active" : ""}"
-                   :space-evenly false
-                   (label :text "${active == "true" ? "󰓃" : "󰓄"}"
-                          :style "margin-right:8px; font-size:16px;")
-                   (label :limit-width 22 :text "${desc}")
-              )
+(defvar selected-sink "")
+(defwidget sink-item [id name desc active active_port ports]
+    (box :orientation "v"
+         :space-evenly false
+        (eventbox :cursor "pointer"
+                  :onclick "pactl set-default-sink ${name} && eww update selected-sink='${selected-sink == name ? "" : name}' && eww update sinks=$(./scripts/getsinks.sh)"
+            (box :class "sink-item ${active == "true" ? "sink-active" : ""}"
+                 :space-evenly false
+                 (label :text "${active == "true" ? "󰓃" : "󰓄"}"
+                        :style "margin-right:8px; font-size:16px;")
+                 (label :limit-width 22 :text "${desc}")
+            )
+        )
+        (revealer :transition "slidedown"
+                  :reveal {selected-sink == name}
+                  :duration "200ms"
+            (box :orientation "v"
+                 :space-evenly false
+                 :spacing 2
+                 :style "margin-left:8px;"
+                 (for port in {ports}
+                     (port-item :sink_name name
+                                :port_name {port.name}
+                                :port_desc {port.desc}
+                                :available {port.available}
+                                :active {port.name == active_port})
+                 )
+            )
+        )
+    )
+)
+
+(defwidget port-item [sink_name port_name port_desc available active]
+    (eventbox :cursor {available == "true" ? "pointer" : "default"}
+              :onclick {available == "true" ? "pactl set-sink-port ${sink_name} ${port_name} && eww update sinks=$(./scripts/getsinks.sh)" : ""}
+        (box :class "sink-item ${active == "true" ? "sink-active" : ""} ${available == "false" ? "port-unavailable" : ""}"
+             :space-evenly false
+             (label :text "${active == "true" ? "󰓃" : "󰓄"}"
+                    :style "margin-right:8px; font-size:12px;")
+             (label :limit-width 20 :text "${port_desc}")
+        )
     )
 )
 
@@ -71,8 +103,7 @@
     :geometry (geometry :anchor "top right"
                         :x "5px"
                         :y "-4px"
-                        :width "260px"
-                        :height "180px")
+                        :width "260px")
     (revealer :transition "slidedown"
               :reveal volrev
               :duration "250ms"
@@ -99,7 +130,9 @@
                                 (sink-item :id {sink.id}
                                            :name {sink.name}
                                            :desc {sink.desc}
-                                           :active {sink.active})
+                                           :active {sink.active}
+                                           :active_port {sink.active_port}
+                                           :ports {sink.ports})
                             )
                        )
                   )
