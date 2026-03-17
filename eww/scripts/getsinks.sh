@@ -8,6 +8,7 @@ get_sink_label() {
     case "$1" in
         "alsa_output.pci-0000_0c_00.4.analog-stereo") echo "オンボード" ;;
         "alsa_output.pci-0000_0a_00.1.hdmi-stereo")   echo "モニタ" ;;
+        "alsa_output.usb-Generic_USB_Audio_202503031722601-00.analog-stereo") echo "ヘッドフォン";;
         *) echo "$1" ;;
     esac
 }
@@ -33,6 +34,8 @@ echo "$sink_data" | grep -oP '(?<=Sink #)\d+' | while read -r id; do
 
     ports=$(echo "$sink_block" | awk '/Ports:/{found=1; next} /Active Port:/{exit} found{print}' \
         | while IFS= read -r line; do
+            [[ "$port_name" == "analog-output-lineout" ]] && continue
+            [[ "$port_name" == "analog-output" ]] && continue
             [[ -z "$(echo "$line" | tr -d '[:space:]')" ]] && continue
             port_name=$(echo "$line" | sed 's/^[[:space:]]*//' | cut -d':' -f1)
             port_desc=$(get_port_label "$port_name")
