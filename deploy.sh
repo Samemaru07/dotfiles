@@ -1,5 +1,5 @@
 #!/bin/bash
-DOTFILES_DIR="$HOME/dotfiles"
+DOTFILES_DIR="/home/samemaru/dotfiles"
 ln -snf "$DOTFILES_DIR/zsh/.zshrc" "$HOME/.zshrc"
 ln -snf "$DOTFILES_DIR/tmux/.tmux.conf" "$HOME/.tmux.conf"
 ln -snf "$DOTFILES_DIR/shell/.profile" "$HOME/.profile"
@@ -24,8 +24,10 @@ if ! grep -qi microsoft /proc/version 2>/dev/null; then
 fi
 sudo mkdir -p "/etc/sddm.conf.d"
 sudo ln -snf "$DOTFILES_DIR/sddm/theme.conf" "/etc/sddm.conf.d/theme.conf"
-sudo ln -snf "$DOTFILES_DIR/sddm/Sugar-Candy/theme.conf" "/usr/share/sddm/themes/Sugar-Candy/theme.conf"
-sudo ln -snf "$DOTFILES_DIR/assets/lock/angel.png" "/usr/share/sddm/Sugar-Candy/Backgrounds/angel.png"
+if [ -d "/usr/share/sddm/themes/Sugar-Candy" ]; then
+    sudo ln -snf "$DOTFILES_DIR/sddm/Sugar-Candy/theme.conf" "/usr/share/sddm/themes/Sugar-Candy/theme.conf"
+    sudo ln -snf "$DOTFILES_DIR/assets/lock/angel.png" "/usr/share/sddm/themes/Sugar-Candy/Backgrounds/angel.png"
+fi
 
 mkdir -p "$HOME/.config/hypr/scripts"
 ln -snf "$DOTFILES_DIR/hypr/hyprland.conf" "$HOME/.config/hypr/hyprland.conf"

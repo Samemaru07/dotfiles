@@ -111,17 +111,21 @@
                   (box :class "volctl-container"
                        :orientation "v"
                        :space-evenly false
-                       (box :space-evenly false
-                            :halign "center"
-                            (label :text "${volico}" :style "margin-right:8px;")
-                            (scale :class "vol"
-                                   :value {get_vol}
-                                   :max 101
-                                   :min 0
-                                   :round-digits 0
-                                   :onchange "pamixer --set-volume {}"
-                            )
-                       )
+    (box :space-evenly false
+        :halign "center"
+        :spacing 8
+        (eventbox :cursor "pointer"
+                  :onclick "pamixer -t"
+                  (label :class "volico" :text "${volico}")
+        )
+         (scale :class "vol"
+             :value {get_vol}
+             :max 101
+             :min 0
+             :round-digits 0
+              :onchange "pamixer --set-volume {}"
+      )
+    )
                        (box :class "volctl-divider")
                        (box :orientation "v"
                             :space-evenly false
