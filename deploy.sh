@@ -59,3 +59,11 @@ ln -snf "$DOTFILES_DIR/quickshell/qs-hyprview/layouts/ColumnarLayout.qml" "$HOME
 
 mkdir -p "/etc/NetworkManager/"
 sudo ln -snf "$DOTFILES_DIR/etc/NetworkManager/NetworkManager.conf" "/etc/NetworkManager/NetworkManager.conf"
+
+mkdir -p "$HOME/.config/fcitx5/conf"
+ln -snf "$DOTFILES_DIR/fcitx5/conf/keyboard.conf" "$HOME/.config/fcitx5/conf/keyboard.conf"
+ln -snf "$DOTFILES_DIR/fcitx5/conf/notificationitem.conf" "$HOME/.config/fcitx5/conf/notificationitem.conf"
+ln -snf "$DOTFILES_DIR/fcitx5/conf/notifications.conf" "$HOME/.config/fcitx5/conf/notifications.conf"
+ln -snf "$DOTFILES_DIR/fcitx5/conf/skk.conf" "$HOME/.config/fcitx5/conf/skk.conf"
+ln -snf "$DOTFILES_DIR/fcitx5/config" "$HOME/.config/fcitx5/config"
+ln -snf "$DOTFILES_DIR/fcitx5/profile" "$HOME/.config/fcitx5/profile"
