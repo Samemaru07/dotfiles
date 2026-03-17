@@ -36,6 +36,7 @@ PanelWindow {
             } else {
                 root.lastLayoutAlgorithm = root.layoutAlgorithm;
             }
+            exposeArea.pendingFocusAddress = Hyprland.activeToplevel ? String(Hyprland.activeToplevel.address) : "";
             exposeArea.currentIndex = -1;
             searchBox.reset();
             Hyprland.refreshToplevels();
@@ -281,6 +282,7 @@ PanelWindow {
 
                     property int currentIndex: 0
                     property string searchText: ""
+                    property string pendingFocusAddress: ""
 
                     width: layoutRoot.width
                     height: layoutRoot.height - searchBox.implicitHeight - layoutRoot.spacing
@@ -365,6 +367,25 @@ PanelWindow {
                                 return 0;
                             });
                             return LayoutsManager.doLayout(algo, windowList, areaW, areaH);
+                        }
+                        onValuesChanged: {
+                            if (!root.isActive)
+                                return ;
+
+                            var addr = exposeArea.pendingFocusAddress;
+                            if (addr !== "") {
+                                for (var i = 0; i < winRepeater.count; ++i) {
+                                    var it = winRepeater.itemAt(i);
+                                    if (it && it.winKey === addr) {
+                                        exposeArea.currentIndex = i;
+                                        exposeArea.pendingFocusAddress = "";
+                                        return ;
+                                    }
+                                }
+                            }
+                            // フォールバック: 一番左（index: 0）
+                            exposeArea.currentIndex = (windowLayoutModel.count > 0) ? 0 : -1;
+                            exposeArea.pendingFocusAddress = "";
                         }
                     }
 
