@@ -36,6 +36,7 @@ ln -snf "$DOTFILES_DIR/hypr/scripts/clock.py" "$HOME/.config/hypr/scripts/clock.
 ln -snf "$DOTFILES_DIR/hypr/scripts/monitor-watch.sh" "$HOME/.config/hypr/scripts/monitor-watch.sh"
 ln -snf "$DOTFILES_DIR/hypr/scripts/photo-widget.sh" "$HOME/.config/hypr/scripts/monitor-watch.sh"
 ln -snf "$DOTFILES_DIR/hypr/scripts/spotify-watch.sh" "$HOME/.config/hypr/scripts/spotify-watch.sh"
+ln -snf "$DOTFILES_DIR/hypr/hypridle.conf" "$HOME/.config/hypr/hypridle.conf"
 
 mkdir -p "$HOME/.config/eww/scripts"
 ln -snf "$DOTFILES_DIR/eww/eww.scss" "$HOME/.config/eww/eww.scss"
