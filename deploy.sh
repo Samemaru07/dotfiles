@@ -39,6 +39,8 @@ ln -snf "$DOTFILES_DIR/hypr/scripts/monitor-watch.sh" "$HOME/.config/hypr/script
 ln -snf "$DOTFILES_DIR/hypr/scripts/photo-widget.sh" "$HOME/.config/hypr/scripts/monitor-watch.sh"
 ln -snf "$DOTFILES_DIR/hypr/scripts/spotify-watch.sh" "$HOME/.config/hypr/scripts/spotify-watch.sh"
 ln -snf "$DOTFILES_DIR/hypr/hypridle.conf" "$HOME/.config/hypr/hypridle.conf"
+ln -snf "$DOTFILES_DIR/hypr/scripts/save-float-state.sh" "$HOME/.config/hypr/scripts/save-float-state.sh"
+ln -snf "$DOTFILES_DIR/hypr/scripts/restore-float-state.sh" "$HOME/.config/hypr/scripts/restore-float-state.sh"
 
 mkdir -p "$HOME/.config/eww/scripts"
 ln -snf "$DOTFILES_DIR/eww/eww.scss" "$HOME/.config/eww/eww.scss"
