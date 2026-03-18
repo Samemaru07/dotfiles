@@ -1,7 +1,5 @@
 {
-    "include": [
-        "default/hiragana"
-    ],
+    "include": ["default/hiragana"],
     "define": {
         "keymap": {
             "Escape": "abort",
@@ -10,7 +8,8 @@
             "l": "",
             "L": "set-input-mode-wide-latin",
             "C-q": "set-input-mode-hankaku-katakana",
-            "C-j": "commit"
+            "C-j": "commit",
+            "backslash": "insert"
         }
     }
 }

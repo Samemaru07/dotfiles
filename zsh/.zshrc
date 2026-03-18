@@ -77,6 +77,10 @@ bindkey '^[[3;5~' kill-word
 bindkey '^E' backward-kill-word
 bindkey '^R' kill-word
 
+bindkey "\e[H" beginning-of-line
+bindkey "\e[F" end-of-line
+bindkey "\e[3~" delete-char
+
 export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 . "$DENO_INSTALL/env"

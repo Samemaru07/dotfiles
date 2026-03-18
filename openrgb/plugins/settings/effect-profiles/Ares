@@ -1,0 +1,62 @@
+{
+    "Effects": [
+        {
+            "AllowOnlyFirst": false,
+            "AutoStart": true,
+            "Brightness": 100,
+            "ControllerZones": [
+                {
+                    "description": "ASUS Aura USB Mainboard Device",
+                    "is_segment": false,
+                    "location": "HID: /dev/hidraw3",
+                    "name": "ASUS TUF GAMING B550-PLUS",
+                    "reverse": false,
+                    "segment_idx": -1,
+                    "self_brightness": 100,
+                    "serial": "9876543210",
+                    "vendor": "ASUS",
+                    "version": "AULA3-AR42-0222",
+                    "zone_idx": 0
+                },
+                {
+                    "description": "ASUS Aura USB Mainboard Device",
+                    "is_segment": false,
+                    "location": "HID: /dev/hidraw3",
+                    "name": "ASUS TUF GAMING B550-PLUS",
+                    "reverse": false,
+                    "segment_idx": -1,
+                    "self_brightness": 100,
+                    "serial": "9876543210",
+                    "vendor": "ASUS",
+                    "version": "AULA3-AR42-0222",
+                    "zone_idx": 1
+                }
+            ],
+            "CustomName": "",
+            "CustomSettings": {
+                "colors": [
+                    15905354,
+                    15905354,
+                    404217,
+                    404217,
+                    3866630,
+                    3866630,
+                    12879161
+                ],
+                "direction": 2,
+                "height": 50,
+                "spread": 100,
+                "width": 50
+            },
+            "EffectClassName": "CustomGradientWave",
+            "FPS": 60,
+            "RandomColors": false,
+            "SelectAll": true,
+            "Slider2Val": 1,
+            "Speed": 6,
+            "Temperature": 0,
+            "Tint": 0
+        }
+    ],
+    "version": 2
+}

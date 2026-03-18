@@ -4,6 +4,10 @@
   font-size: 13px;
 }
 
+window.keycast {
+  background-color: transparent;
+}
+
 .bar{
   border-radius: 12px;
   background-color: rgba(246, 246, 248, 0.1);
@@ -241,6 +245,7 @@ menu {
   border-radius: 20px;
   background-color: rgba(255,255,255,0.82);
   padding: 10px 15px;
+  color: #2c2c2e;
 }
 
 .volctl-divider{
@@ -635,7 +640,8 @@ tooltip{
 
 .volico{
   color: #2c2c2e;
-  margin-left:3px;
+  margin-left: 8px;
+  margin-right: 8px;
   font-family: "JetBrainsMono Nerd Font";
 }
 
@@ -882,3 +888,9 @@ tooltip{
   border-radius: 10px;
 }
 
+.keycast-caps {
+  border: 2px solid rgba(77, 158, 236, 0.8);
+  box-shadow: 0 0 10px rgba(77, 158, 236, 0.6);
+}
+
+@import "./eww-keycast/keycast.scss"
