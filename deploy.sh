@@ -58,9 +58,8 @@ mkdir -p "/etc/NetworkManager/"
 sudo ln -snf "$DOTFILES_DIR/etc/NetworkManager/NetworkManager.conf" "/etc/NetworkManager/NetworkManager.conf"
 
 mkdir -p "$HOME/.config/fcitx5/conf"
-ln -snf "$DOTFILES_DIR/fcitx5/conf/keyboard.conf" "$HOME/.config/fcitx5/conf/keyboard.conf"
-ln -snf "$DOTFILES_DIR/fcitx5/conf/notificationitem.conf" "$HOME/.config/fcitx5/conf/notificationitem.conf"
-ln -snf "$DOTFILES_DIR/fcitx5/conf/notifications.conf" "$HOME/.config/fcitx5/conf/notifications.conf"
-ln -snf "$DOTFILES_DIR/fcitx5/conf/skk.conf" "$HOME/.config/fcitx5/conf/skk.conf"
+for f in "$DOTFILES_DIR/fcitx5/conf/"*.conf; do
+    ln -snf "$f" "$HOME/.config/fcitx5/conf/$(basename "$f")"
+done
 ln -snf "$DOTFILES_DIR/fcitx5/config" "$HOME/.config/fcitx5/config"
 ln -snf "$DOTFILES_DIR/fcitx5/profile" "$HOME/.config/fcitx5/profile"
