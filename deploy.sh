@@ -69,6 +69,7 @@ if [ "$IS_WSL" = false ]; then
     for f in "$DOTFILES_DIR/eww/scripts/"*; do
         ln -snf "$f" "$HOME_DIR/.config/eww/scripts/$(basename "$f")"
     done
+    ln -snf "$DOTFILES_DIR/eww/eww-keycast" "$HOME_DIR/.config/eww/eww-keycast"
 
     # quickshell
     QS_SRC="$DOTFILES_DIR/quickshell/qs-hyprview"
