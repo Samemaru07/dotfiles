@@ -888,3 +888,5 @@
     :exclusive true
     (bar)
 )
+
+(include "./eww-keycast/keycast.yuck")
