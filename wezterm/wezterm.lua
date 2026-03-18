@@ -11,7 +11,6 @@ config.automatically_reload_config = true
 
 -- 基本設定
 config.font_size = 10.5
--- config.default_prog = { "wsl.exe", "-d", "Ubuntu", "--cd", "~" }
 config.initial_cols = 160
 config.initial_rows = 45
 config.freetype_load_flags = "DEFAULT"
@@ -23,7 +22,6 @@ config.window_background_opacity = 0.92
 config.font = wezterm.font("JetBrains Mono", { weight = "Regular" })
 config.line_height = 0.98
 config.use_ime = true
--- config.win32_system_cursor = true
 
 -- 背景設定
 local bg_path
