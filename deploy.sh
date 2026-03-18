@@ -30,10 +30,9 @@ if [ -d "/usr/share/sddm/themes/Sugar-Candy" ]; then
 fi
 
 mkdir -p "$HOME/.config/hypr/scripts"
-ln -snf "$DOTFILES_DIR/hypr/hyprland.conf" "$HOME/.config/hypr/hyprland.conf"
-ln -snf "$DOTFILES_DIR/hypr/hyprpaper.conf" "$HOME/.config/hypr/hyprpaper.conf"
-ln -snf "$DOTFILES_DIR/hypr/hyprlock.conf" "$HOME/.config/hypr/hyprlock.conf"
-ln -snf "$DOTFILES_DIR/hypr/hypridle.conf" "$HOME/.config/hypr/hypridle.conf"
+for f in "$DOTFILES_DIR/hypr/"*.conf; do
+    ln -snf "$f" "$HOME/.config/hypr/$(basename "$f")"
+done
 for f in "$DOTFILES_DIR/hypr/scripts/"*; do
     ln -snf "$f" "$HOME/.config/hypr/scripts/$(basename "$f")"
 done
