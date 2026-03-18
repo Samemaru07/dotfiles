@@ -4,6 +4,10 @@
   font-size: 13px;
 }
 
+window.keycast {
+  background-color: transparent;
+}
+
 .bar{
   border-radius: 12px;
   background-color: rgba(246, 246, 248, 0.1);
@@ -884,3 +888,9 @@ tooltip{
   border-radius: 10px;
 }
 
+.keycast-caps {
+  border: 2px solid rgba(77, 158, 236, 0.8);
+  box-shadow: 0 0 10px rgba(77, 158, 236, 0.6);
+}
+
+@import "./eww-keycast/keycast.scss"
