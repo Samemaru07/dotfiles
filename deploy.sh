@@ -1,28 +1,43 @@
 #!/bin/bash
 HOME_DIR="/home/samemaru"
 DOTFILES_DIR="/home/samemaru/dotfiles"
+
+# シェル・ターミナル基本設定
 ln -snf "$DOTFILES_DIR/zsh/.zshrc" "$HOME_DIR/.zshrc"
 ln -snf "$DOTFILES_DIR/tmux/.tmux.conf" "$HOME_DIR/.tmux.conf"
 ln -snf "$DOTFILES_DIR/shell/.profile" "$HOME_DIR/.profile"
 ln -snf "$DOTFILES_DIR/git/.gitconfig" "$HOME_DIR/.gitconfig"
+ln -snf "$DOTFILES_DIR/p10k/.p10k.zsh" "$HOME_DIR/.p10k.zsh"
+
+# WezTerm
 mkdir -p "$HOME_DIR/.config"
 ln -snf "$DOTFILES_DIR/wezterm" "$HOME_DIR/.config/wezterm"
+
+# Neovim (git submodule)
 ln -snf "$DOTFILES_DIR/nvim" "$HOME_DIR/.config/nvim"
-ln -snf "$DOTFILES_DIR/p10k/.p10k.zsh" "$HOME_DIR/.p10k.zsh"
+
+# fastfetch
 mkdir -p "$HOME_DIR/.config/fastfetch"
 ln -snf "$DOTFILES_DIR/fastfetch/config.jsonc" "$HOME_DIR/.config/fastfetch/config.jsonc"
+
+# .desktop ファイル
 mkdir -p "$HOME_DIR/.local/share/applications"
 ln -snf "$DOTFILES_DIR/applications/org.wezfurlong.wezterm.desktop" "$HOME_DIR/.local/share/applications/org.wezfurlong.wezterm.desktop"
+
+# wofi
 mkdir -p "$HOME_DIR/.config/wofi"
 ln -snf "$DOTFILES_DIR/wofi/config" "$HOME_DIR/.config/wofi/config"
 ln -snf "$DOTFILES_DIR/wofi/style.css" "$HOME_DIR/.config/wofi/style.css"
-# SKK (Arch Linux only; skip on WSL/Ubuntu)
+
+# SKK (Arch Linux のみ・WSL/Ubuntu ではスキップ)
 if ! grep -qi microsoft /proc/version 2>/dev/null; then
     mkdir -p "$HOME_DIR/.config/libskk/rules/myrule/keymap"
     ln -snf "$DOTFILES_DIR/skk/metadata.json" "$HOME_DIR/.config/libskk/rules/myrule/metadata.json"
     ln -snf "$DOTFILES_DIR/skk/keymap/hiragana.json" "$HOME_DIR/.config/libskk/rules/myrule/keymap/hiragana.json"
     ln -snf "$DOTFILES_DIR/skk/keymap/katakana.json" "$HOME_DIR/.config/libskk/rules/myrule/keymap/katakana.json"
 fi
+
+# SDDM (要 sudo)
 sudo mkdir -p "/etc/sddm.conf.d"
 sudo ln -snf "$DOTFILES_DIR/sddm/theme.conf" "/etc/sddm.conf.d/theme.conf"
 if [ -d "/usr/share/sddm/themes/Sugar-Candy" ]; then
@@ -30,6 +45,7 @@ if [ -d "/usr/share/sddm/themes/Sugar-Candy" ]; then
     sudo ln -snf "$DOTFILES_DIR/assets/lock/angel.png" "/usr/share/sddm/themes/Sugar-Candy/Backgrounds/angel.png"
 fi
 
+# Hyprland
 mkdir -p "$HOME_DIR/.config/hypr/scripts"
 for f in "$DOTFILES_DIR/hypr/"*.conf; do
     ln -snf "$f" "$HOME_DIR/.config/hypr/$(basename "$f")"
@@ -38,6 +54,7 @@ for f in "$DOTFILES_DIR/hypr/scripts/"*; do
     ln -snf "$f" "$HOME_DIR/.config/hypr/scripts/$(basename "$f")"
 done
 
+# eww
 mkdir -p "$HOME_DIR/.config/eww/scripts"
 ln -snf "$DOTFILES_DIR/eww/eww.scss" "$HOME_DIR/.config/eww/eww.scss"
 ln -snf "$DOTFILES_DIR/eww/eww.yuck" "$HOME_DIR/.config/eww/eww.yuck"
@@ -45,6 +62,7 @@ for f in "$DOTFILES_DIR/eww/scripts/"*; do
     ln -snf "$f" "$HOME_DIR/.config/eww/scripts/$(basename "$f")"
 done
 
+# quickshell
 QS_SRC="$DOTFILES_DIR/quickshell/qs-hyprview"
 QS_DST="$HOME_DIR/.config/quickshell/qs-hyprview"
 for dir in "" modules layouts; do
@@ -55,9 +73,11 @@ for dir in "" modules layouts; do
     done
 done
 
-mkdir -p "/etc/NetworkManager/"
+# NetworkManager (要 sudo)
+sudo mkdir -p "/etc/NetworkManager/"
 sudo ln -snf "$DOTFILES_DIR/etc/NetworkManager/NetworkManager.conf" "/etc/NetworkManager/NetworkManager.conf"
 
+# fcitx5
 mkdir -p "$HOME_DIR/.config/fcitx5/conf"
 for f in "$DOTFILES_DIR/fcitx5/conf/"*.conf; do
     ln -snf "$f" "$HOME_DIR/.config/fcitx5/conf/$(basename "$f")"
