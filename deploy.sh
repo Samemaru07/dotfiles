@@ -44,12 +44,15 @@ for f in "$DOTFILES_DIR/eww/scripts/"*; do
     ln -snf "$f" "$HOME/.config/eww/scripts/$(basename "$f")"
 done
 
-mkdir -p "$HOME/.config/quickshell/qs-hyprview/modules"
-ln -snf "$DOTFILES_DIR/quickshell/qs-hyprview/shell.qml" "$HOME/.config/quickshell/qs-hyprview/shell.qml"
-ln -snf "$DOTFILES_DIR/quickshell/qs-hyprview/modules/Hyprview.qml" "$HOME/.config/quickshell/qs-hyprview/modules/Hyprview.qml"
-mkdir -p "$HOME/.config/quickshell/qs-hyprview/layouts"
-ln -snf "$DOTFILES_DIR/quickshell/qs-hyprview/layouts/MasonryLayout.qml" "$HOME/.config/quickshell/qs-hyprview/layouts/MasonryLayout.qml"
-ln -snf "$DOTFILES_DIR/quickshell/qs-hyprview/layouts/ColumnarLayout.qml" "$HOME/.config/quickshell/qs-hyprview/layouts/ColumnarLayout.qml"
+QS_SRC="$DOTFILES_DIR/quickshell/qs-hyprview"
+QS_DST="$HOME/.config/quickshell/qs-hyprview"
+for dir in "" modules layouts; do
+    mkdir -p "$QS_DST/$dir"
+    for f in "$QS_SRC/$dir/"*.qml; do
+        [ -f "$f" ] || continue
+        ln -snf "$f" "$QS_DST/$dir/$(basename "$f")"
+    done
+done
 
 mkdir -p "/etc/NetworkManager/"
 sudo ln -snf "$DOTFILES_DIR/etc/NetworkManager/NetworkManager.conf" "/etc/NetworkManager/NetworkManager.conf"
