@@ -491,19 +491,21 @@ config.keys = {
 			)
 		end),
 	},
+}
 
-	-- PowerShellを新しいタブで開く
-	{
+-- PowerShellを新しいタブで開く (Windowsのみ)
+if is_windows then
+	table.insert(config.keys, {
 		key = "p",
 		mods = "CTRL|SHIFT",
 		action = wezterm.action_callback(function(window, pane)
-			local new_tab, new_pane, new_window = window:mux_window():spawn_tab({
+			local new_tab = window:mux_window():spawn_tab({
 				args = { "powershell.exe" },
 			})
 			new_tab:set_title("PowerShell")
 		end),
-	},
-}
+	})
+end
 
 config.key_tables = {
 	resize_pane = {
