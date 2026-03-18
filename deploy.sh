@@ -33,14 +33,10 @@ mkdir -p "$HOME/.config/hypr/scripts"
 ln -snf "$DOTFILES_DIR/hypr/hyprland.conf" "$HOME/.config/hypr/hyprland.conf"
 ln -snf "$DOTFILES_DIR/hypr/hyprpaper.conf" "$HOME/.config/hypr/hyprpaper.conf"
 ln -snf "$DOTFILES_DIR/hypr/hyprlock.conf" "$HOME/.config/hypr/hyprlock.conf"
-ln -snf "$DOTFILES_DIR/hypr/scripts/clock-kitty.conf" "$HOME/.config/hypr/scripts/clock-kitty.conf"
-ln -snf "$DOTFILES_DIR/hypr/scripts/clock.py" "$HOME/.config/hypr/scripts/clock.py"
-ln -snf "$DOTFILES_DIR/hypr/scripts/monitor-watch.sh" "$HOME/.config/hypr/scripts/monitor-watch.sh"
-ln -snf "$DOTFILES_DIR/hypr/scripts/photo-widget.sh" "$HOME/.config/hypr/scripts/photo-widget.sh"
-ln -snf "$DOTFILES_DIR/hypr/scripts/spotify-watch.sh" "$HOME/.config/hypr/scripts/spotify-watch.sh"
 ln -snf "$DOTFILES_DIR/hypr/hypridle.conf" "$HOME/.config/hypr/hypridle.conf"
-ln -snf "$DOTFILES_DIR/hypr/scripts/save-float-state.sh" "$HOME/.config/hypr/scripts/save-float-state.sh"
-ln -snf "$DOTFILES_DIR/hypr/scripts/restore-float-state.sh" "$HOME/.config/hypr/scripts/restore-float-state.sh"
+for f in "$DOTFILES_DIR/hypr/scripts/"*; do
+    ln -snf "$f" "$HOME/.config/hypr/scripts/$(basename "$f")"
+done
 
 mkdir -p "$HOME/.config/eww/scripts"
 ln -snf "$DOTFILES_DIR/eww/eww.scss" "$HOME/.config/eww/eww.scss"
