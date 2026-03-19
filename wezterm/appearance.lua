@@ -34,6 +34,7 @@ M.setup = function(config)
     config.use_fancy_tab_bar = false
     config.hide_tab_bar_if_only_one_tab = false
     config.show_new_tab_button_in_tab_bar = false
+    config.tab_max_width = 60
     config.inactive_pane_hsb = {
         saturation = 0.85,
         brightness = 0.5,
