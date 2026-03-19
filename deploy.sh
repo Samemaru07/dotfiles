@@ -31,6 +31,9 @@ ln -snf "$DOTFILES_DIR/fastfetch/config.jsonc" "$HOME_DIR/.config/fastfetch/conf
 mkdir -p "$HOME_DIR/.local/share/applications"
 ln -snf "$DOTFILES_DIR/applications/org.wezfurlong.wezterm.desktop" "$HOME_DIR/.local/share/applications/org.wezfurlong.wezterm.desktop"
 
+# .clang-formatファイル
+ln -snf "$DOTFILES_DIR/nvim/.clang-format" "$HOME_DIR/.clang-format"
+
 # Arch Linux のみ
 if [ "$IS_WSL" = false ]; then
 
