@@ -224,6 +224,20 @@ install_lazygit() {
 }
 
 # ============================================================
+# lazy.nvim
+# ============================================================
+install_lazy_nvim() {
+    local LAZY_DIR="$HOME/.local/share/nvim/lazy/lazy.nvim"
+    if [ -d "$LAZY_DIR" ]; then
+        echo "lazy.nvim already installed, skipping."
+        return
+    fi
+    echo "Installing lazy.nvim..."
+    git clone https://github.com/folke/lazy.nvim.git "$LAZY_DIR"
+    echo "lazy.nvim installed."
+}
+
+# ============================================================
 # 言語別ツール（nvim設定から要求されるもの）
 # ============================================================
 install_tool_deps() {
@@ -315,6 +329,7 @@ install_rust
 install_go
 install_deno
 install_lazygit
+install_lazy_nvim
 
 # 3. 言語別nvimツール
 install_tool_deps
