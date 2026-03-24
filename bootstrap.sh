@@ -281,9 +281,9 @@ setup_skk() {
         "https://skk-dev.github.io/dict/SKK-JISYO.L.gz"
     gunzip "$SKK_DIR/SKK-JISYO.L.gz"
 
-    # 絵文字辞書（失敗してもスキップ）
-    curl -LO --output-dir "$SKK_DIR" \
-        "https://skk-dev.github.io/dict/SKK-JISYO.emoji.utf8.gz" \
+    # 絵文字辞書
+    curl -o "$SKK_DIR/SKK-JISYO.emoji.utf8" \
+        "https://raw.githubusercontent.com/uasi/skk-emoji-jisyo/master/SKK-JISYO.emoji.utf8" \
         || echo "Warning: Emoji dict download failed, skipping."
     if [ -f "$SKK_DIR/SKK-JISYO.emoji.utf8.gz" ]; then
         gunzip "$SKK_DIR/SKK-JISYO.emoji.utf8.gz"
