@@ -150,3 +150,4 @@ function wezterm_osc7 {
 }
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd wezterm_osc7
+export PATH="$PATH:/mnt/c/tools"
