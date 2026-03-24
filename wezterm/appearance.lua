@@ -9,10 +9,9 @@ M.setup = function(config)
     local bg_path
 
     if is_windows then
-        local wsl_user = os.getenv("WSL_USER") or wezterm.home_dir:match("Users\\(.+)$") or "ubuntu"
-        bg_path = "\\\\wsl$\\Ubuntu\\home\\" .. wsl_user .. "\\dotfiles\\assets\\terminal\\hala.png"
+        bg_path = "\\\\wsl$\\Ubuntu\\home\\samemaru\\dotfiles\\assets\\terminal\\seri.jpg"
     else
-        bg_path = (os.getenv("HOME") or wezterm.home_dir) .. "/dotfiles/assets/terminal/hala.png"
+        bg_path = wezterm.home_dir .. "/dotfiles/assets/terminal/hala.png"
     end
 
     config.background = {
