@@ -1,100 +1,126 @@
 #!/bin/bash
-HOME_DIR="/home/samemaru"
-DOTFILES_DIR="/home/samemaru/dotfiles"
 
+set -e
+
+HOME_DIR="$(cd ~ && pwd)"
+DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+# ============================================================
 # 実行環境の判定
+# ============================================================
 if grep -qi microsoft /proc/version 2>/dev/null; then
     IS_WSL=true
 else
     IS_WSL=false
 fi
 
+# ============================================================
+# ヘルパー関数
+# ============================================================
+
+# ディレクトリを作成してシンボリックリンクを貼る
+# 使い方: link <リンク元(dotfiles側)> <リンク先(HOME側)>
+link() {
+    local src="$1"
+    local dst="$2"
+    mkdir -p "$(dirname "$dst")"
+    ln -snf "$src" "$dst"
+}
+
+# ディレクトリ内のファイルを一括リンク（サブディレクトリは対象外）
+# 使い方: link_dir <リンク元ディレクトリ> <リンク先ディレクトリ> [拡張子フィルタ(例: "*.conf")]
+link_dir() {
+    local src_dir="$1"
+    local dst_dir="$2"
+    local pattern="${3:-*}"
+    mkdir -p "$dst_dir"
+    for f in "$src_dir"/$pattern; do
+        [ -f "$f" ] || continue
+        ln -snf "$f" "$dst_dir/$(basename "$f")"
+    done
+}
+
+# ============================================================
+# WSL / 共通設定
+# ============================================================
+
 # シェル・ターミナル基本設定
-ln -snf "$DOTFILES_DIR/zsh/.zshrc" "$HOME_DIR/.zshrc"
-ln -snf "$DOTFILES_DIR/tmux/.tmux.conf" "$HOME_DIR/.tmux.conf"
-ln -snf "$DOTFILES_DIR/shell/.profile" "$HOME_DIR/.profile"
-ln -snf "$DOTFILES_DIR/git/.gitconfig" "$HOME_DIR/.gitconfig"
-ln -snf "$DOTFILES_DIR/p10k/.p10k.zsh" "$HOME_DIR/.p10k.zsh"
+link "$DOTFILES_DIR/zsh/.zshrc"       "$HOME_DIR/.zshrc"
+link "$DOTFILES_DIR/tmux/.tmux.conf"  "$HOME_DIR/.tmux.conf"
+link "$DOTFILES_DIR/shell/.profile"   "$HOME_DIR/.profile"
+link "$DOTFILES_DIR/git/.gitconfig"   "$HOME_DIR/.gitconfig"
+link "$DOTFILES_DIR/p10k/.p10k.zsh"   "$HOME_DIR/.p10k.zsh"
 
 # WezTerm
-mkdir -p "$HOME_DIR/.config"
-ln -snf "$DOTFILES_DIR/wezterm" "$HOME_DIR/.config/wezterm"
+link "$DOTFILES_DIR/wezterm" "$HOME_DIR/.config/wezterm"
 
 # Neovim (git submodule)
-ln -snf "$DOTFILES_DIR/nvim" "$HOME_DIR/.config/nvim"
+link "$DOTFILES_DIR/nvim" "$HOME_DIR/.config/nvim"
 
 # fastfetch
-mkdir -p "$HOME_DIR/.config/fastfetch"
-ln -snf "$DOTFILES_DIR/fastfetch/config.jsonc" "$HOME_DIR/.config/fastfetch/config.jsonc"
+link "$DOTFILES_DIR/fastfetch/config.jsonc" "$HOME_DIR/.config/fastfetch/config.jsonc"
 
 # .desktop ファイル
-mkdir -p "$HOME_DIR/.local/share/applications"
-ln -snf "$DOTFILES_DIR/applications/org.wezfurlong.wezterm.desktop" "$HOME_DIR/.local/share/applications/org.wezfurlong.wezterm.desktop"
+link "$DOTFILES_DIR/applications/org.wezfurlong.wezterm.desktop" \
+    "$HOME_DIR/.local/share/applications/org.wezfurlong.wezterm.desktop"
 
-# .clang-formatファイル
-ln -snf "$DOTFILES_DIR/nvim/.clang-format" "$HOME_DIR/.clang-format"
+# .clang-format
+link "$DOTFILES_DIR/nvim/.clang-format" "$HOME_DIR/.clang-format"
 
+# ============================================================
 # Arch Linux のみ
+# ============================================================
 if [ "$IS_WSL" = false ]; then
 
     # wofi
-    mkdir -p "$HOME_DIR/.config/wofi"
-    ln -snf "$DOTFILES_DIR/wofi/config" "$HOME_DIR/.config/wofi/config"
-    ln -snf "$DOTFILES_DIR/wofi/style.css" "$HOME_DIR/.config/wofi/style.css"
+    link "$DOTFILES_DIR/wofi/config"     "$HOME_DIR/.config/wofi/config"
+    link "$DOTFILES_DIR/wofi/style.css"  "$HOME_DIR/.config/wofi/style.css"
 
     # SKK
-    mkdir -p "$HOME_DIR/.config/libskk/rules/myrule/keymap"
-    ln -snf "$DOTFILES_DIR/skk/metadata.json" "$HOME_DIR/.config/libskk/rules/myrule/metadata.json"
-    ln -snf "$DOTFILES_DIR/skk/keymap/hiragana.json" "$HOME_DIR/.config/libskk/rules/myrule/keymap/hiragana.json"
-    ln -snf "$DOTFILES_DIR/skk/keymap/katakana.json" "$HOME_DIR/.config/libskk/rules/myrule/keymap/katakana.json"
+    link "$DOTFILES_DIR/skk/metadata.json" \
+        "$HOME_DIR/.config/libskk/rules/myrule/metadata.json"
+    link "$DOTFILES_DIR/skk/keymap/hiragana.json" \
+        "$HOME_DIR/.config/libskk/rules/myrule/keymap/hiragana.json"
+    link "$DOTFILES_DIR/skk/keymap/katakana.json" \
+        "$HOME_DIR/.config/libskk/rules/myrule/keymap/katakana.json"
 
     # SDDM (要 sudo)
     sudo mkdir -p "/etc/sddm.conf.d"
     sudo ln -snf "$DOTFILES_DIR/sddm/theme.conf" "/etc/sddm.conf.d/theme.conf"
     if [ -d "/usr/share/sddm/themes/Sugar-Candy" ]; then
-        sudo ln -snf "$DOTFILES_DIR/sddm/Sugar-Candy/theme.conf" "/usr/share/sddm/themes/Sugar-Candy/theme.conf"
-        sudo ln -snf "$DOTFILES_DIR/assets/lock/angel.png" "/usr/share/sddm/themes/Sugar-Candy/Backgrounds/angel.png"
+        sudo ln -snf "$DOTFILES_DIR/sddm/Sugar-Candy/theme.conf" \
+            "/usr/share/sddm/themes/Sugar-Candy/theme.conf"
+        sudo ln -snf "$DOTFILES_DIR/assets/lock/angel.png" \
+            "/usr/share/sddm/themes/Sugar-Candy/Backgrounds/angel.png"
     fi
 
     # Hyprland
-    mkdir -p "$HOME_DIR/.config/hypr/scripts"
-    for f in "$DOTFILES_DIR/hypr/"*.conf; do
-        ln -snf "$f" "$HOME_DIR/.config/hypr/$(basename "$f")"
-    done
-    for f in "$DOTFILES_DIR/hypr/scripts/"*; do
-        ln -snf "$f" "$HOME_DIR/.config/hypr/scripts/$(basename "$f")"
-    done
+    link_dir "$DOTFILES_DIR/hypr"         "$HOME_DIR/.config/hypr"         "*.conf"
+    link_dir "$DOTFILES_DIR/hypr/scripts" "$HOME_DIR/.config/hypr/scripts"
 
     # eww
-    mkdir -p "$HOME_DIR/.config/eww/scripts"
-    ln -snf "$DOTFILES_DIR/eww/eww.scss" "$HOME_DIR/.config/eww/eww.scss"
-    ln -snf "$DOTFILES_DIR/eww/eww.yuck" "$HOME_DIR/.config/eww/eww.yuck"
-    for f in "$DOTFILES_DIR/eww/scripts/"*; do
-        ln -snf "$f" "$HOME_DIR/.config/eww/scripts/$(basename "$f")"
-    done
-    ln -snf "$DOTFILES_DIR/eww/eww-keycast" "$HOME_DIR/.config/eww/eww-keycast"
+    link "$DOTFILES_DIR/eww/eww.scss" "$HOME_DIR/.config/eww/eww.scss"
+    link "$DOTFILES_DIR/eww/eww.yuck" "$HOME_DIR/.config/eww/eww.yuck"
+    link_dir "$DOTFILES_DIR/eww/scripts" "$HOME_DIR/.config/eww/scripts"
+    link "$DOTFILES_DIR/eww/eww-keycast" "$HOME_DIR/.config/eww/eww-keycast"
 
     # quickshell
     QS_SRC="$DOTFILES_DIR/quickshell/qs-hyprview"
     QS_DST="$HOME_DIR/.config/quickshell/qs-hyprview"
-    for dir in "" modules layouts; do
-        mkdir -p "$QS_DST/$dir"
-        for f in "$QS_SRC/$dir/"*.qml; do
-            [ -f "$f" ] || continue
-            ln -snf "$f" "$QS_DST/$dir/$(basename "$f")"
-        done
+    for subdir in "" modules layouts; do
+        link_dir "$QS_SRC/$subdir" "$QS_DST/$subdir" "*.qml"
     done
 
     # NetworkManager (要 sudo)
     sudo mkdir -p "/etc/NetworkManager/"
-    sudo ln -snf "$DOTFILES_DIR/etc/NetworkManager/NetworkManager.conf" "/etc/NetworkManager/NetworkManager.conf"
+    sudo ln -snf "$DOTFILES_DIR/etc/NetworkManager/NetworkManager.conf" \
+        "/etc/NetworkManager/NetworkManager.conf"
 
     # fcitx5
-    mkdir -p "$HOME_DIR/.config/fcitx5/conf"
-    for f in "$DOTFILES_DIR/fcitx5/conf/"*.conf; do
-        ln -snf "$f" "$HOME_DIR/.config/fcitx5/conf/$(basename "$f")"
-    done
-    ln -snf "$DOTFILES_DIR/fcitx5/config" "$HOME_DIR/.config/fcitx5/config"
-    ln -snf "$DOTFILES_DIR/fcitx5/profile" "$HOME_DIR/.config/fcitx5/profile"
+    link_dir "$DOTFILES_DIR/fcitx5/conf" "$HOME_DIR/.config/fcitx5/conf" "*.conf"
+    link "$DOTFILES_DIR/fcitx5/config"  "$HOME_DIR/.config/fcitx5/config"
+    link "$DOTFILES_DIR/fcitx5/profile" "$HOME_DIR/.config/fcitx5/profile"
 
 fi
+
+echo "deploy complete."
