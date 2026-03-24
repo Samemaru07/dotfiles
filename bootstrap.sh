@@ -203,6 +203,27 @@ install_deno() {
 }
 
 # ============================================================
+# lazygit (公式バイナリ)
+# ============================================================
+install_lazygit() {
+    if command -v lazygit &>/dev/null; then
+        echo "lazygit already installed, skipping."
+        return
+    fi
+    echo "Installing lazygit (official binary)..."
+    local LG_VERSION
+    LG_VERSION=$(curl -fsSL "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" |
+        grep '"tag_name"' | sed 's/.*"v\([^"]*\)".*/\1/')
+    local archive="lazygit_${LG_VERSION}_Linux_x86_64.tar.gz"
+    curl -LO --output-dir "$WORK_DIR" \
+        "https://github.com/jesseduffield/lazygit/releases/latest/download/$archive"
+    tar -xzf "$WORK_DIR/$archive" -C "$WORK_DIR" lazygit
+    sudo install "$WORK_DIR/lazygit" /usr/local/bin/lazygit
+    rm -f "$WORK_DIR/$archive" "$WORK_DIR/lazygit"
+    echo "lazygit installed."
+}
+
+# ============================================================
 # 言語別ツール（nvim設定から要求されるもの）
 # ============================================================
 install_tool_deps() {
@@ -293,6 +314,7 @@ install_fastfetch
 install_rust
 install_go
 install_deno
+install_lazygit
 
 # 3. 言語別nvimツール
 install_tool_deps
