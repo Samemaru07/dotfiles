@@ -1,12 +1,7 @@
-if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
-  fastfetch
-fi
-
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-
 
 if [ -f "$HOME/.cargo/env" ]; then
   . "$HOME/.cargo/env"
@@ -148,3 +143,7 @@ add-zsh-hook precmd wezterm_osc7
 [ -d "/snap/bin" ]                              && export PATH="$PATH:/snap/bin"
 [ -d "$HOME/development/flutter/bin" ] && export PATH="$PATH:$HOME/development/flutter/bin"
 true
+
+if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
+  fastfetch
+fi
