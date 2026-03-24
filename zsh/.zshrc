@@ -147,3 +147,4 @@ add-zsh-hook precmd wezterm_osc7
 [ -d "/mnt/c/tools" ]                           && export PATH="$PATH:/mnt/c/tools"
 [ -d "/snap/bin" ]                              && export PATH="$PATH:/snap/bin"
 [ -d "$HOME/development/flutter/bin" ] && export PATH="$PATH:$HOME/development/flutter/bin"
+true
