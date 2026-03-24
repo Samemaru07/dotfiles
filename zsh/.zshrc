@@ -7,10 +7,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-export PATH="/usr/local/go/bin:$PATH"
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/sbin:$PATH"
-export PATH="/snap/bin:$PATH"
-export PATH="$HOME/go/bin:$PATH"
 
 if [ -f "$HOME/.cargo/env" ]; then
   . "$HOME/.cargo/env"
@@ -38,8 +34,6 @@ zinit light romkatv/powerlevel10k
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-export PATH="$PATH:$HOME/.local/bin"
-
 if command -v batcat &> /dev/null; then
   alias cat='batcat --style=plain'
 elif command -v bat &> /dev/null; then
@@ -65,9 +59,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# 重複していたPATH記述を整理
-export PATH="$HOME/go/bin:/snap/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/sbin:$HOME/.local/share/zinit/polaris/bin:$HOME/.cargo/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:$HOME/.local/bin:/usr/local/go/bin:$PATH"
-
 bindkey '^[[1;5D' backward-word
 bindkey '^[[1;5C' forward-word
 
@@ -81,12 +72,6 @@ bindkey "\e[H" beginning-of-line
 bindkey "\e[F" end-of-line
 bindkey "\e[3~" delete-char
 
-export DENO_INSTALL="$HOME/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
-. "$DENO_INSTALL/env"
-export PATH="/usr/local/bin:/usr/bin:/bin:$HOME/.local/bin:$PATH"
-
-export PATH="$HOME/development/flutter/bin:$PATH"
 # Windows username (dynamic)
 export WIN_USER=$(cmd.exe /c "echo %USERNAME%" 2>/dev/null | tr -d '\r')
 if [[ -n "$WIN_USER" ]]; then
@@ -150,4 +135,15 @@ function wezterm_osc7 {
 }
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd wezterm_osc7
-export PATH="$PATH:/mnt/c/tools"
+
+# PATH
+[ -d "/opt/nvim-linux-x86_64/bin" ]            && export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+[ -d "/usr/local/go/bin" ]                      && export PATH="$PATH:/usr/local/go/bin"
+[ -d "$HOME/go/bin" ]                           && export PATH="$PATH:$HOME/go/bin"
+[ -d "$HOME/.cargo/bin" ]                       && export PATH="$PATH:$HOME/.cargo/bin"
+[ -d "$HOME/.deno/bin" ]                        && export PATH="$PATH:$HOME/.deno/bin"
+[ -d "$HOME/.local/bin" ]                       && export PATH="$PATH:$HOME/.local/bin"
+[ -d "$HOME/.config/composer/vendor/bin" ]      && export PATH="$PATH:$HOME/.config/composer/vendor/bin"
+[ -d "/mnt/c/tools" ]                           && export PATH="$PATH:/mnt/c/tools"
+[ -d "/snap/bin" ]                              && export PATH="$PATH:/snap/bin"
+[ -d "$HOME/development/flutter/bin" ] && export PATH="$PATH:$HOME/development/flutter/bin"
