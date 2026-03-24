@@ -11,9 +11,9 @@ mkdir -p "$WORK_DIR"
 # ============================================================
 # パッケージマネージャの判定
 # ============================================================
-if command -v apt-get &> /dev/null; then
+if command -v apt-get &>/dev/null; then
     PKG_MANAGER="apt"
-elif command -v pacman &> /dev/null; then
+elif command -v pacman &>/dev/null; then
     PKG_MANAGER="pacman"
 else
     echo "Error: Neither apt (Ubuntu/Debian) nor pacman (Arch Linux) found."
@@ -39,10 +39,6 @@ install_neovim() {
     sudo tar -C /opt -xzf "$WORK_DIR/$archive"
     rm -f "$WORK_DIR/$archive"
 
-    # PATHへの追記（未登録の場合のみ）
-    if ! grep -q '/opt/nvim-linux-x86_64/bin' "$HOME/.zshrc" 2>/dev/null; then
-        echo 'export PATH="$PATH:/opt/nvim-linux-x86_64/bin"' >> "$HOME/.zshrc"
-    fi
     echo "Neovim installed."
 }
 
@@ -82,7 +78,7 @@ install_apt() {
     echo "Installing search tools..."
     sudo apt-get install -y ripgrep fd-find
     # Ubuntu では fd-find として入るため fd にシンリンクを貼る
-    if ! command -v fd &> /dev/null && command -v fdfind &> /dev/null; then
+    if ! command -v fd &>/dev/null && command -v fdfind &>/dev/null; then
         sudo ln -sf "$(which fdfind)" /usr/local/bin/fd
     fi
 
@@ -98,7 +94,7 @@ install_apt() {
     sudo apt-get install -y shellcheck shfmt
     sudo apt-get install -y clang-format chktex
     sudo apt-get install -y pgformatter || echo "Warning: pgformatter not found in apt repos"
-    sudo apt-get install -y ghdl        || echo "Warning: ghdl not found in apt repos"
+    sudo apt-get install -y ghdl || echo "Warning: ghdl not found in apt repos"
 
     # LaTeX (任意)
     read -rp "Do you want to install LaTeX (TexLive)? This is large. (y/N) " -n 1
@@ -140,7 +136,7 @@ install_pacman() {
 # ※ apt版 cargo/rustc とは競合するため、rustup で一本化する
 # ============================================================
 install_rust() {
-    if command -v rustup &> /dev/null; then
+    if command -v rustup &>/dev/null; then
         echo "rustup already installed, skipping."
         return
     fi
@@ -150,10 +146,6 @@ install_rust() {
     # shellcheck source=/dev/null
     source "$HOME/.cargo/env"
 
-    # PATHへの追記（未登録の場合のみ）
-    if ! grep -q '\.cargo/env' "$HOME/.zshrc" 2>/dev/null; then
-        echo '. "$HOME/.cargo/env"' >> "$HOME/.zshrc"
-    fi
     echo "Rust installed."
 }
 
@@ -162,7 +154,7 @@ install_rust() {
 # ※ apt版は古いため公式から取得する
 # ============================================================
 install_go() {
-    if command -v go &> /dev/null; then
+    if command -v go &>/dev/null; then
         echo "Go already installed ($(go version)), skipping."
         return
     fi
@@ -178,10 +170,6 @@ install_go() {
     sudo tar -C /usr/local -xzf "$WORK_DIR/$archive"
     rm -f "$WORK_DIR/$archive"
 
-    # PATHへの追記（未登録の場合のみ）
-    if ! grep -q '/usr/local/go/bin' "$HOME/.zshrc" 2>/dev/null; then
-        echo 'export PATH="$PATH:/usr/local/go/bin"' >> "$HOME/.zshrc"
-    fi
     export PATH="$PATH:/usr/local/go/bin"
     echo "Go installed."
 }
@@ -191,7 +179,7 @@ install_go() {
 # ※ apt版は古いため NodeSource 経由で入れる
 # ============================================================
 install_node() {
-    if command -v node &> /dev/null; then
+    if command -v node &>/dev/null; then
         echo "Node.js already installed ($(node --version)), skipping."
         return
     fi
@@ -205,16 +193,12 @@ install_node() {
 # Deno
 # ============================================================
 install_deno() {
-    if command -v deno &> /dev/null; then
+    if command -v deno &>/dev/null; then
         echo "Deno already installed, skipping."
         return
     fi
     echo "Installing Deno..."
     curl -fsSL https://deno.land/install.sh | sh
-    # PATHへの追記（未登録の場合のみ）
-    if ! grep -q '\.deno/bin' "$HOME/.zshrc" 2>/dev/null; then
-        echo 'export PATH="$PATH:$HOME/.deno/bin"' >> "$HOME/.zshrc"
-    fi
     echo "Deno installed."
 }
 
@@ -227,17 +211,17 @@ install_tool_deps() {
     # Python
     echo "  Python: pynvim, ruff, black, debugpy, neovim-remote"
     pip3 install --user --upgrade pynvim ruff black debugpy neovim-remote \
-        --break-system-packages 2>/dev/null \
-        || pip3 install --user --upgrade pynvim ruff black debugpy neovim-remote
+        --break-system-packages 2>/dev/null ||
+        pip3 install --user --upgrade pynvim ruff black debugpy neovim-remote
 
     # Node
     echo "  Node: neovim, tree-sitter-cli, prettier"
-    sudo npm install -g neovim tree-sitter-cli prettier \
-        || npm install -g neovim tree-sitter-cli prettier
+    sudo npm install -g neovim tree-sitter-cli prettier ||
+        npm install -g neovim tree-sitter-cli prettier
 
     # Go
     echo "  Go: goimports, delve"
-    if command -v go &> /dev/null; then
+    if command -v go &>/dev/null; then
         export GOPATH="$HOME/go"
         export PATH="$PATH:$GOPATH/bin"
         go install golang.org/x/tools/cmd/goimports@latest
@@ -248,7 +232,7 @@ install_tool_deps() {
 
     # Rust
     echo "  Rust: stylua"
-    if command -v cargo &> /dev/null; then
+    if command -v cargo &>/dev/null; then
         cargo install stylua
     else
         echo "  cargo not found, skipping."
@@ -256,7 +240,7 @@ install_tool_deps() {
 
     # PHP
     echo "  PHP: pint"
-    if command -v composer &> /dev/null; then
+    if command -v composer &>/dev/null; then
         composer global require laravel/pint
     else
         echo "  composer not found, skipping."
@@ -283,8 +267,8 @@ setup_skk() {
 
     # 絵文字辞書
     curl -o "$SKK_DIR/SKK-JISYO.emoji.utf8" \
-        "https://raw.githubusercontent.com/uasi/skk-emoji-jisyo/master/SKK-JISYO.emoji.utf8" \
-        || echo "Warning: Emoji dict download failed, skipping."
+        "https://raw.githubusercontent.com/uasi/skk-emoji-jisyo/master/SKK-JISYO.emoji.utf8" ||
+        echo "Warning: Emoji dict download failed, skipping."
     if [ -f "$SKK_DIR/SKK-JISYO.emoji.utf8.gz" ]; then
         gunzip "$SKK_DIR/SKK-JISYO.emoji.utf8.gz"
     fi
@@ -298,7 +282,7 @@ setup_skk() {
 # 1. システムパッケージ
 if [ "$PKG_MANAGER" = "apt" ]; then
     install_apt
-    install_node   # apt版Nodeは古いため NodeSource で上書き
+    install_node # apt版Nodeは古いため NodeSource で上書き
 elif [ "$PKG_MANAGER" = "pacman" ]; then
     install_pacman
 fi
@@ -323,17 +307,6 @@ echo ""
 echo "=========================================="
 echo " Installation complete!"
 echo "=========================================="
-echo ""
-echo "以下のPATHが .zshrc に追記されています:"
-echo "  /opt/nvim-linux-x86_64/bin  (Neovim)"
-echo "  /usr/local/go/bin           (Go)"
-echo "  \$HOME/.cargo/env           (Rust/cargo)"
-echo "  \$HOME/.deno/bin            (Deno)"
-echo "  \$HOME/.local/bin           (fastfetch, Python tools)"
-echo "  \$HOME/go/bin               (Go tools)"
-echo "  \$HOME/.config/composer/vendor/bin  (PHP tools)"
-echo ""
-echo "変更を反映するには: source ~/.zshrc"
 echo ""
 echo "[手動対応が必要なもの]"
 echo "  win32yank (WSL クリップボード):"
