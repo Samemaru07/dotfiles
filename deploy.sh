@@ -45,14 +45,18 @@ link_dir() {
 # ============================================================
 
 # シェル・ターミナル基本設定
-link "$DOTFILES_DIR/zsh/.zshrc"       "$HOME_DIR/.zshrc"
-link "$DOTFILES_DIR/tmux/.tmux.conf"  "$HOME_DIR/.tmux.conf"
-link "$DOTFILES_DIR/shell/.profile"   "$HOME_DIR/.profile"
-link "$DOTFILES_DIR/git/.gitconfig"   "$HOME_DIR/.gitconfig"
-link "$DOTFILES_DIR/p10k/.p10k.zsh"   "$HOME_DIR/.p10k.zsh"
+link "$DOTFILES_DIR/zsh/.zshrc" "$HOME_DIR/.zshrc"
+link "$DOTFILES_DIR/tmux/.tmux.conf" "$HOME_DIR/.tmux.conf"
+link "$DOTFILES_DIR/shell/.profile" "$HOME_DIR/.profile"
+link "$DOTFILES_DIR/git/.gitconfig" "$HOME_DIR/.gitconfig"
+link "$DOTFILES_DIR/p10k/.p10k.zsh" "$HOME_DIR/.p10k.zsh"
 
 # WezTerm
-link "$DOTFILES_DIR/wezterm" "$HOME_DIR/.config/wezterm"
+WIN_USER=$(ls /mnt/c/Users/ | grep -v -E 'All Users|Default|Public|desktop.ini')
+WIN_WEZTERM_DIR="/mnt/c/Users/$WIN_USER/.config/wezterm"
+rm -rf "$WIN_WEZTERM_DIR"
+mkdir -p "$WIN_WEZTERM_DIR"
+cp "$DOTFILES_DIR/wezterm/"* "$WIN_WEZTERM_DIR/"
 
 # Neovim (git submodule)
 link "$DOTFILES_DIR/nvim" "$HOME_DIR/.config/nvim"
@@ -73,8 +77,8 @@ link "$DOTFILES_DIR/nvim/.clang-format" "$HOME_DIR/.clang-format"
 if [ "$IS_WSL" = false ]; then
 
     # wofi
-    link "$DOTFILES_DIR/wofi/config"     "$HOME_DIR/.config/wofi/config"
-    link "$DOTFILES_DIR/wofi/style.css"  "$HOME_DIR/.config/wofi/style.css"
+    link "$DOTFILES_DIR/wofi/config" "$HOME_DIR/.config/wofi/config"
+    link "$DOTFILES_DIR/wofi/style.css" "$HOME_DIR/.config/wofi/style.css"
 
     # SKK
     link "$DOTFILES_DIR/skk/metadata.json" \
@@ -95,7 +99,7 @@ if [ "$IS_WSL" = false ]; then
     fi
 
     # Hyprland
-    link_dir "$DOTFILES_DIR/hypr"         "$HOME_DIR/.config/hypr"         "*.conf"
+    link_dir "$DOTFILES_DIR/hypr" "$HOME_DIR/.config/hypr" "*.conf"
     link_dir "$DOTFILES_DIR/hypr/scripts" "$HOME_DIR/.config/hypr/scripts"
 
     # eww
@@ -118,7 +122,7 @@ if [ "$IS_WSL" = false ]; then
 
     # fcitx5
     link_dir "$DOTFILES_DIR/fcitx5/conf" "$HOME_DIR/.config/fcitx5/conf" "*.conf"
-    link "$DOTFILES_DIR/fcitx5/config"  "$HOME_DIR/.config/fcitx5/config"
+    link "$DOTFILES_DIR/fcitx5/config" "$HOME_DIR/.config/fcitx5/config"
     link "$DOTFILES_DIR/fcitx5/profile" "$HOME_DIR/.config/fcitx5/profile"
 
 fi
