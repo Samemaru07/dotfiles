@@ -144,6 +144,6 @@ add-zsh-hook precmd wezterm_osc7
 [ -d "$HOME/development/flutter/bin" ] && export PATH="$PATH:$HOME/development/flutter/bin"
 true
 
-if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
+if [[ "$TERM_PROGRAM" == "WezTerm" && -z "$TOGGLETERM" ]]; then
   fastfetch
 fi
