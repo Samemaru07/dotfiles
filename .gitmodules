@@ -1,7 +1,7 @@
 [submodule ".config/nvim"]
 	path = nvim
-	url = https://github.com/Samemaru07/Neovim-setup_WSL2.git
+	url = https://github.com/Samemaru07/Neovim-setup.git
 [submodule "eww/eww-keycast"]
 	path = eww/eww-keycast
-	url = git@github.com:Samemaru07/eww-keycast.git
-	branch = develop
+	url = https://github.com/Samemaru07/eww-keycast.git
+	branch = main

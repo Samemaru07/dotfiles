@@ -2,6 +2,7 @@ local wezterm = require("wezterm")
 local keys = require("keys")
 local appearance = require("appearance")
 local events = require("events")
+local utils = require("utils")
 
 local config = {}
 if wezterm.config_builder then
@@ -32,5 +33,10 @@ config.leader = { key = "q", mods = "CTRL", timeout_milliseconds = 2000 }
 appearance.setup(config)
 keys.setup(config)
 events.setup()
+
+-- WSL起動 (Windowsのみ)
+if utils.is_windows then
+    config.default_prog = { "wsl.exe", "--cd", "~" }
+end
 
 return config
