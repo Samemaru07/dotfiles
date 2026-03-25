@@ -4,4 +4,4 @@
 [submodule "eww/eww-keycast"]
 	path = eww/eww-keycast
 	url = https://github.com/Samemaru07/eww-keycast.git
-	branch = develop
+	branch = main
