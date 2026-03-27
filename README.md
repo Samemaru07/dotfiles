@@ -33,6 +33,35 @@
 
 ## 📁 ディレクトリ構成
 
+```
+dotfiles/
+    ├ applications/ # WezTermのデスクトップエントリ
+    ├ assets/ # 壁紙・アイコンなどの画像素材 (Arch・WSL共通)
+    ├ etc/ # NetworkManager設定
+    ├ eww/ # ewwウィジェット設定
+    │   └ eww-keycast/ # キー入力表示ウィジェット (git submodule)
+    ├ fastfetch/ # システム情報表示設定
+    ├ fcitx5/ # 日本語入力設定 (fcitx5 + SKK)
+    ├ git/ # Gitグローバル設定 (.gitconfig)
+    ├ hypr/ # Hyprland / hypridle/ hyprlock / hyprpaper設定
+    ├ keymap/ # キーマップ画像
+    ├ libskk/ # SKKカスタムキーマップルール
+    ├ nvim/ # Neovim設定 (git submodule)
+    ├ openrgb/ # OpenRGB (PCファンのRGBライティング) 設定
+    ├ p10k/ # Powerlevel10k設定
+    ├ quickshell/ # quickshellウィジェット設定
+    ├ scripts/ # 汎用スクリプト
+    ├ sddm/ # SDDMテーマ設定
+    ├ shell/ # シェル共通設定 (.profile)
+    ├ skk/ # SKKキーマップ設定
+    ├ tmux/ # tmux設定
+    ├ wezterm/ # WezTerm設定
+    ├ wofi/ # wofiランチャー設定
+    ├ zsh/ # Zsh設定 (.zshrc)
+    ├ deploy.sh # シンボリックリンク展開スクリプト
+    └ bootstrap.sh # 初回セットアップスクリプト
+```
+
 ## 🚀 インストール
 
 ### WSL (Ubuntu)
