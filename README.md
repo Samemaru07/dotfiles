@@ -25,6 +25,7 @@
 - ディスプレイマネージャ: [SDDM](https://github.com/sddm/sddm/)
 - 日本語入力: [fcitx5](https://fcitx-im.org/wiki/Fcitx_5) + [fcitx5-skk](https://github.com/fcitx/fcitx5-skk)
 - ネットワーク管理: [NetworkManager](https://networkmanager.dev/)
+- keycaster: [[自作] eww-keycast](https://github.com/Samemaru07/eww-keycast.git)
 
 ### WSL専用
 
