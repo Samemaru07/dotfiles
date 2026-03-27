@@ -130,7 +130,7 @@ cat ~/.ssh/id_ed25519.pub
 ```bash
 # WSL
 exit
-# Powerhsell
+# PowerShell
 wsl
 ```
 
