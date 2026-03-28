@@ -142,7 +142,8 @@ cat ~/.ssh/id_ed25519.pub
 # WSL
 exit
 # PowerShell
-wsl
+wsl --terminate Ubuntu
+wsl -d Ubuntu
 ```
 
 #### 7. シンボリックリンクの展開
