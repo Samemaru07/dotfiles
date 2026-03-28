@@ -7,6 +7,25 @@ if [ -f "$HOME/.cargo/env" ]; then
   . "$HOME/.cargo/env"
 fi
 
+# SSH Agent auto-start
+if [ -z "$SSH_AUTH_SOCK" ]; then
+  # Check for existing ssh-agent
+  if [ -f ~/.ssh/ssh-agent.env ]; then
+    source ~/.ssh/ssh-agent.env > /dev/null
+    if ! kill -0 "$SSH_AGENT_PID" > /dev/null 2>&1; then
+      # Agent is dead, start new one
+      eval "$(ssh-agent -s)" > /dev/null
+      echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" > ~/.ssh/ssh-agent.env
+      echo "export SSH_AGENT_PID=$SSH_AGENT_PID" >> ~/.ssh/ssh-agent.env
+    fi
+  else
+    # No agent file, start new one
+    eval "$(ssh-agent -s)" > /dev/null
+    echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" > ~/.ssh/ssh-agent.env
+    echo "export SSH_AGENT_PID=$SSH_AGENT_PID" >> ~/.ssh/ssh-agent.env
+  fi
+fi
+
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
