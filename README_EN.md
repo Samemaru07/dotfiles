@@ -144,7 +144,8 @@ cat ~/.ssh/id_ed25519.pub
 # WSL
 exit
 # PowerShell
-wsl
+wsl --terminate Ubuntu
+wsl -d Ubuntu
 ```
 
 #### 7. Deploy symlinks
@@ -198,8 +199,8 @@ All image copyrights belong to their respective owners. Redistribution and secon
 | File                             | Source                                                                                                                |
 | -------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | `eww/mito.png`                   | Photo taken at the "Seishun Buta Yarou wa Ogaki ni Tomoru Yume wo Minai" event                                        |
-| `eww/seri_orihime.jpg`           | Fafner in the Azure: EXODUS Episode 8「平和を夢見て」                                                                 |
-| `eww-keycast/mimic.JPG`          | Frieren: Beyond Journey's End Season 1 Episode 23「迷宮攻略」                                                         |
+| `eww/seri_orihime.jpg`           | Fafner in the Azure: EXODUS Episode 8「平和を夢見て」(Heiwa wo Yume Mite)                                             |
+| `eww-keycast/mimic.JPG`          | Frieren: Beyond Journey's End Season 1 Episode 23「迷宮攻略」(Meikyuu Kouryaku)                                       |
 | `home/aobuta.png`                | Photo taken at the "Seishun Buta Yarou wa Ogaki ni Tomoru Yume wo Minai" event                                        |
 | `home/fafner.jpeg`               | Photo taken at the "Fafner in the Azure 20th Anniversary Onomichi Collaboration" event                                |
 | `lock/angel.png`                 | [Wallpaper site](https://kabekin.com/wallpaper/anime/building_tenshinoakuma_2023_0602/gZGG/1440/1080)                 |
@@ -208,9 +209,9 @@ All image copyrights belong to their respective owners. Redistribution and secon
 | `quickshell/misato.jpg`          | Evangelion: 2.0 You Can (Not) Advance                                                                                 |
 | `terminal/dairoku.jpg`           | [Wallpaper site](https://anihonetwallpaper.com/tag/%E5%A6%99%E9%AB%98%E8%89%A6%E3%81%93%E3%82%8C)                     |
 | `terminal/fastfetch/asuka.jpg`   | Evangelion: 2.0 You Can (Not) Advance                                                                                 |
-| `terminal/fastfetch/frieren.JPG` | Frieren: Beyond Journey's End Season 1 Episode 23「迷宮攻略」                                                         |
+| `terminal/fastfetch/frieren.JPG` | Frieren: Beyond Journey's End Season 1 Episode 23「迷宮攻略」(Meikyuu Kouryaku)                                       |
 | `terminal/hala.png`              | [Mobile Suit Gundam: Hathaway's Flash Release Commemoration PV](https://www.youtube.com/watch?v=Mlb4WaADW2s)          |
-| `terminal/seri.jpg`              | Fafner in the Azure: EXODUS Episode 16「命の行方」                                                                    |
-| `widget/maya.PNG`                | Fafner in the Azure: THE BEYOND Episode 12「蒼穹の彼方」                                                              |
+| `terminal/seri.jpg`              | Fafner in the Azure: EXODUS Episode 16「命の行方」(Inochi no Yukue)                                                   |
+| `widget/maya.PNG`                | Fafner in the Azure: THE BEYOND Episode 12「蒼穹の彼方」(Soukyu no Kanata)                                            |
 | `widget/suremio.JPG`             | Mobile Suit Gundam: The Witch from Mercury Season 1 OP                                                                |
 | `wofi/sakura.jpg`                | [@susuki_Mk2](https://x.com/susuki_Mk2/status/1373651612766502917)                                                    |
