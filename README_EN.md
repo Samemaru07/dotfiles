@@ -9,8 +9,35 @@
 ![OS](https://img.shields.io/badge/OS-Arch%20Linux%20%2B%20WSL-6F66DD?style=flat-square&logoColor=white)
 ![WM](https://img.shields.io/badge/WM-Hyprland-1D9E75?style=flat-square)
 ![Editor](https://img.shields.io/badge/Editor-Neovim-639922?style=flat-square)
-![Shell](https://img.shields.io/badge/Shell-Zsh-BA7517?sytle=flat-square)
+![Shell](https://img.shields.io/badge/Shell-Zsh-BA7517?style=flat-square)
 ![Terminal](https://img.shields.io/badge/Terminal-WezTerm-D4537E?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-888780?style=flat-square)
 
 <!-- TODO: スクショ-->
+
+## 🛠️ Tools
+
+### Arch + WSL
+
+- Editor: [Neovim](https://neovim.io/)
+    - 👉 Check out the ultimate Neovim config [here](https://github.com/samemaru07/Neovim-setup.git)
+- Terminal Emulator: [WezTerm](https://wezterm.org/index.html)
+- Shell: [Zsh](https://www.zsh.org/)
+- Terminal Multiplexer: [tmux](https://github.com/tmux/tmux/wiki)
+- System Info: [fastfetch](https://github.com/fastfetch-cli/fastfetch)
+- Version Control: [Git](https://git-scm.com)
+    - 👉 Tool: [lazygit](https://github.com/jesseduffield/lazygit)
+
+### Arch Linux only
+
+- Window Manager: [Hyprland](https://hypr.land/)
+- Widget & Bar: [eww](https://github.com/elkowar/eww) / [quickshell](https://quickshell.org/)
+- Launcher: [wofi](https://hg.sr.ht/~scoopta/wofi)
+- Display Manager: [SDDM](https://github.com/sddm/sddm/)
+- Japanese Input: [fcitx5](https://fcitx-im.org/wiki/Fcitx_5) + [fcitx5-skk](https://github.com/fcitx/fcitx5-skk)
+- Network Manager: [NetworkManager](https://networkmanager.dev/)
+- Keycaster: [[custom] eww-keycast](https://github.com/Samemaru07/eww-keycast.git)
+
+### WSL only
+
+- Clipboard: [win32yank](https://github.com/equalsraf/win32yank)
