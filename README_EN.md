@@ -20,7 +20,7 @@
 ### Arch + WSL
 
 - Editor: [Neovim](https://neovim.io/)
-    - 👉 Check out the ultimate Neovim config [here](https://github.com/samemaru07/Neovim-setup.git)
+    - 👉 Check out the ultimate Neovim config [here](https://github.com/Samemaru07/Neovim-setup.git)
 - Terminal Emulator: [WezTerm](https://wezterm.org/index.html)
 - Shell: [Zsh](https://www.zsh.org/)
 - Terminal Multiplexer: [tmux](https://github.com/tmux/tmux/wiki)
@@ -72,3 +72,109 @@ dotfiles/
     ├ deploy.sh # Symlink deployment script
     └ bootstrap.sh # Initial setup script
 ```
+
+## 🚀 Installation
+
+### WSL (Ubuntu)
+
+#### 0. Prerequisites (Windows)
+
+##### Install Ubuntu
+
+```bash
+# PowerShell
+wsl --install -d Ubuntu
+```
+
+##### Place win32yank.exe
+
+1. Download [win32yank.exe](https://github.com/equalsraf/win32yank/releases).
+2. Extract it to `C:\tools\`
+
+#### 1. Minimal setup
+
+```bash
+sudo apt update
+sudo apt install curl git -y
+```
+
+#### 2. Clone dotfiles
+
+```bash
+git clone --recurse-submodules https://github.com/Samemaru07/dotfiles.git
+```
+
+- If you want to use a specific branch:
+
+```bash
+    git clone -b <branch> --recurse-submodules https://github.com/Samemaru07/dotfiles.git
+```
+
+#### 3. Install tools & packages
+
+```bash
+cd ~/dotfiles
+bash bootstrap.sh
+```
+
+#### 4. Change shell (bash→Zsh)
+
+```bash
+chsh -s $(which zsh)
+```
+
+#### 5. Set up public key authentication (GitHub)
+
+```bash
+ssh-keygen -t ed25519 -C "<your@mail>"
+ssh-add ~/.ssh/id_ed25519
+cat ~/.ssh/id_ed25519.pub
+```
+
+- Register the output public key on [GitHub](https://github.com/settings/keys).
+- Verify:
+
+```bash
+    ssh -T git@github.com
+```
+
+#### 6. Restart WSL
+
+```bash
+# WSL
+exit
+# PowerShell
+wsl
+```
+
+#### 7. Deploy symlinks
+
+```bash
+cd ~/dotfiles
+bash deploy.sh
+```
+
+#### 8. Reload PATH
+
+```bash
+source ~/.zshrc
+```
+
+### Arch Linux
+
+#### 0. Prerequisites
+
+- Install [Arch Linux](https://wiki.archlinux.org/title/Installation_guide)
+- Install yay (AUR helper)
+
+```bash
+sudo pacman -S --needed git base-devel
+git clone https://aur.archlinux.org/yay.git
+cd yay && makepkg -si
+```
+
+#### 1. Onwards
+
+Follow the same steps as WSL: [1. Minimal setup](#1.-minimal-setup) ~ [8. Reload PATH](#8.-reload-path).
+
+> Skip [6. Restart WSL](#6.-restart-wsl)
