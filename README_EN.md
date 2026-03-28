@@ -178,3 +178,39 @@ cd yay && makepkg -si
 Follow the same steps as WSL: [1. Minimal setup](#1.-minimal-setup) ~ [8. Reload PATH](#8.-reload-path).
 
 > Skip [6. Restart WSL](#6.-restart-wsl)
+
+## 💘 Highlights
+
+## 📄 License
+
+MIT License © 2025 Samemaru07
+
+See [LICENSE](./LICENSE) for details.
+
+The Arch Linux configuration is based on and improved from [Monasm](https://github.com/Mon4sm/monasm-dots)'s dotfiles. Thank you 🙏
+
+---
+
+### 🖼️ Image Credits
+
+All image copyrights belong to their respective owners. Redistribution and secondary use are prohibited.
+
+| File                             | Source                                                                                                                |
+| -------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `eww/mito.png`                   | Photo taken at the "Seishun Buta Yarou wa Ogaki ni Tomoru Yume wo Minai" event                                        |
+| `eww/seri_orihime.jpg`           | Fafner in the Azure: EXODUS Episode 8「平和を夢見て」                                                                 |
+| `eww-keycast/mimic.JPG`          | Frieren: Beyond Journey's End Season 1 Episode 23「迷宮攻略」                                                         |
+| `home/aobuta.png`                | Photo taken at the "Seishun Buta Yarou wa Ogaki ni Tomoru Yume wo Minai" event                                        |
+| `home/fafner.jpeg`               | Photo taken at the "Fafner in the Azure 20th Anniversary Onomichi Collaboration" event                                |
+| `lock/angel.png`                 | [Wallpaper site](https://kabekin.com/wallpaper/anime/building_tenshinoakuma_2023_0602/gZGG/1440/1080)                 |
+| `lock/ironblood.png`             | [Reddit](https://www.reddit.com/r/Gundam/comments/1c14vxp/official_mobile_suit_gundam_ironblooded_orphans/)           |
+| `lock/witch.png`                 | [Mobile Suit Gundam: The Witch from Mercury Official](https://gundam-official.com/witch-from-mercury/gallery/visual/) |
+| `quickshell/misato.jpg`          | Evangelion: 2.0 You Can (Not) Advance                                                                                 |
+| `terminal/dairoku.jpg`           | [Wallpaper site](https://anihonetwallpaper.com/tag/%E5%A6%99%E9%AB%98%E8%89%A6%E3%81%93%E3%82%8C)                     |
+| `terminal/fastfetch/asuka.jpg`   | Evangelion: 2.0 You Can (Not) Advance                                                                                 |
+| `terminal/fastfetch/frieren.JPG` | Frieren: Beyond Journey's End Season 1 Episode 23「迷宮攻略」                                                         |
+| `terminal/hala.png`              | [Mobile Suit Gundam: Hathaway's Flash Release Commemoration PV](https://www.youtube.com/watch?v=Mlb4WaADW2s)          |
+| `terminal/seri.jpg`              | Fafner in the Azure: EXODUS Episode 16「命の行方」                                                                    |
+| `widget/maya.PNG`                | Fafner in the Azure: THE BEYOND Episode 12「蒼穹の彼方」                                                              |
+| `widget/suremio.JPG`             | Mobile Suit Gundam: The Witch from Mercury Season 1 OP                                                                |
+| `wofi/sakura.jpg`                | [@susuki_Mk2](https://x.com/susuki_Mk2/status/1373651612766502917)                                                    |
