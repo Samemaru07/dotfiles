@@ -14,7 +14,7 @@ config.automatically_reload_config = true
 -- フォント設定
 config.font = wezterm.font("JetBrains Mono", { weight = "Regular" })
 config.font_size = 10.5
-config.line_height = 0.98
+config.line_height = 0.88
 config.freetype_load_flags = "DEFAULT"
 config.freetype_load_target = "Normal"
 config.freetype_render_target = "Normal"
