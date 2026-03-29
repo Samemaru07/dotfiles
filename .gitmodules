@@ -6,3 +6,6 @@
 	path = eww/eww-keycast
 	url = https://github.com/Samemaru07/eww-keycast.git
 	branch = main
+[submodule "boot-animation"]
+	path = boot-animation
+	url = https://github.com/Samemaru07/boot-animation.git
