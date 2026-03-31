@@ -119,6 +119,8 @@ if [ "$IS_WSL" = false ]; then
     sudo mkdir -p "/etc/NetworkManager/"
     sudo ln -snf "$DOTFILES_DIR/etc/NetworkManager/NetworkManager.conf" \
         "/etc/NetworkManager/NetworkManager.conf"
+    # autologin
+    sudo ln -snf "$DOTFILES_DIR/etc/sddm.conf" "/etc/sddm.conf"
 
     # fcitx5
     link_dir "$DOTFILES_DIR/fcitx5/conf" "$HOME_DIR/.config/fcitx5/conf" "*.conf"
