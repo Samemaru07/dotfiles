@@ -5,8 +5,6 @@ hyprctl dispatch movecursor 2880 540
 MONITOR_COUNT=$(hyprctl monitors | grep -c "^Monitor")
 export BRUNHILDE_MONITOR=$MONITOR_COUNT
 
-swaybg -i /home/samemaru/dotfiles/assets/home/fafner.jpeg -m fill &
-sleep 1
 if [ ! -f /tmp/brunhilde_booted ]; then
     hyprctl dispatch submap locked
     BRUNHILDE_MONITOR=$MONITOR_COUNT /usr/local/bin/processing-java --sketch=/home/samemaru/project/boot_animation/brunhilde_system --run
@@ -15,6 +13,7 @@ if [ ! -f /tmp/brunhilde_booted ]; then
 fi
 
 systemctl --user import-environment WAYLAND_DISPLAY XDG_SESSION_TYPE HYPRLAND_INSTANCE_SIGNATURE
+swaybg -i /home/samemaru/dotfiles/assets/home/fafner.jpeg -m fill &
 bash /home/samemaru/.config/eww/scripts/eww-start.sh
 dunst &
 fcitx5 -d &
