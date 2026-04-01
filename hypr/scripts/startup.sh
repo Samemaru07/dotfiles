@@ -7,6 +7,7 @@ export BRUNHILDE_MONITOR=$MONITOR_COUNT
 
 if [ ! -f /tmp/brunhilde_booted ]; then
     hyprctl dispatch submap locked
+    openrgb --mode Off
     BRUNHILDE_MONITOR=$MONITOR_COUNT /usr/local/bin/processing-java --sketch=/home/samemaru/project/boot_animation/brunhilde_system --run
     hyprctl dispatch submap reset
     touch /tmp/brunhilde_booted
