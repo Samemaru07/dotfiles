@@ -75,7 +75,8 @@ dotfiles/
 
 ## 🚀 インストール
 
-### WSL (Ubuntu)
+<details>
+<summary>WSL (Ubuntu)</summary>
 
 #### 0. 事前準備 (Windows)
 
@@ -159,7 +160,10 @@ bash deploy.sh
 source ~/.zshrc
 ```
 
-### Arch Linux
+</details>
+
+<details>
+<summary>Arch Linux</summary>
 
 #### 0. 事前準備
 
@@ -174,9 +178,11 @@ cd yay && makepkg -si
 
 #### 1. 以降
 
-WSLの手順[1. 最低限の準備](#1.-最低限の準備) ~ [8. パスの反映](#8.-パスの反映)と同様に。
+WSLの手順 1. 最低限の準備 ~ 8. パスの反映 と同様に。
 
-> ただし、[6. WSLを再起動](#6.-wslを再起動)はスキップ
+> ただし、6. WSLを再起動はスキップ
+
+</details>
 
 ## 💘 こだわりポイント
 
