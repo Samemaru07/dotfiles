@@ -1,6 +1,6 @@
 # dotfiles　
 
-###### 🇯🇵 日本語 | 🇺🇸 [English](./README_EN.md)
+###### 🇯🇵 日本語 | 🇺🇸 [English](./README.en.md)
 
 ### 最高の生活空間
 
