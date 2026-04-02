@@ -70,7 +70,7 @@ install_apt() {
     # WSL固有
     if [ "$IS_WSL" = true ]; then
         echo "Installing WSL-specific packages..."
-        sudo apt-get install -y pulseaudio-utils sound-theme-freedesktop xclip
+        sudo apt-get install -y pulseaudio-utils sound-theme-freedesktop xclip wslu
     else
         sudo apt-get install -y xclip wl-clipboard
     fi
