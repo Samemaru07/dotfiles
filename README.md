@@ -188,7 +188,7 @@ WSLの手順 1. 最低限の準備 ~ 8. パスの反映 と同様に。
 
 ## 📄 ライセンス
 
-MIT License © 2025 Samemaru07
+MIT License © 2026 Samemaru07
 
 詳細は [LICENSE](./LICENSE) を参照してください。
 

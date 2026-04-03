@@ -194,7 +194,7 @@ Follow the same steps as WSL: 1. Minimal setup ~ 8. Reload PATH.
 
 ## 📄 License
 
-MIT License © 2025 Samemaru07
+MIT License © 2026 Samemaru07
 
 See [LICENSE](./LICENSE) for details.
 
