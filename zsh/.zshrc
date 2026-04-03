@@ -17,12 +17,14 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
       eval "$(ssh-agent -s)" > /dev/null
       echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" > ~/.ssh/ssh-agent.env
       echo "export SSH_AGENT_PID=$SSH_AGENT_PID" >> ~/.ssh/ssh-agent.env
+      ssh-add ~/.ssh/id_ed25519 2>/dev/null
     fi
   else
     # No agent file, start new one
     eval "$(ssh-agent -s)" > /dev/null
     echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" > ~/.ssh/ssh-agent.env
     echo "export SSH_AGENT_PID=$SSH_AGENT_PID" >> ~/.ssh/ssh-agent.env
+    ssh-add ~/.ssh/id_ed25519 2>/dev/null
   fi
 fi
 
