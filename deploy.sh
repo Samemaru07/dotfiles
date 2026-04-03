@@ -69,7 +69,7 @@ link "$DOTFILES_DIR/applications/org.wezfurlong.wezterm.desktop" \
     "$HOME_DIR/.local/share/applications/org.wezfurlong.wezterm.desktop"
 
 # .clang-format
-link "$DOTFILES_DIR/nvim/.clang-format" "$HOME_DIR/.clang-format"
+link "$DOTFILES_DIR/nvim/tools/.clang-format" "$HOME_DIR/.clang-format"
 
 # ============================================================
 # Arch Linux のみ
