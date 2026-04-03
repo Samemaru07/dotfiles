@@ -184,9 +184,9 @@ cd yay && makepkg -si
 
 #### 1. Onwards
 
-Follow the same steps as WSL: [1. Minimal setup](#1.-minimal-setup) ~ [8. Reload PATH](#8.-reload-path).
+Follow the same steps as WSL: 1. Minimal setup ~ 8. Reload PATH.
 
-> Skip [6. Restart WSL](#6.-restart-wsl)
+> Skip 6. Restart WSL
 
 </details>
 
