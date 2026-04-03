@@ -75,6 +75,9 @@ dotfiles/
 
 ## 🚀 Installation
 
+<details>
+<summary>WSL (Ubuntu)</summary>
+
 ### WSL (Ubuntu)
 
 #### 0. Prerequisites (Windows)
@@ -161,6 +164,11 @@ bash deploy.sh
 source ~/.zshrc
 ```
 
+</details>
+
+<details>
+<summary>Arch Linux</summary>
+
 ### Arch Linux
 
 #### 0. Prerequisites
@@ -179,6 +187,8 @@ cd yay && makepkg -si
 Follow the same steps as WSL: [1. Minimal setup](#1.-minimal-setup) ~ [8. Reload PATH](#8.-reload-path).
 
 > Skip [6. Restart WSL](#6.-restart-wsl)
+
+</details>
 
 ## 💘 Highlights
 
