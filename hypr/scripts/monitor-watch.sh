@@ -13,14 +13,14 @@ handle() {
     case $1 in
     "monitorremoved>>DP-1")
         eww close bar_widget
+        eww close bar_widget_sub
         sleep 0.5
-        set_monitor "PX248WAVE"
         eww open bar_widget --screen PX248WAVE
         ;;
     "monitoradded>>DP-1")
         eww close bar_widget
+        eww close bar_widget_sub
         sleep 0.5
-        set_monitor "GH-LCW24L"
         hyprctl dispatch moveworkspacetomonitor 1 DP-1
         hyprctl dispatch workspace 1
         sleep 0.3
@@ -32,6 +32,7 @@ handle() {
         kitty --title btop --override font_size=9 bash -c "btop" &
         kitty --title clock --config /home/samemaru/.config/hypr/scripts/clock-kitty.conf bash -c "python3 /home/samemaru/.config/hypr/scripts/clock.py" &
         eww open bar_widget --screen GH-LCW24L
+        eww open bar_widget_sub --screen PX248WAVE
         ;;
     esac
 }

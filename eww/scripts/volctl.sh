@@ -1,8 +1,18 @@
 #!/bin/bash
 
-if [[ -z $(eww active-windows | grep 'volctl') ]]; then
-    /usr/bin/eww open volctl && /usr/bin/eww update volrev=true
+ACTIVE_MONITOR=$(hyprctl monitors -j | jq -r '.[] | select(.focused == true) | .name')
+
+if [ "$ACTIVE_MONITOR" = "DP-1" ]; then
+    WINDOW="volctl"
+    VAR="volrev"
 else
-    /usr/bin/eww update volrev=false
-    (sleep 0.2 && /usr/bin/eww close volctl) &
+    WINDOW="volctl_sub"
+    VAR="volrev_sub"
+fi
+
+if [[ -z $(eww active-windows | grep "$WINDOW") ]]; then
+    /usr/bin/eww open "$WINDOW" && /usr/bin/eww update ${VAR}=true
+else
+    /usr/bin/eww update ${VAR}=false
+    (sleep 0.2 && /usr/bin/eww close "$WINDOW") &
 fi
