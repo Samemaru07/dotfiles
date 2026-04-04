@@ -8,22 +8,13 @@ if [ -f "$HOME/.cargo/env" ]; then
 fi
 
 # SSH Agent auto-start
-if [ -z "$SSH_AUTH_SOCK" ]; then
-  # Check for existing ssh-agent
-  if [ -f ~/.ssh/ssh-agent.env ]; then
-    source ~/.ssh/ssh-agent.env > /dev/null
-    if ! kill -0 "$SSH_AGENT_PID" > /dev/null 2>&1; then
-      # Agent is dead, start new one
-      eval "$(ssh-agent -s)" > /dev/null
-      echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" > ~/.ssh/ssh-agent.env
-      echo "export SSH_AGENT_PID=$SSH_AGENT_PID" >> ~/.ssh/ssh-agent.env
-      ssh-add ~/.ssh/id_ed25519 2>/dev/null
-    fi
-  else
-    # No agent file, start new one
-    eval "$(ssh-agent -s)" > /dev/null
-    echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" > ~/.ssh/ssh-agent.env
-    echo "export SSH_AGENT_PID=$SSH_AGENT_PID" >> ~/.ssh/ssh-agent.env
+if [ -z "$SSH_AUTH_SOCK" ] || [ ! -S "$SSH_AUTH_SOCK" ]; then
+  agent_env=~/.ssh/ssh-agent.env
+  [ -f "$agent_env" ] && source "$agent_env" > /dev/null
+
+  if ! kill -0 "$SSH_AGENT_PID" 2>/dev/null; then
+    ssh-agent > "$agent_env"
+    source "$agent_env" > /dev/null
     ssh-add ~/.ssh/id_ed25519 2>/dev/null
   fi
 fi
