@@ -46,6 +46,7 @@
 )
 
 (defvar volrev false)
+(defvar volrev_sub false)
 (defvar volico "󰕾")
 
 (defpoll sinks :interval "2s"
@@ -144,6 +145,54 @@
     )
 )
 
+(defwindow volctl_sub
+    :monitor "PX248WAVE"
+    :stacking "overlay"
+    :focusable false
+    :geometry (geometry :anchor "top right"
+                        :x "5px"
+                        :y "-4px"
+                        :width "260px")
+    (revealer :transition "slidedown"
+              :reveal volrev_sub
+              :duration "250ms"
+              (eventbox :onhoverlost "./scripts/volctl.sh"
+                  (box :class "volctl-container"
+                       :orientation "v"
+                       :space-evenly false
+    (box :space-evenly false
+        :halign "center"
+        :spacing 8
+        (eventbox :cursor "pointer"
+                  :onclick "pamixer -t"
+                  (label :class "volico" :text "${volico}")
+        )
+         (scale :class "vol"
+             :value {get_vol}
+             :max 101
+             :min 0
+             :round-digits 0
+              :onchange "pamixer --set-volume {}"
+      )
+    )
+                       (box :class "volctl-divider")
+                       (box :orientation "v"
+                            :space-evenly false
+                            :spacing 4
+                            (for sink in {sinks}
+                                (sink-item :id {sink.id}
+                                           :name {sink.name}
+                                           :desc {sink.desc}
+                                           :active {sink.active}
+                                           :active_port {sink.active_port}
+                                           :ports {sink.ports})
+                            )
+                       )
+                  )
+              )
+    )
+)
+
 (defwidget ime-indicator []
     (box :class {ime_status.caps ? "ime-pill ime-caps" : "ime-pill"}
          :halign "center"
@@ -193,6 +242,7 @@
 (defvar wifirev false)
 (defvar wifihov false)
 (defvar wifictlrev false)
+(defvar wifictlrev_sub false)
 
 (defpoll wifistatus :interval "1s" :initial "{\"icon\": \"睊\", \"ssid\": \"Disconnected\", \"strength\": 0}"
     "./scripts/current-wifi.sh"
@@ -356,6 +406,25 @@
     )
 )
 
+(defwindow wifictl_sub
+    :monitor "PX248WAVE"
+    :stacking "overlay"
+    :focusable true
+    :geometry (geometry :anchor "top right"
+                        :x "5px"
+                        :y "-14px"
+                        :width "425px"
+                        :height "440px"
+    )
+    (expander :expanded true
+              (revealer :transition "slidedown"
+                        :reveal wifictlrev_sub
+                        :duration "350ms"
+                        (wifi_event)
+              )
+    )
+)
+
 (defvar keyrev false)
 (defvar keyhov false)
 
@@ -409,6 +478,7 @@
 )
 
 (defvar menurev false)
+(defvar menurev_sub false)
 
 (defwindow menuctl
     :monitor "GH-LCW24L"
@@ -422,6 +492,22 @@
     (box :space-evenly false
          (revealer :transition "slideright"
                    :reveal menurev
+                   :duration "350ms"
+                   (menu_event)))
+)
+
+(defwindow menuctl_sub
+    :monitor "PX248WAVE"
+    :stacking "overlay"
+    :focusable true
+    :geometry (geometry :anchor "top left"
+                        :x "5px"
+                        :y "-4px"
+                        :width "425px"
+                        :height "993px")
+    (box :space-evenly false
+         (revealer :transition "slideright"
+                   :reveal menurev_sub
                    :duration "350ms"
                    (menu_event)))
 )
@@ -519,7 +605,25 @@
     )
 )
 
+(defwindow calendar_sub
+    :monitor "PX248WAVE"
+    :stacking "overlay"
+    :geometry (geometry :anchor "top center"
+                        :y "-15px"
+                        :width "355px"
+                        :height "41%"
+    )
+    (expander :expanded true
+              (revealer :transition "slidedown"
+                        :reveal calrev_sub
+                        :duration "350ms"
+                        (calendar_event)
+              )
+    )
+)
+
 (defvar calrev false)
+(defvar calrev_sub false)
 
 (defwidget calendar_event []
     (eventbox :onhoverlost "./scripts/calendar.sh"
@@ -601,7 +705,28 @@
     )
 )
 
+(defwindow usrctl_sub
+    :monitor "PX248WAVE"
+    :stacking "overlay"
+    :focusable false
+    :geometry (geometry :anchor "top right"
+                        :x "5px"
+                        :y "-4px"
+                        :width "425px"
+                        :height "993px"
+    )
+    (box :space-evenly false
+         :halign "end"
+              (revealer :transition "slideleft"
+                        :reveal ctlrev_sub
+                        :duration "350ms"
+                        (usrctl-widget :uptime get_uptime)
+              )
+    )
+)
+
 (defvar ctlrev false)
+(defvar ctlrev_sub false)
 (defvar music_ready false)
 
 (defwidget usrctl-widget [uptime]
@@ -880,6 +1005,16 @@
 
 (defwindow bar_widget
     ;; :monitor 1
+    :stacking "bg"
+    :geometry (geometry :anchor "top center"
+                        :width "99.5%"
+                        :height "3.425%"
+    )
+    :exclusive true
+    (bar)
+)
+
+(defwindow bar_widget_sub
     :stacking "bg"
     :geometry (geometry :anchor "top center"
                         :width "99.5%"
