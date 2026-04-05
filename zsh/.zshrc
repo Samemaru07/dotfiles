@@ -159,3 +159,8 @@ true
 if [[ "$TERM_PROGRAM" == "WezTerm" && -z "$TOGGLETERM" ]]; then
   fastfetch
 fi
+
+# vi 有効化
+bindkey -v
+
+KEYTIMEOUT=1
