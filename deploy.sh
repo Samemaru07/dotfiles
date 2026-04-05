@@ -127,6 +127,9 @@ if [ "$IS_WSL" = false ]; then
     link "$DOTFILES_DIR/fcitx5/config" "$HOME_DIR/.config/fcitx5/config"
     link "$DOTFILES_DIR/fcitx5/profile" "$HOME_DIR/.config/fcitx5/profile"
 
+    # swaync
+    ln -snf "$DOTFILES_DIR/swaync" "$HOME/.config/swaync"
+
 fi
 
 echo "deploy complete."

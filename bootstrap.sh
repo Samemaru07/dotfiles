@@ -119,7 +119,7 @@ install_pacman() {
         python python-pip \
         nodejs npm \
         go rustup perl php composer \
-        shellcheck shfmt ghdl clang pgformatter chktex
+        shellcheck shfmt ghdl clang pgformatter chktex swaync
 
     # LaTeX (任意)
     read -rp "Do you want to install LaTeX (TexLive)? This is large. (y/N) " -n 1

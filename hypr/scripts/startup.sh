@@ -16,7 +16,7 @@ fi
 systemctl --user import-environment WAYLAND_DISPLAY XDG_SESSION_TYPE HYPRLAND_INSTANCE_SIGNATURE
 swaybg -i /home/samemaru/dotfiles/assets/home/fafner.jpeg -m fill &
 bash /home/samemaru/.config/eww/scripts/eww-start.sh
-dunst &
+swaync &
 fcitx5 -d &
 kitty --title cava bash -c "cava" &
 spotify &
