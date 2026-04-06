@@ -15,7 +15,7 @@ execs=(
 )
 
 icons=(
-  "/usr/share/icons/hicolor/128x128/apps/org.wezfurlong.wezterm.png"
+  "/home/samemaru/dotfiles/assets/icon/wezterm/wezterm.png"
   "/usr/share/icons/hicolor/128x128/apps/zen-browser.png"
   "/usr/share/icons/hicolor/256x256/apps/spotify.png"
   "/usr/share/icons/hicolor/scalable/apps/org.kde.dolphin.svg"
