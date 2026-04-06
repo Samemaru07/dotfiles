@@ -2,3 +2,5 @@
 .config/gh/
 .gitconfig.local
 .zsh_history
+.icons/*
+!.icons/.gitkeep

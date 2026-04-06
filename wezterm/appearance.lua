@@ -101,6 +101,11 @@ M.setup = function(config)
     config.default_cursor_style = "BlinkingBlock"
     config.cursor_blink_rate = 500
 
+    if not is_windows then
+        config.xcursor_theme = "FernCursor"
+        config.xcursor_size = 24
+    end
+
     config.enable_wayland = false
 end
 

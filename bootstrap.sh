@@ -7,6 +7,7 @@ set -e
 # ============================================================
 WORK_DIR="$HOME/Downloads"
 mkdir -p "$WORK_DIR"
+DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # ============================================================
 # パッケージマネージャの判定
@@ -309,6 +310,40 @@ setup_skk() {
     fi
 
     echo "SKK dictionaries installed."
+}
+
+# ============================================================
+# Cursor Theme (FernCursor) - Arch Linux Only
+# ============================================================
+setup_cursor_theme() {
+    if [ "$PKG_MANAGER" != "pacman" ] || [ "$IS_WSL" = true ]; then
+        return
+    fi
+
+    local DOT_ICON_DIR="$DOTFILES_DIR/.icons"
+    local THEME_NAME="FernCursor"
+
+    if [ -d "$DOT_ICON_DIR/$THEME_NAME" ]; then
+        return
+    fi
+
+    echo "Checking for $THEME_NAME..."
+    mkdir -p "$DOT_ICON_DIR"
+
+    local ZIP_PATH="$WORK_DIR/FernCursor.zip"
+
+    if [ -f "$ZIP_PATH" ]; then
+        unzip -q "$ZIP_PATH" -d "$DOT_ICON_DIR"
+        echo "$THEME_NAME has been extracted to $DOT_ICON_DIR."
+    else
+        echo "----------------------------------------------------------"
+        echo "Warning: $THEME_NAME is not installed yet."
+        echo "1. Download 'FernCursor.zip' from:"
+        echo "   https://www.opendesktop.org/p/2352161/"
+        echo "2. Place the ZIP file in: $WORK_DIR"
+        echo "3. Re-run this script."
+        echo "----------------------------------------------------------"
+    fi
 }
 
 # ============================================================
