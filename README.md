@@ -38,6 +38,7 @@
 - ネットワーク管理: [NetworkManager](https://networkmanager.dev/)
 - keycaster: [[自作] eww-keycast](https://github.com/Samemaru07/eww-keycast.git)
 - 通知: [SwayNotificationCenter](https://github.com/ErikReider/SwayNotificationCenter)
+- カーソル: [フェルン (葬送のフリーレン) のカーソル (FernCursor)](https://www.opendesktop.org/p/2352161/)
 
 ### WSL専用
 
@@ -47,6 +48,8 @@
 
 ```
 dotfiles/
+    ├ .icons/               # カーソルのテーマ
+    │   └ FernCursor/       # テーマ名と同じ名前のディレクトリを置く
     ├ applications/         # WezTermのデスクトップエントリ
     ├ assets/               # 壁紙・アイコンなどの画像素材 (Arch・WSL共通)
     ├ etc/                  # NetworkManager設定
@@ -169,8 +172,9 @@ source ~/.zshrc
 
 #### 0. 事前準備
 
-- [Arch Linux](https://wiki.archlinux.org/title/Installation_guide)のインストール
-- yay (AURヘルパー) のインストール
+##### [Arch Linux](https://wiki.archlinux.org/title/Installation_guide)のインストール
+
+##### [yay (AURヘルパー)](https://github.com/Jguer/yay) のインストール
 
 ```bash
 sudo pacman -S --needed git base-devel
@@ -178,9 +182,45 @@ git clone https://aur.archlinux.org/yay.git
 cd yay && makepkg -si
 ```
 
+##### カーソルテーマの導入 (デフォルト「フェルン (FernCursor)」の場合)
+
+- [FernCursor](https://www.opendesktop.org/p/2352161/)を`~/Downloads`にダウンロード。
+
+<details>
+<summary>FernCursor 以外を使いたい場合</summary>
+
+1. [こちら](https://www.opendesktop.org/browse?cat=107&ord=latest)のサイトから好きなテーマを`~/Downloads`へダウンロード。
+2. このリポジトリをクローンして、**1. 以降** を実行。
+3. 以下のコマンドを実行して、テーマを配置。
+    > **📌 Note:** `bootstrap.sh`が実行されると、`~/.icons`は`~/dotfiles/.icons`のシンボリックリンクとなります。
+
+```bash
+unzip -q ~/Downloads/<テーマ>.zip -d ~/dotfiles/.icons
+```
+
+4. 以下の2ファイルを(`<>`ごと)書き換え。
+
+- `hypr/hyprland.conf`
+
+```diff
+    - env = XCURSOR_THEME,FernCursor
+    + env = XCURSOR_THEME,<テーマ名>
+```
+
+- `wezterm/appearance.lua`
+
+```diff
+    - config.xcursor_theme = "FernCursor"
+    + config.xcursor_theme = "<テーマ名>"
+```
+
+5. WezTermを再起動し、`hyprctl reload`を実行。
+
+</details>
+
 #### 1. 以降
 
-WSLの手順 1. 最低限の準備 ~ 8. パスの反映 と同様に。
+WSLの手順 2. dotfilesのclone ~ 8. パスの反映 と同様に。
 
 > ただし、6. WSLを再起動はスキップ
 
