@@ -46,31 +46,31 @@
 
 ```
 dotfiles/
-    ├ applications/ # WezTerm desktop entry
-    ├ assets/ # Wallpapers, icons, and other image assets (shared across Arch & WSL)
-    ├ etc/ # NetworkManager config
-    ├ eww/ # eww widget config
-    │   └ eww-keycast/ # Key input display widget (git submodule)
-    ├ fastfetch/ # System info display config
-    ├ fcitx5/ # Japanese input config (fcitx5 + SKK)
-    ├ git/ # Git global config (.gitconfig)
-    ├ hypr/ # Hyprland / hypridle / hyprlock / hyprpaper config
-    ├ keymap/ # Keymap images
-    ├ libskk/ # SKK custom keymap rules
-    ├ nvim/ # Neovim config (git submodule)
-    ├ openrgb/ # OpenRGB (PC fan RGB lighting) config
-    ├ p10k/ # Powerlevel10k config
-    ├ quickshell/ # quickshell widget config
-    ├ scripts/ # General-purpose scripts
-    ├ sddm/ # SDDM theme config
-    ├ shell/ # Shell common config (.profile)
-    ├ skk/ # SKK keymap config
-    ├ tmux/ # tmux config
-    ├ wezterm/ # WezTerm config
-    ├ wofi/ # wofi launcher config
-    ├ zsh/ # Zsh config (.zshrc)
-    ├ deploy.sh # Symlink deployment script
-    └ bootstrap.sh # Initial setup script
+    ├ applications/         # WezTerm desktop entry
+    ├ assets/               # Wallpapers, icons, and other image assets (shared across Arch & WSL)
+    ├ etc/                  # NetworkManager config
+    ├ eww/                  # eww widget config
+    │   └ eww-keycast/      # Key input display widget (git submodule)
+    ├ fastfetch/            # System info display config
+    ├ fcitx5/               # Japanese input config (fcitx5 + SKK)
+    ├ git/                  # Git global config (.gitconfig)
+    ├ hypr/                 # Hyprland / hypridle / hyprlock / hyprpaper config
+    ├ keymap/               # Keymap images
+    ├ libskk/               # SKK custom keymap rules
+    ├ nvim/                 # Neovim config (git submodule)
+    ├ openrgb/              # OpenRGB (PC fan RGB lighting) config
+    ├ p10k/                 # Powerlevel10k config
+    ├ quickshell/           # quickshell widget config
+    ├ scripts/              # General-purpose scripts
+    ├ sddm/                 # SDDM theme config
+    ├ shell/                # Shell common config (.profile)
+    ├ skk/                  # SKK keymap config
+    ├ tmux/                 # tmux config
+    ├ wezterm/              # WezTerm config
+    ├ wofi/                 # wofi launcher config
+    ├ zsh/                  # Zsh config (.zshrc)
+    ├ deploy.sh             # Symlink deployment script
+    └ bootstrap.sh          # Initial setup script
 ```
 
 ## 🚀 Installation
