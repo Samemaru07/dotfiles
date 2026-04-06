@@ -38,6 +38,7 @@
 - Network Manager: [NetworkManager](https://networkmanager.dev/)
 - Keycaster: [[custom] eww-keycast](https://github.com/Samemaru07/eww-keycast.git)
 - Notification: [SwayNotificationCenter](https://github.com/ErikReider/SwayNotificationCenter)
+- Cursor: [Fern (Frieren: Beyond Journey's End) cursor theme (FernCursor)](https://www.opendesktop.org/p/2352161/)
 
 ### WSL only
 
@@ -47,6 +48,8 @@
 
 ```
 dotfiles/
+    ├ .icons/               # Cursor theme directory
+    │   └ FernCursor        # Place a directory named after the theme
     ├ applications/         # WezTerm desktop entry
     ├ assets/               # Wallpapers, icons, and other image assets (shared across Arch & WSL)
     ├ etc/                  # NetworkManager config
@@ -171,12 +174,11 @@ source ~/.zshrc
 <details>
 <summary>Arch Linux</summary>
 
-### Arch Linux
-
 #### 0. Prerequisites
 
-- Install [Arch Linux](https://wiki.archlinux.org/title/Installation_guide)
-- Install yay (AUR helper)
+##### Install [Arch Linux](https://wiki.archlinux.org/title/Installation_guide)
+
+##### Install [yay (AUR helper)](https://github.com/Jguer/yay)
 
 ```bash
 sudo pacman -S --needed git base-devel
@@ -184,11 +186,47 @@ git clone https://aur.archlinux.org/yay.git
 cd yay && makepkg -si
 ```
 
+##### Install cursor theme (default: Fern (FernCursor))
+
+- Download [FernCursor](https://www.opendesktop.org/p/2352161/) to `~/Downloads`.
+
+<details>
+<summary>Using a theme other than FernCursor</summary>
+
+1. Download your preferred theme from [here](https://www.opendesktop.org/browse?cat=107&ord=latest) to `~/Downloads`.
+2. Clone this repository and proceed from **Step 1 onwards**.
+3. Run the following command to place the theme.
+    > **📌 Note:** Once `bootstrap.sh` is executed, `~/.icons` will be a symbolic link to `~/dotfiles/.icons`.
+
+```bash
+unzip -q ~/Downloads/<theme>.zip -d ~/dotfiles/.icons
+```
+
+4. Edit the following 2 files (replace including `<>`).
+
+- `hypr/hyprland.conf`
+
+```diff
+    - env = XCURSOR_THEME,FernCursor
+    + env = XCURSOR_THEME,<theme name>
+```
+
+- `wezterm/appearance.lua`
+
+```diff
+    - config.xcursor_theme = "FernCursor"
+    + config.xcursor_theme = "<theme name>"
+```
+
+5. Restart WezTerm and run `hyprctl reload`.
+
+</details>
+
 #### 1. Onwards
 
-Follow the same steps as WSL: 1. Minimal setup ~ 8. Reload PATH.
+Follow the WSL steps 2. Clone dotfiles ~ 8. Reload PATH.
 
-> Skip 6. Restart WSL
+> Skip step 6. Restart WSL
 
 </details>
 
