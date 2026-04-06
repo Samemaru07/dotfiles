@@ -130,6 +130,8 @@ if [ "$IS_WSL" = false ]; then
     # swaync
     ln -snf "$DOTFILES_DIR/swaync" "$HOME/.config/swaync"
 
+    # カーソル設定
+    ln -snf "$DOTFILES_DIR/.icons" "$HOME/.icons"
 fi
 
 echo "deploy complete."
