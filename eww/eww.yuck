@@ -922,6 +922,7 @@
          )
          (cpu-panel)
          (music-player) 
+         (notification-center)
          )
     ))
 )
@@ -1022,6 +1023,64 @@
     )
     :exclusive true
     (bar)
+)
+
+;; ── Notification Center ──────────────────────────────
+(defpoll notifications :interval "2s"
+    "cat $HOME/.cache/eww-notifications.json 2>/dev/null || echo '[]'"
+)
+
+(defwidget notification-center []
+    (box :class "notif-container"
+         :orientation "v"
+         :space-evenly false
+         (box :class "notif-header"
+              :space-evenly false
+              (label :class "notif-title" :halign "start" :hexpand true :text "通知")
+              (eventbox :cursor "pointer"
+                        :onclick "bash ~/dotfiles/swaync/scripts/dismiss-all-notifications.sh"
+                        (label :class "notif-clear-all" :text "すべて削除")
+              )
+         )
+         (scroll :vscroll true
+                 :hscroll false
+                 :height 200
+                 (box :class "notif-list"
+                      :orientation "v"
+                      :space-evenly false
+                      (for n in {notifications}
+                          (notification-item :id {n.id}
+                                             :app {n.app}
+                                             :summary {n.summary}
+                                             :body {n.body}
+                                             :urgency {n.urgency}
+                                             :time {n.time})
+                      )
+                 )
+         )
+    )
+)
+
+(defwidget notification-item [id app summary body urgency time]
+    (box :class "notif-item notif-${urgency}"
+         :orientation "h"
+         :space-evenly false
+         (box :class "notif-content"
+              :orientation "v"
+              :space-evenly false
+              :hexpand true
+              (box :space-evenly false
+                   (label :class "notif-app" :halign "start" :text "${app}")
+              )
+              (label :class "notif-summary" :halign "start" :limit-width 28 :text "${summary}")
+              (label :class "notif-body" :halign "start" :limit-width 28 :text "${body}")
+         )
+         (eventbox :cursor "pointer"
+                   :valign "start"
+                   :onclick "bash ~/dotfiles/swaync/scripts/invoke-action.sh ${id}"
+                   (label :class "notif-dismiss" :text "󰅖")
+         )
+    )
 )
 
 (include "./eww-keycast/keycast.yuck")

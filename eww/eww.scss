@@ -893,4 +893,94 @@ tooltip{
   box-shadow: 0 0 10px rgba(77, 158, 236, 0.6);
 }
 
+// ── Notification Center ──────────────────────────────
+.notif-container {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.08);
+  margin: 5.5px;
+  border-radius: 20px;
+  min-width: 385px;
+  background-color: rgba(255,255,255,0.82);
+  padding: 5px;
+}
+
+.notif-header {
+  margin: 7px 7px 4px 7px;
+  padding: 8px 12px;
+  border-radius: 15px;
+  background-color: rgba(255,255,255,0.65);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.notif-title {
+  font-size: 18px;
+  color: rgb(48,100,170);
+}
+
+.notif-clear-all {
+  color: #e06c75;
+  font-size: 12px;
+  border-radius: 10px;
+  padding: 2px 8px;
+  background-color: rgba(224,108,117,0.10);
+  transition: background-color 0.2s;
+  &:hover {
+    background-color: rgba(224,108,117,0.22);
+  }
+}
+
+.notif-list {
+  margin: 0px 7px 7px 7px;
+  padding-right: 5px;
+}
+
+.notif-item {
+  border-radius: 15px;
+  padding: 10px 12px;
+  margin-top: 5px;
+  background-color: rgba(255,255,255,0.65);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.notif-app {
+  font-size: 11px;
+  color: rgb(48,100,170);
+  margin-bottom: 2px;
+}
+
+.notif-summary {
+  font-size: 13px;
+  font-weight: bold;
+  color: #1e293b;
+}
+
+.notif-body {
+  font-size: 12px;
+  color: rgba(30,41,59,0.65);
+  margin-top: 2px;
+}
+
+.notif-dismiss {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 16px;
+  color: rgba(30,41,59,0.35);
+  margin-left: 8px;
+  transition: color 0.2s;
+  &:hover {
+    color: #e06c75;
+  }
+}
+
+// urgency別の左ボーダー
+.notif-Low {
+  border-left: 3px solid rgba(48,100,170,0.4);
+}
+
+.notif-Normal {
+  border-left: 3px solid rgb(48,100,170);
+}
+
+.notif-Critical {
+  border-left: 3px solid #e06c75;
+}
+
 @import "./eww-keycast/keycast.scss"
