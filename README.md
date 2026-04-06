@@ -37,6 +37,7 @@
 - 日本語入力: [fcitx5](https://fcitx-im.org/wiki/Fcitx_5) + [fcitx5-skk](https://github.com/fcitx/fcitx5-skk)
 - ネットワーク管理: [NetworkManager](https://networkmanager.dev/)
 - keycaster: [[自作] eww-keycast](https://github.com/Samemaru07/eww-keycast.git)
+- 通知: [SwayNotificationCenter](https://github.com/ErikReider/SwayNotificationCenter)
 
 ### WSL専用
 
@@ -65,6 +66,7 @@ dotfiles/
     ├ sddm/                 # SDDMテーマ設定
     ├ shell/                # シェル共通設定 (.profile)
     ├ skk/                  # SKKキーマップ設定
+    ├ swaync/               # swaync設定
     ├ tmux/                 # tmux設定
     ├ wezterm/              # WezTerm設定
     ├ wofi/                 # wofiランチャー設定
