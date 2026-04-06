@@ -225,3 +225,4 @@ All image copyrights belong to their respective owners. Redistribution and secon
 | `widget/maya.PNG`                | Fafner in the Azure: THE BEYOND Episode 12「蒼穹の彼方」(Soukyu no Kanata)                                            |
 | `widget/suremio.JPG`             | Mobile Suit Gundam: The Witch from Mercury Season 1 OP                                                                |
 | `wofi/sakura.jpg`                | [@susuki_Mk2](https://x.com/susuki_Mk2/status/1373651612766502917)                                                    |
+| `assets/icon/wezterm.png`        | [Evangelion × Monster Strike Collaboration](https://www.monster-strike.com/news/20150428_1.html)                      |
