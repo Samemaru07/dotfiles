@@ -1,5 +1,5 @@
 #!/bin/bash
-eww daemon
+LC_TIME=en_US.UTF-8 eww daemon
 while ! eww ping 2>/dev/null; do
     sleep 0.1
 done
