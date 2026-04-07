@@ -996,9 +996,12 @@
                    :space-evenly false
                    :halign "center"
                    :spacing 45
-                   (eventbox :class "mico" :cursor "pointer" :onclick "playerctl previous" "󰒮")
-                   (eventbox :class "mico" :cursor "pointer" :onclick "playerctl play-pause" {music.status == "Playing" ? "󰓛" : "󰐊"})
-                   (eventbox :class "mico" :cursor "pointer" :onclick "playerctl next" "󰒭")
+                   (eventbox :class "mico" :cursor "pointer" :onclick "playerctl previous" 
+                             (label :text "󰒮"))
+                   (eventbox :class "mico" :cursor "pointer" :onclick "playerctl play-pause" 
+                             (label :text {music.status == "Playing" ? "󰓛" : "󰐊"}))
+                   (eventbox :class "mico" :cursor "pointer" :onclick "playerctl next" 
+                             (label :text "󰒭"))
               )
          ))
 
@@ -1044,7 +1047,7 @@
          )
          (scroll :vscroll true
                  :hscroll false
-                 :height 200
+                 :height 150
                  (box :class "notif-list"
                       :orientation "v"
                       :space-evenly false

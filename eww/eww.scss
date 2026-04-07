@@ -915,12 +915,21 @@ tooltip {
     margin: 3px 20px;
 }
 
-.mico {
-    font-size: 30px;
-    margin-left: 10px;
+.music-action {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.mico label {
+    font-size: 25px;
     color: #0f172a;
+}
+
+.mico {
     transition: color 0.3s;
-    &:hover {
+    padding: 8px 12px;
+    margin-left: 10px;
+    &:hover label {
         color: rgb(48, 100, 170);
     }
 }
