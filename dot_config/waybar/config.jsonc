@@ -1,0 +1,104 @@
+{
+    "modules-left": [
+        "custom/power",
+        "hyprland/workspaces"
+    ],
+    "modules-right": [
+        "custom/skk",
+        "bluetooth",
+        "network",
+        "custom/battery",
+        "pulseaudio",
+        "clock"
+    ],
+"custom/skk": {
+        "exec": "test \"$(fcitx5-remote)\" = \"2\" && echo \"あ\" || echo \"Ａ\"",
+        "interval": 1,
+        "format": "{}",
+        "tooltip": false,
+        "on-click": "fcitx5-remote -t"
+    },
+    "custom/power": {
+        "format": " ",
+        "tooltip": false,
+        "on-click": "wlogout -b 5"
+    },
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "warp-on-scroll": false,
+        "format": "{name}",
+        "cursor": true
+    },
+    "tray": {
+        "icon-size": 20,
+        "spacing": 10,
+        "cursor": true
+    },
+    "bluetooth": {
+        "format": " 󰂯 ",
+        "format-disabled": " 󰂲 ",
+        "format-connected": " 󰂱 ",
+        "on-click": "blueman-manager"
+    },
+    "network": {
+        "format-wifi": "  {essid}",
+        "format-ethernet": "  Ethernet",
+        "format-linked": "  Linked (No IP)",
+        "format-disconnected": "  Disconnected",
+        "tooltip": false
+    },
+    "battery": {
+        "states": {
+            "good": 85,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-full": "{icon} {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-alt": "{icon} {capacity}%",
+        "format-icons": [
+            " ",
+            " ",
+            " ",
+            " ",
+            " "
+        ],
+        "tooltip-format": "{time}",
+        "cursor": false
+    },
+    "custom/battery": {
+        "format": "  100%",
+        "tooltip": false
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "  {volume}%",
+        "format-bluetooth": " {volume}%",
+        "format-bluetooth-muted": "  {volume}%",
+        "format-icons": {
+            "headphone": " ",
+            "headset": " ",
+            "default": [
+                " "
+            ]
+        },
+        "on-click": "~/.config/waybar/scripts/toggle-pavucontrol.sh"
+    },
+"clock": {
+        "format": "{:%a %Y/%m/%d %H:%M}",
+        "tooltip-format": "<span size=\"15000\"><tt>{calendar}</tt></span>",
+        "calendar": {
+            "mode": "month",
+            "format": {
+                "months": "<b>{}</b>",
+                "weekdays": "<b>{}</b>",
+                "days": "{}",
+                "today": "<b><u>{}</u></b>"
+            }
+        },
+        "on-click": "swaync-client -t -sw"
+    }
+}
