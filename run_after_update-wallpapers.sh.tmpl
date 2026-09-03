@@ -1,0 +1,8 @@
+#!/bin/bash
+{{ if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+# Windows側のディレクトリが存在しない場合は作成
+mkdir -p /mnt/c/Users/nakayama/Pictures/Wallpapers
+
+# WSL側に配置された壁紙をWindows側へコピー
+cp -r {{ .chezmoi.homeDir }}/Pictures/Wallpapers/* /mnt/c/Users/nakayama/Pictures/Wallpapers/
+{{ end }}
