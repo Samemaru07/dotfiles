@@ -1,0 +1,11 @@
+{{ if eq .chezmoi.osRelease.id "ubuntu" }}
+.config/cava
+.config/hypr
+.config/kitty
+.config/fcitx5
+.config/quickshell
+.config/swaync
+.config/waybar
+.config/wlogout
+.config/wofi
+{{ end }}
