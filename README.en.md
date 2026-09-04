@@ -33,6 +33,8 @@
 - Terminal Emulator: [Hyper](https://hyper.is/)
     - 👉 Custom Hyper integrated with Webview, SKK, and background images: [Hyper-webview](https://github.com/Samemaru07/hyper-webview-fork)
 - Shell: [fish](https://fishshell.com/)
+    - 👉 Plugin Manager: [Fisher](https://github.com/jorgebucaran/fisher)
+    - 👉 Prompt Plugin: [TIDE](https://github.com/IlanCosman/tide)
 - Resource Monitor: [btop](https://github.com/aristocratos/btop)
 - Version Control: [Git](https://git-scm.com/)
     - 👉 Tools: [lazygit](https://github.com/jesseduffield/lazygit) / [GitHub CLI (gh)](https://cli.github.com/)

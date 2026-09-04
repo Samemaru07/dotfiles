@@ -33,6 +33,8 @@
 - ターミナルエミュレータ: [Hyper](https://hyper.is/)
     - 👉 Webview + SKK + 背景画像を組み込んだカスタムHyper: [Hyper-webview](https://github.com/Samemaru07/hyper-webview-fork)
 - シェル: [fish](https://fishshell.com/)
+    - 👉 プラグインマネージャ: [Fisher](https://github.com/jorgebucaran/fisher)
+    - 👉 プロンプト・プラグイン: [TIDE](https://github.com/IlanCosman/tide)
 - リソースモニター: [btop](https://github.com/aristocratos/btop)
 - バージョン管理: [Git](https://git-scm.com/)
     - 👉 ツール: [lazygit](https://github.com/jesseduffield/lazygit) / [GitHub CLI (gh)](https://cli.github.com/)
