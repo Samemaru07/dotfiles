@@ -1,4 +1,4 @@
-{{ if eq .chezmoi.osRelease.id "ubuntu" }}
+{{ if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
 .config/cava
 .config/hypr
 .config/kitty
