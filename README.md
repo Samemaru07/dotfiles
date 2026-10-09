@@ -187,6 +187,35 @@ wsl --terminate archlinux
 wsl -d archlinux
 ```
 
+##### 7. dotfiles の適用
+
+事前に、Windows 側に [Hyper Webview](https://github.com/Samemaru07/hyper-webview-fork) をインストールして起動しておいてください（WSL から Windows 側の設定ディレクトリへコピーするため）。
+
+`samemaru` でログインした WSL で実行します。
+
+```bash
+sudo pacman -S --needed chezmoi
+chezmoi init --apply Samemaru07
+```
+
+> 📌 **Note**: 途中で GitHub CLI（`gh`）のログインプロンプトが表示されます。プロトコルは SSH を選び、SSH 鍵の生成と GitHub への登録まで進めてください。[Neovim](https://github.com/Samemaru07/nvim-config) の設定が SSH 経由で取得されるため、この鍵が必要です。WSL からはブラウザが開かないので、表示された URL を Windows 側のブラウザで開き、コードを入力してください。
+
+##### 8. win32yank の導入
+
+```bash
+mkdir -p ~/.local/bin
+curl -sLo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/latest/download/win32yank-x64.zip
+unzip -p /tmp/win32yank.zip win32yank.exe > ~/.local/bin/win32yank.exe
+chmod +x ~/.local/bin/win32yank.exe
+rm /tmp/win32yank.zip
+```
+
+シェルを再読み込みして完了です。
+
+```bash
+exec fish
+```
+
 </details>
 
 <details>
