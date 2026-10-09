@@ -88,59 +88,103 @@ dotfiles/
 ## 🚀 インストール
 
 <details>
-<summary>WSL (Ubuntu)</summary>
+<summary>WSL (Arch Linux)</summary>
 
-#### 0. 事前準備 (Windows)
+#### 事前準備
 
-##### Ubuntuのインストール
+WSL が導入済みの環境では、PowerShell で最新にしてからインストールします。
 
-```bash
-# PowerShell
-wsl --install -d Ubuntu
+```powershell
+# WSL 本体のアップデート
+wsl --update
+
+# バージョンチェック
+wsl --version
 ```
 
-#### 1. 必須パッケージのインストール
+#### WSL に Arch Linux を導入する
 
-chezmoiの実行に必要なツールと、クリップボード連携ツール ([win32yank](https://github.com/equalsraf/win32yank))をインストールします。
+##### 1. ディストリビューションのインストール
 
-```bash
-sudo apt update
-sudo apt install -y git curl fish gh unzip
+管理者権限の PowerShell で実行してください。
 
-# win32yankのインストール
-mkdir -p ~/.local/bin
-curl -sLo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/latest/download/win32yank-x64.zip
-unzip -p /tmp/win32yank.zip win32yank.exe > ~/.local/bin/win32yank.exe
-chmod +x ~/.local/bin/win32yank.exe
-rm /tmp/win32yank.zip
+```powershell
+wsl --install -d archlinux
 ```
 
-#### 2. dotfilesの適用
-
-以下のワンライナーを実行するだけで、リポジトリのクローンからファイルの配置、Windows側への同期スクリプトまでが全て自動で実行されます。
-
-```bash
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply Samemaru07
-```
-
-> 📌 **Note**: 途中でGitHub CLI (`gh`) のログインプロンプトが表示されます。画面の指示に従ってブラウザ認証などを進めてください。(この過程でSSH鍵の生成・登録も可能です)
-
-#### 3. シェルの変更
+WSL を初めて導入した場合は、WSL 本体が最新でない可能性があります。
+インストール後に起動した Arch を抜け、PowerShell で WSL を停止してから更新します。
 
 ```bash
-chsh -s $(which fish)
-```
-
-#### 4. WSLの再起動
-
-設定とデフォルトシェルを完全に反映させるため、WSLを再起動します。
-
-```bash
-# WSL
 exit
-# PowerShell
-wsl --terminate Ubuntu
-wsl -d Ubuntu
+```
+
+```powershell
+# WSL の停止
+wsl --shutdown
+
+# WSL 本体のアップデート
+wsl --update
+
+# バージョンチェック
+wsl --version
+
+# Arch の再起動
+wsl -d archlinux
+```
+
+以降の2~5は、起動した root のシェルで実行してください。
+
+##### 2. システムの更新
+
+```bash
+pacman -Syu
+```
+
+##### 3. パッケージのインストール
+
+```bash
+pacman -S --needed git curl fish openssh github-cli neovim tmux lazygit btop unzip less sudo
+```
+
+##### 4. 一般ユーザの作成
+
+```bash
+useradd -m -G wheel -s /usr/bin/fish samemaru
+passwd samemaru
+```
+
+`wheel` グループに sudo を許可します。
+
+```bash
+echo '%wheel ALL=(ALL:ALL) ALL' > /etc/sudoers.d/wheel
+chmod 440 /etc/sudoers.d/wheel
+```
+
+##### 5. デフォルトユーザの設定
+
+```bash
+nvim /etc/wsl.conf
+```
+
+次の内容を追記して保存します。
+
+```ini
+[user]
+default=samemaru
+```
+
+```bash
+exit
+```
+
+##### 6. WSL の再起動
+
+PowerShell で実行します。
+
+```powershell
+wsl --terminate archlinux
+wsl -d archlinux
 ```
 
 </details>
