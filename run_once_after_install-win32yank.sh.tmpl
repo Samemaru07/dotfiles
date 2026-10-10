@@ -1,0 +1,11 @@
+{{ if (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
+#!/bin/bash
+set -e
+
+# Neovimのクリップボード連携用にwin32yankを導入
+mkdir -p "$HOME/.local/bin"
+curl -fsSLo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/latest/download/win32yank-x64.zip
+unzip -p /tmp/win32yank.zip win32yank.exe > "$HOME/.local/bin/win32yank.exe"
+chmod +x "$HOME/.local/bin/win32yank.exe"
+rm /tmp/win32yank.zip
+{{ end -}}
