@@ -144,7 +144,7 @@ pacman -Syu
 ##### 3. パッケージのインストール
 
 ```bash
-pacman -S --needed git curl fish openssh github-cli neovim tmux lazygit btop unzip less sudo
+pacman -S --needed git curl fish openssh github-cli neovim tmux lazygit btop unzip less sudo tree-sitter-cli gcc nodejs npm deno ripgrep python python-pip php composer texlive-meta texlive-langjapanese biber zathura zathura-pdf-mupdf tesseract-data-eng
 ```
 
 ##### 4. 一般ユーザの作成
