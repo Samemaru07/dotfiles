@@ -189,8 +189,6 @@ wsl -d archlinux
 
 ##### 7. Apply dotfiles
 
-Beforehand, install and launch [Hyper Webview](https://github.com/Samemaru07/hyper-webview-fork) on Windows (the setup copies the configuration to the Windows configuration directory).
-
 Run the following in WSL after logging in as `samemaru`.
 
 ```bash
