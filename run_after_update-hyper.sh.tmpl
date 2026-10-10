@@ -1,4 +1,5 @@
 #!/bin/bash
 {{ if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+mkdir -p /mnt/c/Users/nakayama/AppData/Roaming/Hyper
 cp {{ .chezmoi.homeDir }}/.config/Hyper/hyper.json /mnt/c/Users/nakayama/AppData/Roaming/Hyper/hyper.json
 {{ end }}
