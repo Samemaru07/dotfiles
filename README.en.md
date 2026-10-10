@@ -88,59 +88,132 @@ dotfiles/
 ## 🚀 Installation
 
 <details>
-<summary>WSL (Ubuntu)</summary>
+<summary>WSL (Arch Linux)</summary>
 
-#### 0. Prerequisites (Windows)
+#### Prerequisites
 
-##### Install Ubuntu
+On a system where WSL is already installed, update WSL to the latest version in PowerShell before installing.
 
-```bash
-# PowerShell
-wsl --install -d Ubuntu
+```powershell
+# Update WSL
+wsl --update
+
+# Check the version
+wsl --version
 ```
 
-#### 1. Install Required Packages
+#### Install Arch Linux on WSL
 
-Install tools required to run chezmoi and the clipboard integration tool ([win32yank](https://github.com/equalsraf/win32yank)).
+##### 1. Install the distribution
+
+Run this in an elevated PowerShell.
+
+```powershell
+wsl --install -d archlinux
+```
+
+If this is your first time installing WSL, WSL itself may not be up to date.
+After installation, exit the Arch shell that starts automatically, stop WSL in PowerShell, and update it.
 
 ```bash
-sudo apt update
-sudo apt install -y git curl fish gh unzip
+exit
+```
 
-# Install win32yank
+```powershell
+# Stop WSL
+wsl --shutdown
+
+# Update WSL
+wsl --update
+
+# Check the version
+wsl --version
+
+# Restart Arch
+wsl -d archlinux
+```
+
+Run steps 2–5 below in the root shell of the Arch instance you started.
+
+##### 2. Update the system
+
+```bash
+pacman -Syu
+```
+
+##### 3. Install packages
+
+```bash
+pacman -S --needed git curl fish openssh github-cli neovim tmux lazygit btop unzip less sudo tree-sitter-cli gcc nodejs npm deno ripgrep python python-pip php composer texlive-meta texlive-langjapanese biber zathura zathura-pdf-mupdf tesseract-data-eng
+```
+
+##### 4. Create a regular user
+
+```bash
+useradd -m -G wheel -s /usr/bin/fish samemaru
+passwd samemaru
+```
+
+Allow the `wheel` group to use sudo.
+
+```bash
+echo '%wheel ALL=(ALL:ALL) ALL' > /etc/sudoers.d/wheel
+chmod 440 /etc/sudoers.d/wheel
+```
+
+##### 5. Set the default user
+
+```bash
+nvim /etc/wsl.conf
+```
+
+Append and save the following:
+
+```ini
+[user]
+default=samemaru
+```
+
+```bash
+exit
+```
+
+##### 6. Restart WSL
+
+Run this in PowerShell.
+
+```powershell
+wsl --terminate archlinux
+wsl -d archlinux
+```
+
+##### 7. Apply dotfiles
+
+Beforehand, install and launch [Hyper Webview](https://github.com/Samemaru07/hyper-webview-fork) on Windows (the setup copies the configuration to the Windows configuration directory).
+
+Run the following in WSL after logging in as `samemaru`.
+
+```bash
+sudo pacman -S --needed chezmoi
+chezmoi init --apply Samemaru07
+```
+
+> 📌 **Note**: A GitHub CLI (`gh`) login prompt will appear during the process. Select SSH as the protocol and continue through SSH key generation and registration with GitHub. This key is required to fetch the [Neovim](https://github.com/Samemaru07/nvim-config) configuration over SSH. Since a browser cannot be opened from WSL, open the displayed URL in a Windows browser and enter the code.
+
+##### 8. Install win32yank
+
+```bash
 mkdir -p ~/.local/bin
-curl -sLo /tmp/win32yank.zip [https://github.com/equalsraf/win32yank/releases/latest/download/win32yank-x64.zip](https://github.com/equalsraf/win32yank/releases/latest/download/win32yank-x64.zip)
+curl -sLo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/latest/download/win32yank-x64.zip
 unzip -p /tmp/win32yank.zip win32yank.exe > ~/.local/bin/win32yank.exe
 chmod +x ~/.local/bin/win32yank.exe
 rm /tmp/win32yank.zip
 ```
 
-#### 2. Apply dotfiles
-
-Simply run the following one-liner to automatically clone the repository, place the files, and set up sync scripts to the Windows side.
+Reload the shell to finish.
 
 ```bash
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply Samemaru07
-```
-
-> 📌 **Note**: A GitHub CLI (`gh`) login prompt will appear during the process. Follow the on-screen instructions to complete browser authentication. (You can also generate and register an SSH key during this process.)
-
-#### 3. Change Default Shell
-
-```bash
-chsh -s $(which fish)
-```
-
-#### 4. Restart WSL
-
-Restart WSL to fully apply the settings and the default shell.
-
-```bash
-# WSL
-exit
-# PowerShell
-wsl --terminate Ubuntu
-wsl -d Ubuntu
+exec fish
 ```
 
 </details>
@@ -156,7 +229,7 @@ wsl -d Ubuntu
 
 ```bash
 sudo pacman -S --needed git base-devel
-git clone [https://aur.archlinux.org/yay.git](https://aur.archlinux.org/yay.git)
+git clone https://aur.archlinux.org/yay.git
 cd yay && makepkg -si
 ```
 
