@@ -46,7 +46,8 @@
         "format-ethernet": "  Ethernet",
         "format-linked": "  Linked (No IP)",
         "format-disconnected": "  Disconnected",
-        "tooltip": false
+        "tooltip": false,
+        "on-click": "nm-connection-editor"
     },
     "battery": {
         "states": {
