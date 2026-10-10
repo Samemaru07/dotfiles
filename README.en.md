@@ -196,17 +196,12 @@ sudo pacman -S --needed chezmoi
 chezmoi init --apply Samemaru07
 ```
 
-> 📌 **Note**: A GitHub CLI (`gh`) login prompt will appear during the process. Select SSH as the protocol and continue through SSH key generation and registration with GitHub. This key is required to fetch the [Neovim](https://github.com/Samemaru07/nvim-config) configuration over SSH. Since a browser cannot be opened from WSL, open the displayed URL in a Windows browser and enter the code.
+> 📌 **Note**: The SKK dictionary for Neovim (`~/.skk/SKK-JISYO.L`), the Python virtual environment for Molten (`~/.local/share/nvim/venv`), and win32yank for clipboard integration are also installed automatically during this process.
 
-##### 8. Install win32yank
-
-```bash
-mkdir -p ~/.local/bin
-curl -sLo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/latest/download/win32yank-x64.zip
-unzip -p /tmp/win32yank.zip win32yank.exe > ~/.local/bin/win32yank.exe
-chmod +x ~/.local/bin/win32yank.exe
-rm /tmp/win32yank.zip
-```
+> 📌 **Note**: A GitHub CLI (`gh`) login prompt will appear during the process.
+> Select SSH as the protocol and continue through SSH key generation and registration with GitHub.
+> This key is required to fetch the [Neovim](https://github.com/Samemaru07/nvim-config) configuration over SSH.
+> Since a browser cannot be opened from WSL, open the displayed URL in a Windows browser and enter the code.
 
 Reload the shell to finish.
 
