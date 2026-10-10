@@ -144,7 +144,7 @@ pacman -Syu
 ##### 3. Install packages
 
 ```bash
-pacman -S --needed git curl fish openssh github-cli neovim tmux lazygit btop unzip less sudo tree-sitter-cli gcc nodejs npm deno ripgrep python python-pip php composer texlive-meta texlive-langjapanese biber zathura zathura-pdf-mupdf tesseract-data-eng
+pacman -S --needed git curl fish openssh github-cli neovim tmux lazygit btop unzip less sudo tree-sitter-cli gcc nodejs npm deno ripgrep python python-pip php composer texlive-meta texlive-langjapanese biber zathura zathura-pdf-mupdf tesseract-data-eng perl-yaml-tiny perl-file-homedir
 ```
 
 ##### 4. Create a regular user
