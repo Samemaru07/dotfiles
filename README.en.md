@@ -62,27 +62,38 @@ Structure of the repository managed by chezmoi (`~/.local/share/chezmoi`).
 
 ```text
 dotfiles/
-    ├ Pictures/Wallpapers/           # Wallpapers
-    ├ assets/                        # Image assets for README
-    ├ dot_config/                    # Configuration files under ~/.config/
-    │ ├ cava/                        # Audio visualizer config
-    │ ├ gh/                          # GitHub CLI config
-    │ ├ hypr/                        # Hyprland / hypridle / hyprpaper config
-    │ ├ kitty/                       # Kitty terminal config
-    │ ├ private_Hyper/               # Hyper terminal config (OS-specific path branching template)
-    │ ├ private_fcitx5/              # Japanese input config (fcitx5 + SKK)
-    │ ├ private_fish/                # fish shell config
-    │ ├ quickshell/                  # quickshell widget config
-    │ ├ swaync/                      # SwayNotificationCenter config
-    │ ├ systemd/user/                # systemd user service (for OpenRGB sleep wake)
-    │ ├ waybar/                      # Waybar config
-    │ ├ wlogout/                     # Logout menu config
-    │ └ wofi/                        # wofi launcher config
-    ├ private_dot_ssh/               # SSH client config (.ssh/config)
-    ├ dot_gitconfig                  # Git global config (.gitconfig)
-    ├ dot_tmux.conf                  # tmux config (.tmux.conf)
-    ├ run_after_update-hyper.sh.tmpl # Automation script to copy Hyper config to Windows side
-    └ run_once_after_gh-login.sh     # GitHub CLI initial login automation script
+    ├ .chezmoidata                                # chezmoi data files
+    ├ Pictures/Wallpapers                         # Wallpapers
+    ├ assets/                                     # Image assets for README
+    ├ dot_config/                                 # Configuration files under ~/.config/
+    │  ├ cava/                                    # Audio visualizer config
+    │  │  ├ shaders/                              # cava shaders
+    │  │  └ themes/                               # cava themes
+    │  ├ gh/                                      # GitHub CLI config
+    │  ├ hypr/                                    # Hyprland / hypridle / hyprpaper config
+    │  ├ kitty/                                   # Kitty terminal config
+    │  ├ private_Hyper/                           # Hyper terminal config (OS-specific path branching template)
+    │  ├ private_fcitx5/                          # Japanese input config (fcitx5 + SKK)
+    │  ├ private_fish/                            # fish shell config
+    │  ├ quickshell/                              # quickshell widget config
+    │  ├ swaync/                                  # SwayNotificationCenter config
+    │  ├ waybar/                                  # Waybar config
+    │  │  └ scripts/                              # Waybar scripts
+    │  ├ wlogout/                                 # Logout menu config
+    │  └ wofi/                                    # wofi launcher config
+    ├ private_dot_ssh/                            # SSH client config (.ssh/config)
+    ├ dot_gitconfig                               # Git global config (.gitconfig)
+    ├ dot_tmux.conf                               # tmux config (.tmux.conf)
+    ├ run_after_update-hyper.sh.tmpl              # Automation script to copy Hyper config to Windows side
+    ├ run_after_update-wallpapers.sh.tmpl         # Automation script to update wallpapers
+    ├ run_once_after_gh-login.sh                  # GitHub CLI initial login automation script
+    ├ run_once_after_install-fish-plugins.sh      # fish plugin installation script
+    ├ run_once_after_install-nvim-config.sh       # Neovim config installation script
+    ├ run_once_after_install-nvim-venv.sh         # Python virtual environment setup script for Neovim
+    ├ run_once_after_install-skk-dict.sh          # SKK dictionary installation script
+    ├ run_once_after_install-win32yank.sh.tmpl    # win32yank installation script
+    ├ run_once_after_set-default-image-viewer.sh  # Image viewer setup script
+    └ run_once_before_install-packages.sh.tmpl    # Pre-package-installation setup script
 ```
 
 ## 🚀 Installation
@@ -144,13 +155,13 @@ pacman -Syu
 ##### 3. Install packages
 
 ```bash
-pacman -S --needed git curl fish openssh github-cli neovim tmux lazygit btop unzip less sudo tree-sitter-cli gcc nodejs npm deno ripgrep python python-pip xdg-utils feh php composer texlive-meta texlive-langjapanese biber zathura zathura-pdf-mupdf tesseract-data-eng perl-yaml-tiny perl-file-homedir
+pacman -S --needed git chezmoi sudo
 ```
 
 ##### 4. Create a regular user
 
 ```bash
-useradd -m -G wheel -s /usr/bin/fish samemaru
+useradd -m -G wheel -s /bin/bash samemaru
 passwd samemaru
 ```
 
@@ -164,17 +175,7 @@ chmod 440 /etc/sudoers.d/wheel
 ##### 5. Set the default user
 
 ```bash
-nvim /etc/wsl.conf
-```
-
-Append and save the following:
-
-```ini
-[user]
-default=samemaru
-```
-
-```bash
+printf '[user]\ndefault=samemaru\n' >> /etc/wsl.conf
 exit
 ```
 
@@ -192,21 +193,34 @@ wsl -d archlinux
 Run the following in WSL after logging in as `samemaru`.
 
 ```bash
-sudo pacman -S --needed chezmoi
 chezmoi init --apply Samemaru07
 ```
 
-> 📌 **Note**: The SKK dictionary for Neovim (`~/.skk/SKK-JISYO.L`), the Python virtual environment for Molten (`~/.local/share/nvim/venv`), and win32yank for clipboard integration are also installed automatically during this process.
-
-> 📌 **Note**: A GitHub CLI (`gh`) login prompt will appear during the process.
+> 📌 **Note**: Required packages, including the Neovim runtime and TeX Live, are installed at the beginning of the apply process.
+> You will be prompted for your `sudo` password, and installation may take some time.
+>
+> A GitHub CLI (`gh`) login prompt will appear during the process.
 > Select SSH as the protocol and continue through SSH key generation and registration with GitHub.
 > This key is required to fetch the [Neovim](https://github.com/Samemaru07/nvim-config) configuration over SSH.
 > Since a browser cannot be opened from WSL, open the displayed URL in a Windows browser and enter the code.
+>
+> The SKK dictionary for Neovim (`~/.skk/SKK-JISYO.L`), the Python virtual environment for Molten (`~/.local/share/nvim/venv`), and win32yank for clipboard integration are also installed automatically during this process.
+>
+> `~/.config/Hyper/hyper.json` is copied to `%APPDATA%\Hyper\hyper.json` on Windows.
+> [Hyper Webview](https://github.com/Samemaru07/hyper-webview-fork) can be installed either before or after this copy.
 
-Reload the shell to finish.
+##### 8. Change the shell
 
 ```bash
-exec fish
+chsh -s $(which fish)
+exit
+```
+
+Restart WSL in PowerShell to finish.
+
+```powershell
+wsl --terminate archlinux
+wsl -d archlinux
 ```
 
 </details>
@@ -265,19 +279,26 @@ chezmoi edit ~/.config/hypr/hyprland.conf
 
 #### 1. Install Required Packages
 
-Install basic tools required to run chezmoi and apply settings.
+Install the basic tools required to run chezmoi.
 
 ```bash
-sudo pacman -S --needed curl git fish github-cli
+sudo pacman -S --needed git chezmoi
 ```
 
 #### 2. Apply dotfiles
 
 ```bash
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply Samemaru07
+chezmoi init --apply Samemaru07
 ```
 
-> 📌 **Note**: A GitHub CLI (`gh`) login prompt will appear during the process. Follow the on-screen instructions to complete browser authentication. (You can also generate and register an SSH key during this process.)
+> 📌 **Note**: Required packages are installed at the beginning of the apply process. AUR packages are installed through yay, which was installed during the prerequisites.
+> You will be prompted for your `sudo` password, and installation may take some time.
+>
+> A GitHub CLI (`gh`) login prompt will appear during the process.
+> Select SSH as the protocol and continue through SSH key generation and registration with GitHub.
+> This key is required to fetch the [Neovim](https://github.com/Samemaru07/nvim-config) configuration over SSH.
+>
+> The SKK dictionary for Neovim and the Python virtual environment are also installed automatically during this process.
 
 #### 3. Change Default Shell
 
