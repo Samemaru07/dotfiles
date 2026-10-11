@@ -13,4 +13,7 @@ if status is-interactive
 
     # EDITORの設定
     set -gx EDITOR "nvim"
+
+    # デスクトップ環境の設定
+    set -gx DE generic
 end
