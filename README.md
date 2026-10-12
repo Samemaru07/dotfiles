@@ -212,7 +212,7 @@ chezmoi init --apply Samemaru07
 ##### 8. シェルの変更
 
 ```bash
-chsh -s $(which fish)
+chsh -s /usr/bin/fish
 exit
 ```
 
@@ -303,7 +303,7 @@ chezmoi init --apply Samemaru07
 #### 3. シェルの変更
 
 ```bash
-chsh -s $(which fish)
+chsh -s /usr/bin/fish
 ```
 
 </details>
