@@ -14,7 +14,6 @@ packages:
     - xdg-utils
     - feh
     - tree-sitter-cli
-    - gcc
     - nodejs
     - npm
     - deno
@@ -31,6 +30,7 @@ packages:
     - tesseract-data-eng
     - perl-yaml-tiny
     - perl-file-homedir
+    - base-devel
   desktop:
     - hyprland
     - hypridle
