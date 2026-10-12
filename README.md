@@ -62,27 +62,38 @@ chezmoiによって管理されているリポジトリ (`~/.local/share/chezmoi
 
 ```text
 dotfiles/
-    ├ Pictures/Wallpapers/           # 壁紙画像
-    ├ assets/                        # README用画像素材
-    ├ dot_config/                    # ~/.config/ 以下の設定ファイル群
-    │  ├ cava/                       # オーディオビジュアライザ設定
-    │  ├ gh/                         # GitHub CLI設定
-    │  ├ hypr/                       # Hyprland / hypridle / hyprpaper設定
-    │  ├ kitty/                      # Kittyターミナル設定
-    │  ├ private_Hyper/              # Hyperターミナル設定 (OS別パス分岐テンプレート)
-    │  ├ private_fcitx5/             # 日本語入力設定 (fcitx5 + SKK)
-    │  ├ private_fish/               # fishシェル設定
-    │  ├ quickshell/                 # quickshellウィジェット設定
-    │  ├ swaync/                     # SwayNotificationCenter設定
-    │  ├ systemd/user/               # systemdユーザーサービス (OpenRGBスリープ復帰用)
-    │  ├ waybar/                     # Waybar設定
-    │  ├ wlogout/                    # ログアウトメニュー設定
-    │  └ wofi/                       # wofiランチャー設定
-    ├ private_dot_ssh/               # SSHクライアント設定 (.ssh/config)
-    ├ dot_gitconfig                  # Gitグローバル設定 (.gitconfig)
-    ├ dot_tmux.conf                  # tmux設定 (.tmux.conf)
-    ├ run_after_update-hyper.sh.tmpl # Hyper設定をWindows側へコピーする自動化スクリプト
-    └ run_once_after_gh-login.sh     # GitHub CLIの初回ログイン自動化スクリプト
+    ├ .chezmoidata                                # chezmoiのデータファイル
+    ├ Pictures/Wallpapers                         # 壁紙画像
+    ├ assets/                                     # README用画像素材
+    ├ dot_config/                                 # ~/.config/ 以下の設定ファイル群
+    │  ├ cava/                                    # オーディオビジュアライザ設定
+    │  │  ├ shaders/                              # cavaシェーダー
+    │  │  └ themes/                               # cavaテーマ
+    │  ├ gh/                                      # GitHub CLI設定
+    │  ├ hypr/                                    # Hyprland / hypridle / hyprpaper設定
+    │  ├ kitty/                                   # Kittyターミナル設定
+    │  ├ private_Hyper/                           # Hyperターミナル設定 (OS別パス分岐テンプレート)
+    │  ├ private_fcitx5/                          # 日本語入力設定 (fcitx5 + SKK)
+    │  ├ private_fish/                            # fishシェル設定
+    │  ├ quickshell/                              # quickshellウィジェット設定
+    │  ├ swaync/                                  # SwayNotificationCenter設定
+    │  ├ waybar/                                  # Waybar設定
+    │  │  └ scripts/                              # Waybarスクリプト
+    │  ├ wlogout/                                 # ログアウトメニュー設定
+    │  └ wofi/                                    # wofiランチャー設定
+    ├ private_dot_ssh/                            # SSHクライアント設定 (.ssh/config)
+    ├ dot_gitconfig                               # Gitグローバル設定 (.gitconfig)
+    ├ dot_tmux.conf                               # tmux設定 (.tmux.conf)
+    ├ run_after_update-hyper.sh.tmpl              # Hyper設定をWindows側へコピーする自動化スクリプト
+    ├ run_after_update-wallpapers.sh.tmpl         # 壁紙を更新する自動化スクリプト
+    ├ run_once_after_gh-login.sh                  # GitHub CLIの初回ログイン自動化スクリプト
+    ├ run_once_after_install-fish-plugins.sh      # fishプラグインのインストールスクリプト
+    ├ run_once_after_install-nvim-config.sh       # Neovim設定のインストールスクリプト
+    ├ run_once_after_install-nvim-venv.sh         # Neovim用Python仮想環境の構築スクリプト
+    ├ run_once_after_install-skk-dict.sh          # SKK辞書のインストールスクリプト
+    ├ run_once_after_install-win32yank.sh.tmpl    # win32yankのインストールスクリプト
+    ├ run_once_after_set-default-image-viewer.sh  # 画像ビューアーの設定スクリプト
+    └ run_once_before_install-packages.sh.tmpl    # パッケージ導入前の準備スクリプト
 ```
 
 ## 🚀 インストール
@@ -144,13 +155,13 @@ pacman -Syu
 ##### 3. パッケージのインストール
 
 ```bash
-pacman -S --needed git curl fish openssh github-cli neovim tmux lazygit btop unzip less sudo tree-sitter-cli gcc nodejs npm deno ripgrep python python-pip xdg-utils feh php composer texlive-meta texlive-langjapanese biber zathura zathura-pdf-mupdf tesseract-data-eng perl-yaml-tiny perl-file-homedir
+pacman -S --needed git chezmoi sudo
 ```
 
 ##### 4. 一般ユーザの作成
 
 ```bash
-useradd -m -G wheel -s /usr/bin/fish samemaru
+useradd -m -G wheel -s /bin/bash samemaru
 passwd samemaru
 ```
 
@@ -164,17 +175,7 @@ chmod 440 /etc/sudoers.d/wheel
 ##### 5. デフォルトユーザの設定
 
 ```bash
-nvim /etc/wsl.conf
-```
-
-次の内容を追記して保存します。
-
-```ini
-[user]
-default=samemaru
-```
-
-```bash
+printf '[user]\ndefault=samemaru\n' >> /etc/wsl.conf
 exit
 ```
 
@@ -192,21 +193,34 @@ wsl -d archlinux
 `samemaru` でログインした WSL で実行します。
 
 ```bash
-sudo pacman -S --needed chezmoi
 chezmoi init --apply Samemaru07
 ```
 
-> 📌 **Note**: Neovim 用の SKK 辞書（`~/.skk/SKK-JISYO.L`）、Molten 用の Python 仮想環境（`~/.local/share/nvim/venv`）、クリップボード連携用の win32yank も、この適用の中で自動的に導入されます。
-
-> 📌 **Note**: 途中で GitHub CLI（`gh`）のログインプロンプトが表示されます。
+> 📌 **Note**: 適用の最初に、必要なパッケージ（Neovim の実行環境、TeX Live など）が導入されます。
+> `sudo` のパスワードの入力が求められ、導入には時間がかかります。
+>
+> 途中で GitHub CLI（`gh`）のログインプロンプトが表示されます。
 > プロトコルは SSH を選び、SSH 鍵の生成と GitHub への登録まで進めてください。
 > [Neovim](https://github.com/Samemaru07/nvim-config) の設定が SSH 経由で取得されるため、この鍵が必要です。
 > WSL からはブラウザが開かないので、表示された URL を Windows 側のブラウザで開き、コードを入力してください。
+>
+> Neovim 用の SKK 辞書（`~/.skk/SKK-JISYO.L`）、Molten 用の Python 仮想環境（`~/.local/share/nvim/venv`）、クリップボード連携用の win32yank も、この適用の中で自動的に導入されます。
+>
+> `~/.config/Hyper/hyper.json` は、Windows 側の `%APPDATA%\Hyper\hyper.json` にコピーされます。
+> [Hyper Webview](https://github.com/Samemaru07/hyper-webview-fork) は、このコピーの前後どちらにインストールしても構いません。
 
-シェルを再読み込みして完了です。
+##### 8. シェルの変更
 
 ```bash
-exec fish
+chsh -s /usr/bin/fish
+exit
+```
+
+PowerShell で WSL を再起動して完了です。
+
+```powershell
+wsl --terminate archlinux
+wsl -d archlinux
 ```
 
 </details>
@@ -265,24 +279,31 @@ chezmoi edit ~/.config/hypr/hyprland.conf
 
 #### 1. 必須パッケージのインストール
 
-chezmoiの実行や設定反映に必要な基本ツールをインストールします。
+chezmoi の実行に必要な基本ツールをインストールします。
 
 ```bash
-sudo pacman -S --needed curl git fish github-cli
+sudo pacman -S --needed git chezmoi
 ```
 
 #### 2. dotfilesの適用
 
 ```bash
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply Samemaru07
+chezmoi init --apply Samemaru07
 ```
 
-> 📌 **Note**: 途中でGitHub CLI (`gh`) のログインプロンプトが表示されます。画面の指示に従ってブラウザ認証などを進めてください。(この過程でSSH鍵の生成・登録も可能です)
+> 📌 **Note**: 適用の最初に、必要なパッケージが導入されます。AUR のパッケージは、事前準備で導入した yay 経由で導入されます。
+> `sudo` のパスワード入力を求められ、導入には時間がかかります。
+>
+> 途中で GitHub CLI（`gh`）のログインプロンプトが表示されます。
+> プロトコルは SSH を選び、SSH 鍵の生成と GitHub への登録まで進めてください。
+> [Neovim](https://github.com/Samemaru07/nvim-config) の設定が SSH 経由で取得されるため、この鍵が必要です。
+>
+> Neovim 用の SKK 辞書と Python 仮想環境も、この適用の中で自動的に導入されます。
 
 #### 3. シェルの変更
 
 ```bash
-chsh -s $(which fish)
+chsh -s /usr/bin/fish
 ```
 
 </details>
