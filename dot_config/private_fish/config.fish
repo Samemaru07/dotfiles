@@ -17,3 +17,13 @@ if status is-interactive
     # デスクトップ環境の設定
     set -gx DE generic
 end
+
+# Archのみ, ttyでのログイン成功後, Hyprlandを起動
+if status is-login
+    if test (tty) = "/dev/tty1"
+        exec Hyprland 
+    end
+end
+
+# Git/GitHubの通信プロトコル。学校ではHTTPSに
+alias gith='git -c url."https://github.com/".insteadOf=git@github.com:'
