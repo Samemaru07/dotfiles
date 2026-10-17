@@ -55,7 +55,8 @@ packages:
     - ttf-jetbrains-mono-nerd
     - noto-fonts-cjk
     - noto-fonts-emoji
+    - openrgb
   aur:
     - quickshell
-    - openrgb
+    - openrgb-plugin-effects
     - zen-browser-bin

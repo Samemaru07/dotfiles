@@ -51,6 +51,8 @@
 - Notifications: [SwayNotificationCenter](https://github.com/ErikReider/SwayNotificationCenter)
 - Audio Visualizer: [cava](https://github.com/karlstav/cava)
 - Cursor: [Fern Cursor (FernCursor)](https://www.opendesktop.org/p/2352161/)
+- RGB Lighting Control: [OpenRGB](https://openrgb.org/plugins.html)
+    - 👉 Effects Plugin: [OpenRGB Effects Plugin](https://openrgb.org/plugin_effects.html)
 
 ### WSL Only
 
@@ -66,6 +68,7 @@ dotfiles/
     ├ Pictures/Wallpapers                         # Wallpapers
     ├ assets/                                     # Image assets for README
     ├ dot_config/                                 # Configuration files under ~/.config/
+    │  ├ OpenRGB/                                 # OpenRGB config
     │  ├ cava/                                    # Audio visualizer config
     │  │  ├ shaders/                              # cava shaders
     │  │  └ themes/                               # cava themes
