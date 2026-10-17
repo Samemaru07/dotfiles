@@ -51,6 +51,8 @@
 - 通知: [SwayNotificationCenter](https://github.com/ErikReider/SwayNotificationCenter)
 - オーディオビジュアライザ: [cava](https://github.com/karlstav/cava)
 - カーソル: [フェルン (葬送のフリーレン) のカーソル (FernCursor)](https://www.opendesktop.org/p/2352161/)
+- RGB ライティング制御: [OpenRGB](https://openrgb.org/plugins.html)
+    - 👉 エフェクトプラグイン: [OpenRGB Effects Plugin](https://openrgb.org/plugin_effects.html)
 
 ### WSL専用
 
@@ -66,6 +68,7 @@ dotfiles/
     ├ Pictures/Wallpapers                         # 壁紙画像
     ├ assets/                                     # README用画像素材
     ├ dot_config/                                 # ~/.config/ 以下の設定ファイル群
+    │  ├ OpenRGB/                                 # OpenRGB設定
     │  ├ cava/                                    # オーディオビジュアライザ設定
     │  │  ├ shaders/                              # cavaシェーダー
     │  │  └ themes/                               # cavaテーマ
