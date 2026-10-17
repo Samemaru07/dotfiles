@@ -21,7 +21,7 @@ end
 # Archのみ, ttyでのログイン成功後, Hyprlandを起動
 if status is-login
     if test (tty) = "/dev/tty1"
-        exec Hyprland 
+        exec start-hyprland
     end
 end
 
