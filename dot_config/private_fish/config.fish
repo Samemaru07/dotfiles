@@ -9,7 +9,14 @@ end
 alias gith='git -c url."https://github.com/".insteadOf=git@github.com:'
 
 # fastfetch
-alias ff="clear; fastfetch"
+function ff
+    clear
+    if set -q TMUX
+        fastfetch --raw ~/.config/fastfetch/asuka_tmux.raw --logo-width 50 --logo-height 20
+    else
+        fastfetch
+    end
+end
 
 if status is-interactive
     # 起動の挨拶
@@ -27,11 +34,13 @@ if status is-interactive
     # Neovim/Toggleterm 内でない場合のみ fastfetch を実行
     if not set -q TOGGLETERM_ID
         and test -z "$NVIM"
-            printf '\e[?25l'
+        and not set -q __FF_DONE
+        set -g __FF_DONE 1
+        if not set -q TMUX
             clear
             sleep 1.5
             fastfetch
-            printf '\e[?25h'
+        end
     end
 end
 
