@@ -37,8 +37,6 @@ if status is-interactive
         and not set -q __FF_DONE
         set -g __FF_DONE 1
         if not set -q TMUX
-            clear
-            sleep 1.5
             fastfetch
         end
     end
