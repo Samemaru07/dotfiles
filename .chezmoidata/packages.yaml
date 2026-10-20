@@ -13,6 +13,7 @@ packages:
       - lazygit
       - less
       - dolphin
+      - fastfetch
       - xdg-utils
       - feh
       - tree-sitter-cli
