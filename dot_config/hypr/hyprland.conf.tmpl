@@ -60,7 +60,9 @@ exec-once = kitty --class="asciiquarium" -e asciiquarium
 exec-once = kitty --class="tty-clock" -e tty-clock -c
 exec-once = kitty --class="btop" -e btop
 exec-once = quickshell -c qs-hyprview
+{{- if ne .chezmoi.hostname "arch-laptop" }}
 exec-once = openrgb --startminimized
+{{- end }}
 exec-once = hypridle
 
 # 元のコメントアウト例:

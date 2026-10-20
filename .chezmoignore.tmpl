@@ -9,3 +9,6 @@
 .config/wlogout
 .config/wofi
 {{ end }}
+{{ if eq .chezmoi.hostname "arch-laptop" }}
+.config/OpenRGB
+{{ end }}
