@@ -39,7 +39,7 @@
 - Version Control: [Git](https://git-scm.com/)
     - 👉 Tools: [lazygit](https://github.com/jesseduffield/lazygit) / [GitHub CLI (gh)](https://cli.github.com/)
 
-### Arch Linux Only
+### Shared across Arch Linux environments
 
 - Window Manager: [Hyprland](https://hypr.land/)
 - Status Bar: [Waybar](https://github.com/Alexays/Waybar)
@@ -51,10 +51,10 @@
 - Notifications: [SwayNotificationCenter](https://github.com/ErikReider/SwayNotificationCenter)
 - Audio Visualizer: [cava](https://github.com/karlstav/cava)
 - Cursor: [Fern Cursor (FernCursor)](https://www.opendesktop.org/p/2352161/)
-- RGB Lighting Control: [OpenRGB](https://openrgb.org/plugins.html)
+- RGB Lighting Control (desktop): [OpenRGB](https://openrgb.org/plugins.html)
     - 👉 Effects Plugin: [OpenRGB Effects Plugin](https://openrgb.org/plugin_effects.html)
 
-### WSL Only
+### WSL Only (to be removed)
 
 - Clipboard: [win32yank](https://github.com/equalsraf/win32yank)
 

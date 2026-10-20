@@ -39,7 +39,7 @@
 - バージョン管理: [Git](https://git-scm.com/)
     - 👉 ツール: [lazygit](https://github.com/jesseduffield/lazygit) / [GitHub CLI (gh)](https://cli.github.com/)
 
-### Arch Linux専用
+### Arch Linux環境共通
 
 - ウィンドウマネージャ: [Hyprland](https://hypr.land/)
 - ステータスバー: [Waybar](https://github.com/Alexays/Waybar)
@@ -51,10 +51,10 @@
 - 通知: [SwayNotificationCenter](https://github.com/ErikReider/SwayNotificationCenter)
 - オーディオビジュアライザ: [cava](https://github.com/karlstav/cava)
 - カーソル: [フェルン (葬送のフリーレン) のカーソル (FernCursor)](https://www.opendesktop.org/p/2352161/)
-- RGB ライティング制御: [OpenRGB](https://openrgb.org/plugins.html)
+- RGB ライティング制御（デスクトップ）: [OpenRGB](https://openrgb.org/plugins.html)
     - 👉 エフェクトプラグイン: [OpenRGB Effects Plugin](https://openrgb.org/plugin_effects.html)
 
-### WSL専用
+### WSL専用（移行予定）
 
 - クリップボード: [win32yank](https://github.com/equalsraf/win32yank)
 
