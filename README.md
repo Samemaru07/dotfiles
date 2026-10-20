@@ -48,11 +48,16 @@
 - ディスプレイマネージャ: [SDDM](https://github.com/sddm/sddm/)
 - 日本語入力: [fcitx5](https://fcitx-im.org/wiki/Fcitx_5) + [fcitx5-skk](https://github.com/fcitx/fcitx5-skk)
 - ネットワーク管理: [NetworkManager](https://networkmanager.dev/)
+- オーディオ: [PipeWire](https://pipewire.org/)
 - 通知: [SwayNotificationCenter](https://github.com/ErikReider/SwayNotificationCenter)
 - オーディオビジュアライザ: [cava](https://github.com/karlstav/cava)
 - カーソル: [フェルン (葬送のフリーレン) のカーソル (FernCursor)](https://www.opendesktop.org/p/2352161/)
 - RGB ライティング制御（デスクトップ）: [OpenRGB](https://openrgb.org/plugins.html)
     - 👉 エフェクトプラグイン: [OpenRGB Effects Plugin](https://openrgb.org/plugin_effects.html)
+
+### ラップトップ専用
+
+- サウンドファームウェア: [sof-firmware](https://archlinux.org/packages/extra/any/sof-firmware/)
 
 ### ラップトップ固有の設定
 

@@ -51,6 +51,7 @@ packages:
       - wl-clipboard
       - jq
       - gvfs
+      - pipewire-pulse
       - grim
       - slurp
       - xdg-user-dirs
@@ -66,3 +67,6 @@ packages:
       - openrgb
     aur:
       - openrgb-plugin-effects
+  laptop_only:
+    pacman:
+      - sof-firmware

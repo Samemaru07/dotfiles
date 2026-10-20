@@ -48,11 +48,17 @@
 - Display Manager: [SDDM](https://github.com/sddm/sddm/)
 - Japanese Input: [fcitx5](https://fcitx-im.org/wiki/Fcitx_5) + [fcitx5-skk](https://github.com/fcitx/fcitx5-skk)
 - Network Management: [NetworkManager](https://networkmanager.dev/)
+- Audio: [PipeWire](https://pipewire.org/)
+
 - Notifications: [SwayNotificationCenter](https://github.com/ErikReider/SwayNotificationCenter)
 - Audio Visualizer: [cava](https://github.com/karlstav/cava)
 - Cursor: [Fern Cursor (FernCursor)](https://www.opendesktop.org/p/2352161/)
 - RGB Lighting Control (desktop): [OpenRGB](https://openrgb.org/plugins.html)
     - 👉 Effects Plugin: [OpenRGB Effects Plugin](https://openrgb.org/plugin_effects.html)
+
+### Laptop-only
+
+- Sound firmware: [sof-firmware](https://archlinux.org/packages/extra/any/sof-firmware/)
 
 ### Laptop-specific configuration
 

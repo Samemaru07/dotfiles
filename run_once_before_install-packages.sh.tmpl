@@ -6,6 +6,9 @@
 {{- $packages = concat $packages .packages.desktop_only.pacman -}}
 {{- $aurPackages = concat $aurPackages .packages.desktop_only.aur -}}
 {{- end -}}
+{{- if and (not $isWSL) $isLaptop -}}
+{{- $packages = concat $packages .packages.laptop_only.pacman -}}
+{{- end -}}
 {{- if eq .chezmoi.osRelease.id "arch" -}}
 #!/bin/bash
 set -e
