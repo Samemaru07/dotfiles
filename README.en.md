@@ -54,6 +54,11 @@
 - RGB Lighting Control (desktop): [OpenRGB](https://openrgb.org/plugins.html)
     - 👉 Effects Plugin: [OpenRGB Effects Plugin](https://openrgb.org/plugin_effects.html)
 
+### Laptop-specific configuration
+
+On the laptop (hostname: `arch-laptop`), `hyprland.conf`, `hyprpaper.conf`, and `hypridle.conf` are not deployed.
+The laptop currently manages its configuration in Lua format, and detailed Hyprland and Hyprpaper settings are maintained on the laptop itself.
+
 ### WSL Only (to be removed)
 
 - Clipboard: [win32yank](https://github.com/equalsraf/win32yank)
@@ -73,7 +78,7 @@ dotfiles/
     │  │  ├ shaders/                              # cava shaders
     │  │  └ themes/                               # cava themes
     │  ├ gh/                                      # GitHub CLI config
-    │  ├ hypr/                                    # Hyprland / hypridle / hyprpaper config
+    │  ├ hypr/                                    # Hyprland / hypridle / hyprpaper config (partially excluded on laptop)
     │  ├ kitty/                                   # Kitty terminal config
     │  ├ private_Hyper/                           # Hyper terminal config (OS-specific path branching template)
     │  ├ private_fcitx5/                          # Japanese input config (fcitx5 + SKK)
@@ -265,7 +270,7 @@ mkdir -p ~/.icons
 unzip -q ~/Downloads/<theme_name>.zip -d ~/.icons
 ```
 
-3. Edit the config file via chezmoi and replace the theme name.
+3. On the desktop, edit the config file via chezmoi and replace the theme name. On the laptop, edit the Lua-format configuration maintained on the laptop itself.
 
 - Edit `hyprland.conf`:
 

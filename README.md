@@ -54,6 +54,11 @@
 - RGB ライティング制御（デスクトップ）: [OpenRGB](https://openrgb.org/plugins.html)
     - 👉 エフェクトプラグイン: [OpenRGB Effects Plugin](https://openrgb.org/plugin_effects.html)
 
+### ラップトップ固有の設定
+
+ラップトップ（hostname: `arch-laptop`）では、`hyprland.conf`、`hyprpaper.conf`、`hypridle.conf` を配置しません。
+ラップトップ側では現在Lua形式で設定を管理しており、HyprlandとHyprpaperの詳細設定もラップトップ側で行います。
+
 ### WSL専用（移行予定）
 
 - クリップボード: [win32yank](https://github.com/equalsraf/win32yank)
@@ -73,7 +78,7 @@ dotfiles/
     │  │  ├ shaders/                              # cavaシェーダー
     │  │  └ themes/                               # cavaテーマ
     │  ├ gh/                                      # GitHub CLI設定
-    │  ├ hypr/                                    # Hyprland / hypridle / hyprpaper設定
+    │  ├ hypr/                                    # Hyprland / hypridle / hyprpaper設定（ラップトップでは一部除外）
     │  ├ kitty/                                   # Kittyターミナル設定
     │  ├ private_Hyper/                           # Hyperターミナル設定 (OS別パス分岐テンプレート)
     │  ├ private_fcitx5/                          # 日本語入力設定 (fcitx5 + SKK)
@@ -265,7 +270,7 @@ mkdir -p ~/.icons
 unzip -q ~/Downloads/<テーマ>.zip -d ~/.icons
 ```
 
-3. chezmoi経由で設定ファイルを編集し、テーマ名を書き換えます。
+3. デスクトップではchezmoi経由で設定ファイルを編集し、テーマ名を書き換えます。ラップトップでは、ラップトップ側で管理しているLua形式の設定を編集してください。
 
 - `hyprland.conf` の編集
 
