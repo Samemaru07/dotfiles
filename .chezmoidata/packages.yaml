@@ -12,6 +12,7 @@ packages:
       - tmux
       - lazygit
       - less
+      - dolphin
       - xdg-utils
       - feh
       - tree-sitter-cli
