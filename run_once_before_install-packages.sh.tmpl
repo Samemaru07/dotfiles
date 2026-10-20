@@ -1,7 +1,10 @@
 {{- $isWSL := (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
-{{- $packages := .packages.common -}}
-{{- if not $isWSL -}}
-{{- $packages = concat $packages .packages.desktop -}}
+{{- $isLaptop := eq .chezmoi.hostname "arch-laptop" -}}
+{{- $packages := .packages.shared.pacman -}}
+{{- $aurPackages := .packages.shared.aur -}}
+{{- if and (not $isWSL) (not $isLaptop) -}}
+{{- $packages = concat $packages .packages.desktop_only.pacman -}}
+{{- $aurPackages = concat $aurPackages .packages.desktop_only.aur -}}
 {{- end -}}
 {{- if eq .chezmoi.osRelease.id "arch" -}}
 #!/bin/bash
@@ -9,7 +12,7 @@ set -e
 
 sudo pacman -S --needed --noconfirm {{ $packages | join " " }}
 {{ if not $isWSL }}
-yay -S --needed --noconfirm {{ .packages.aur | join " " }}
+yay -S --needed --noconfirm {{ $aurPackages | join " " }}
 
 xdg-user-dirs-update
 mkdir -p ~/Pictures/Screenshots

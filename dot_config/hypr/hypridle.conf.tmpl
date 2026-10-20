@@ -1,3 +1,5 @@
 general {
+{{- if ne .chezmoi.hostname "arch-laptop" }}
     after_sleep_cmd = pkill -x openrgb; sleep 3; openrgb --startminimized -p Ares.orp
+{{- end }}
 }

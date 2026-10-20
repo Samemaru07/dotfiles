@@ -39,7 +39,7 @@
 - バージョン管理: [Git](https://git-scm.com/)
     - 👉 ツール: [lazygit](https://github.com/jesseduffield/lazygit) / [GitHub CLI (gh)](https://cli.github.com/)
 
-### Arch Linux専用
+### Arch Linux環境共通
 
 - ウィンドウマネージャ: [Hyprland](https://hypr.land/)
 - ステータスバー: [Waybar](https://github.com/Alexays/Waybar)
@@ -51,10 +51,15 @@
 - 通知: [SwayNotificationCenter](https://github.com/ErikReider/SwayNotificationCenter)
 - オーディオビジュアライザ: [cava](https://github.com/karlstav/cava)
 - カーソル: [フェルン (葬送のフリーレン) のカーソル (FernCursor)](https://www.opendesktop.org/p/2352161/)
-- RGB ライティング制御: [OpenRGB](https://openrgb.org/plugins.html)
+- RGB ライティング制御（デスクトップ）: [OpenRGB](https://openrgb.org/plugins.html)
     - 👉 エフェクトプラグイン: [OpenRGB Effects Plugin](https://openrgb.org/plugin_effects.html)
 
-### WSL専用
+### ラップトップ固有の設定
+
+ラップトップ（hostname: `arch-laptop`）では、`hyprland.conf`、`hyprpaper.conf`、`hypridle.conf` を配置しません。
+ラップトップ側では現在Lua形式で設定を管理しており、HyprlandとHyprpaperの詳細設定もラップトップ側で行います。
+
+### WSL専用（移行予定）
 
 - クリップボード: [win32yank](https://github.com/equalsraf/win32yank)
 
@@ -73,7 +78,7 @@ dotfiles/
     │  │  ├ shaders/                              # cavaシェーダー
     │  │  └ themes/                               # cavaテーマ
     │  ├ gh/                                      # GitHub CLI設定
-    │  ├ hypr/                                    # Hyprland / hypridle / hyprpaper設定
+    │  ├ hypr/                                    # Hyprland / hypridle / hyprpaper設定（ラップトップでは一部除外）
     │  ├ kitty/                                   # Kittyターミナル設定
     │  ├ private_Hyper/                           # Hyperターミナル設定 (OS別パス分岐テンプレート)
     │  ├ private_fcitx5/                          # 日本語入力設定 (fcitx5 + SKK)
@@ -265,7 +270,7 @@ mkdir -p ~/.icons
 unzip -q ~/Downloads/<テーマ>.zip -d ~/.icons
 ```
 
-3. chezmoi経由で設定ファイルを編集し、テーマ名を書き換えます。
+3. デスクトップではchezmoi経由で設定ファイルを編集し、テーマ名を書き換えます。ラップトップでは、ラップトップ側で管理しているLua形式の設定を編集してください。
 
 - `hyprland.conf` の編集
 
