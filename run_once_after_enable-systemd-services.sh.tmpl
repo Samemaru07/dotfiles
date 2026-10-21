@@ -1,0 +1,8 @@
+{{- $isWSL := (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
+{{- if and (eq .chezmoi.osRelease.id "arch") (not $isWSL) }}
+#!/bin/bash
+set -e
+
+sudo systemctl enable sddm.service
+sudo systemctl enable --now bluetooth.service
+{{- end }}

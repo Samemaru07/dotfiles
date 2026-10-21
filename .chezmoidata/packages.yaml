@@ -45,6 +45,10 @@ packages:
       - fcitx5-im
       - fcitx5-skk
       - networkmanager
+      - network-manager-applet
+      - blueman
+      - bluez-utils
+      - pavucontrol
       - cava
       - btop
       - kitty
