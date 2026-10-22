@@ -10,8 +10,9 @@
     min-height: 0;
 }
 
-window {
-    background-color: @background;
+/* バー全体は透明にし、左・中央・右をそれぞれ独立した背景にする */
+window#waybar {
+    background-color: transparent;
 }
 
 tooltip {
@@ -26,9 +27,13 @@ tooltip label {
     text-shadow: none;
 }
 
-#waybar {
-    background: alpha(@background, 0.65);
-    border-radius: 0;
+/* ---------- 左・中央・右のブロック ---------- */
+.modules-left,
+.modules-center,
+.modules-right {
+    background-color: alpha(@background, 0.65);
+    border-radius: 10px;
+    padding: 0 4px;
 }
 
 #workspaces {
@@ -60,7 +65,10 @@ tooltip label {
 }
 
 #custom-power,
-#tray,
+#window,
+#custom-cc,
+#cpu,
+#memory,
 #bluetooth,
 #network,
 #custom-battery,
@@ -73,6 +81,9 @@ tooltip label {
 }
 
 #custom-power:hover,
+#custom-cc:hover,
+#cpu:hover,
+#memory:hover,
 #bluetooth:hover,
 #network:hover,
 #custom-battery:hover,
@@ -81,8 +92,62 @@ tooltip label {
     background-color: alpha(@select, 0.5);
 }
 
+#window {
+    color: alpha(@foreground, 0.7);
+    margin-left: 6px;
+}
+
+#sys,
+#conn,
+#out,
+#custom-skk {
+    background-color: alpha(@select, 0.3);
+    border-radius: 8px;
+    margin: 3px 2px;
+}
+
+/* セパレータ */
+#custom-sep {
+    color: alpha(@foreground, 0.3);
+    margin: 1px 0 1px 6px;
+    padding: 0;
+}
+
+/* コントロールパネルボタン */
+#custom-cc {
+    color: @foreground;
+    margin: 3px 4px 3px 4px;
+    padding: 0;
+    min-width: 30px;
+    border-radius: 5px;
+}
+
+#cpu.warning,
+#memory.warning {
+    color: @orange;
+}
+
+#cpu.critical,
+#memory.critical {
+    color: @red;
+}
+
 #bluetooth {
     color: @yellow;
+}
+
+#bluetooth,
+#network {
+    font-size: 16px;
+    min-width: 40px;
+    padding: 0;
+    margin: 1px 0;
+}
+
+#bluetooth label,
+#network label {
+    padding: 0;
+    margin: 0;
 }
 
 #network {
@@ -98,12 +163,11 @@ tooltip label {
 }
 
 #clock {
-    margin-right: 10px;
     color: @blue;
 }
 
 #custom-power {
-    margin-left: 10px;
+    margin-left: 4px;
     padding: 0px 10px 0 15px;
 }
 
