@@ -40,7 +40,6 @@ packages:
       - hyprpaper
       - waybar
       - wofi
-      - swaync
       - sddm
       - fcitx5-im
       - fcitx5-skk
