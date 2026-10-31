@@ -9,33 +9,33 @@
         "group/conn",
         "group/out",
         "custom/sep",
-        "custom/cc",
+        "custom/cc"
     ],
     "custom/skk": {
         "exec": "test \"$(fcitx5-remote)\" = \"2\" && echo \"あ\" || echo \"Ａ\"",
         "interval": 1,
         "format": "{}",
         "tooltip": false,
-        "on-click": "fcitx5-remote -t",
+        "on-click": "fcitx5-remote -t"
     },
     "custom/power": {
         "format": " ",
         "tooltip": false,
-        "on-click": "wlogout -b 5",
+        "on-click": "wlogout -b 5"
     },
     "hyprland/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
         "warp-on-scroll": false,
         "format": "{name}",
-        "cursor": true,
+        "cursor": true
     },
     "bluetooth": {
         "format": "",
         "format-disabled": "󰂲",
         "format-connected": "󰂱",
         "on-click": "blueman-manager",
-        "align": 0.5,
+        "align": 0.5
     },
     "network": {
         "format-wifi": " ",
@@ -44,13 +44,13 @@
         "format-disconnected": "  Disconnected",
         "tooltip": false,
         "on-click": "nm-connection-editor",
-        "align": 0.5,
+        "align": 0.5
     },
     "battery": {
         "states": {
             "good": 85,
             "warning": 30,
-            "critical": 15,
+            "critical": 15
         },
         "format": "{icon} {capacity}%",
         "format-full": "{icon} {capacity}%",
@@ -59,11 +59,11 @@
         "format-alt": "{icon} {capacity}%",
         "format-icons": [" ", " ", " ", " ", " "],
         "tooltip-format": "{time}",
-        "cursor": false,
+        "cursor": false
     },
     "custom/battery": {
-        "format": "  100%",
-        "tooltip": false,
+        "format": " 100%",
+        "tooltip": false
     },
     "pulseaudio": {
         "format": "{icon} {volume}%",
@@ -73,11 +73,11 @@
         "format-icons": {
             "headphone": " ",
             "headset": " ",
-            "default": [" "],
+            "default": [" "]
         },
         "on-click": "~/.config/waybar/scripts/toggle-pavucontrol.sh",
         "scroll-step": 5,
-        "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
     },
     "clock": {
         "format": "{:%a %Y/%m/%d %H:%M}",
@@ -88,54 +88,55 @@
                 "months": "<b>{}</b>",
                 "weekdays": "<b>{}</b>",
                 "days": "{}",
-                "today": "<b><u>{}</u></b>",
-            },
+                "today": "<b><u>{}</u></b>"
+            }
         },
-        "on-click": "swaync-client -t -sw",
+        "on-click": "qs -c qs-notif ipc call notif close; qs -c qs-cal ipc call cal toggle"
     },
     "modules-center": ["clock"],
     "group/sys": {
         "orientation": "inherit",
-        "modules": ["cpu", "memory"],
+        "modules": ["cpu", "memory"]
     },
     "group/conn": {
         "orientation": "inherit",
-        "modules": ["bluetooth", "network"],
+        "modules": ["bluetooth", "network"]
     },
     "group/out": {
         "orientation": "inherit",
-        "modules": ["pulseaudio", "custom/battery"],
+        "modules": ["pulseaudio", "custom/battery"]
+        // TODO: custom-batteryはデスクトップのみ！
     },
     "hyprland/window": {
         "format": "{title}",
         "max-length": 40,
-        "separate-outputs": true,
+        "separate-outputs": true
     },
     "cpu": {
         "format": " {usage}%",
         "interval": 2,
         "states": {
             "warning": 70,
-            "critical": 90,
+            "critical": 90
         },
-        "tooltip": false,
+        "tooltip": false
     },
     "memory": {
         "format": "󰍛 {percentage}%",
         "interval": 5,
         "states": {
             "warning": 70,
-            "critical": 90,
+            "critical": 90
         },
-        "tooltip-format": "{used:0.1f}GiB / {total:0.1f}GiB",
+        "tooltip-format": "{used:0.1f}GiB / {total:0.1f}GiB"
     },
     "custom/sep": {
         "format": "│",
-        "tooltip": false,
+        "tooltip": false
     },
     "custom/cc": {
         "format": "",
         "tooltip": false,
-        "on-click": "swaync-client -t -sw",
-    },
+        "on-click": "qs -c qs-cal ipc call cal close; qs -c qs-notif ipc call notif toggle"
+    }
 }

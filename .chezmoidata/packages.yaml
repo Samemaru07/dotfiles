@@ -62,10 +62,15 @@ packages:
       - ttf-jetbrains-mono-nerd
       - noto-fonts-cjk
       - noto-fonts-emoji
+      - vdirsyncer
+      - khal
+      - qt6-declarative
+      - xor-xrandr
     aur:
       - quickshell
       - wlogout
       - zen-browser-bin
+      - sddm-astronaut-theme
   desktop_only:
     pacman:
       - openrgb
@@ -74,3 +79,4 @@ packages:
   laptop_only:
     pacman:
       - sof-firmware
+      - brightnessctl

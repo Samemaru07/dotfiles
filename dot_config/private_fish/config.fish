@@ -1,8 +1,12 @@
-# ssh-agent
-if test -z "$SSH_AUTH_SOCK"
-    eval (ssh-agent -c) > /dev/null
-    ssh-add "$HOME/.ssh/id_ed25519"
+if not status is-interactive
+    exit
 end
+# ssh-agent
+# if test -z "$SSH_AUTH_SOCK"
+#     eval (ssh-agent -c) > /dev/null
+#     ssh-add "$HOME/.ssh/id_ed25519"
+# end
+set -gx SSH_AUTH_SOCK $XDG_RUNTIME_DIR/ssh-agent.socket
 
 # alias
 # Git/GitHubの通信プロトコル。学校ではHTTPSに
@@ -48,3 +52,17 @@ if status is-login
         exec start-hyprland
     end
 end
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+if test -f /opt/miniforge/bin/conda
+    eval /opt/miniforge/bin/conda "shell.fish" "hook" $argv | source
+else
+    if test -f "/opt/miniforge/etc/fish/conf.d/conda.fish"
+        . "/opt/miniforge/etc/fish/conf.d/conda.fish"
+    else
+        set -x PATH "/opt/miniforge/bin" $PATH
+    end
+end
+# <<< conda initialize <<<
+
