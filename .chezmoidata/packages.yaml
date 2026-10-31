@@ -66,6 +66,10 @@ packages:
       - khal
       - qt6-declarative
       - xor-xrandr
+      - libreoffice-fresh
+      - libreoffice-fresh-ja
+      - ttf-sazanami
+      - zenity
     aur:
       - quickshell
       - wlogout
