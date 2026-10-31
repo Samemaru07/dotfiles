@@ -104,8 +104,11 @@
     },
     "group/out": {
         "orientation": "inherit",
+        {{- if eq .chezmoi.hostname "arch-laptop" }}
+        "modules": ["pulseaudio", "battery"]
+        {{- else }}
         "modules": ["pulseaudio", "custom/battery"]
-        // TODO: custom-batteryはデスクトップのみ！
+        {{- end }}
     },
     "hyprland/window": {
         "format": "{title}",
