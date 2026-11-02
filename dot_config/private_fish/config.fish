@@ -25,9 +25,10 @@ set -gx EDITOR "nvim"
 # デスクトップ環境の設定
 set -gx DE generic
 
-# Neovim/Toggleterm 内でない場合のみ fastfetch を実行
+# Neovim/Toggleterm/Tmux内でない場合のみfastfetchを実行
 if not set -q TOGGLETERM_ID
     and test -z "$NVIM"
+    and not set -q TMUX
     and not set -q __FF_DONE
     set -g __FF_DONE 1
     fastfetch
@@ -41,14 +42,12 @@ if status is-login
 end
 
 # >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
+# conda (遅延初期化: 初回のconda実行時にだけhookを読み込む)
 if test -f /opt/miniforge/bin/conda
-    eval /opt/miniforge/bin/conda "shell.fish" "hook" $argv | source
-else
-    if test -f "/opt/miniforge/etc/fish/conf.d/conda.fish"
-        . "/opt/miniforge/etc/fish/conf.d/conda.fish"
-    else
-        set -x PATH "/opt/miniforge/bin" $PATH
+    function conda
+        functions -e conda
+        eval /opt/miniforge/bin/conda "shell.fish" "hook" | source
+        conda $argv
     end
 end
 # <<< conda initialize <<<
