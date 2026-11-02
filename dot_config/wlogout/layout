@@ -12,7 +12,7 @@
 }
 {
     "label": "suspend",
-    "action": "loginctl lock-session; sleep 1; systemctl suspend",
+    "action": "pidof hyprlock || hyprlock & sleep 1; systemctl suspend",
     "text": "󰒲 Sleep",
     "keybind": "s"
 }
