@@ -7,95 +7,95 @@
         "padding": {
             "top": 1,
             "right": 1,
-            "left": 1,
-        },
+            "left": 1
+        }
     },
     "display": {
         "separator": " ┃ ",
         "color": {
             "keys": "red",
-            "title": "bright_red",
-        },
+            "title": "bright_red"
+        }
     },
     "modules": [
         "break",
         {
             "type": "custom",
-            "format": "\u001b[1;31m「あんたバカぁ？\u001b[0m",
+            "format": "\u001b[1;31m「あんたバカぁ？\u001b[0m"
         },
         {
             "type": "custom",
-            "format": "\u001b[1;31m  これくらい、サクッと終わらせなさいよね！\u001b[0m",
+            "format": "\u001b[1;31m  これくらい、サクッと終わらせなさいよね！\u001b[0m"
         },
         {
             "type": "custom",
-            "format": "\u001b[1;31m  私が応援してあげるんだから、期待に応えて見せなさいよ！」\u001b[0m",
+            "format": "\u001b[1;31m  私が応援してあげるんだから、期待に応えて見せなさいよ！」\u001b[0m"
         },
         "break",
         {
             "type": "title",
-            "format": " \u001b[1;41;30m ARCH \u001b[0m \u001b[1;31m samemaru\u001b[0m",
+            "format": " \u001b[1;41;30m ARCH \u001b[0m \u001b[1;31m samemaru\u001b[0m"
         },
         {
             "type": "custom",
-            "format": "\u001b[90m ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m",
+            "format": "\u001b[90m ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m"
         },
         {
             "type": "os",
             "key": " 󰣇 SYSTEM ",
-            "keyColor": "red",
+            "keyColor": "red"
         },
         {
             "type": "shell",
             "key": " 󰞷 SHELL  ",
-            "keyColor": "light_red",
+            "keyColor": "light_red"
         },
         {
             "type": "terminal",
             "key": "  TERM   ",
-            "keyColor": "light_red",
+            "keyColor": "light_red"
         },
         {
             "type": "wm",
             "key": " 󱂬 ENV    ",
-            "keyColor": "light_red",
+            "keyColor": "light_red"
         },
         "break",
         {
             "type": "cpu",
             "key": " 󰻠 COMPUTE",
             "keyColor": "yellow",
-            "temp": true,
+            "temp": true
         },
         {
             "type": "gpu",
             "key": " 󰍹 RENDER ",
-            "keyColor": "yellow",
+            "keyColor": "yellow"
         },
         {
             "type": "memory",
             "key": " 󰑭 RAM    ",
-            "keyColor": "yellow",
+            "keyColor": "yellow"
         },
         {
             "type": "disk",
             "key": " 󰋊 NVME   ",
             "keyColor": "yellow",
-            "folders": "/",
+            "folders": "/"
         },
         "break",
         {
             "type": "command",
             "key": " 󰅐 STAMP  ",
             "keyColor": "white",
-            "text": "date '+%Y.%m.%d - %H:%M:%S'",
+            "text": "date '+%Y.%m.%d - %H:%M:%S'"
         },
         "break",
         {
             "type": "colors",
             "paddingLeft": 2,
-            "symbol": "circle",
+            "symbol": "circle"
         },
-        "break",
-    ],
+        "break"
+    ]
 }
