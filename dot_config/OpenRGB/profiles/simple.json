@@ -1,63 +1,43 @@
 {
     "controllers": [
         {
-            "active_mode": 0,
+            "active_mode": 2,
             "colors": [
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215,
-                16777215
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
             ],
             "configuration": null,
             "description": "ASUS Aura USB Mainboard Device",
@@ -168,69 +148,9 @@
                 },
                 {
                     "name": "Addressable RGB Header 1, LED 30"
-                },
-                {
-                    "name": "Addressable RGB Header 1, LED 31"
-                },
-                {
-                    "name": "Addressable RGB Header 1, LED 32"
-                },
-                {
-                    "name": "Addressable RGB Header 1, LED 33"
-                },
-                {
-                    "name": "Addressable RGB Header 1, LED 34"
-                },
-                {
-                    "name": "Addressable RGB Header 1, LED 35"
-                },
-                {
-                    "name": "Addressable RGB Header 1, LED 36"
-                },
-                {
-                    "name": "Addressable RGB Header 1, LED 37"
-                },
-                {
-                    "name": "Addressable RGB Header 1, LED 38"
-                },
-                {
-                    "name": "Addressable RGB Header 1, LED 39"
-                },
-                {
-                    "name": "Addressable RGB Header 1, LED 40"
-                },
-                {
-                    "name": "Addressable RGB Header 1, LED 41"
-                },
-                {
-                    "name": "Addressable RGB Header 1, LED 42"
-                },
-                {
-                    "name": "Addressable RGB Header 1, LED 43"
-                },
-                {
-                    "name": "Addressable RGB Header 1, LED 44"
-                },
-                {
-                    "name": "Addressable RGB Header 1, LED 45"
-                },
-                {
-                    "name": "Addressable RGB Header 1, LED 46"
-                },
-                {
-                    "name": "Addressable RGB Header 1, LED 47"
-                },
-                {
-                    "name": "Addressable RGB Header 1, LED 48"
-                },
-                {
-                    "name": "Addressable RGB Header 1, LED 49"
-                },
-                {
-                    "name": "Addressable RGB Header 1, LED 50"
                 }
             ],
-            "location": "HID: /dev/hidraw1",
+            "location": "HID: /dev/hidraw0",
             "modes": [
                 {
                     "brightness": 0,
@@ -266,7 +186,7 @@
                     "brightness_min": 0,
                     "color_mode": 2,
                     "colors": [
-                        0
+                        16777215
                     ],
                     "colors_max": 1,
                     "colors_min": 1,
@@ -372,6 +292,146 @@
                     "speed": 0,
                     "speed_max": 0,
                     "speed_min": 0
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 0,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 256,
+                    "name": "Spectrum Cycle Breathing",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 0,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 256,
+                    "name": "Spectrum Cycle Chase Fade",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 0,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 256,
+                    "name": "Spectrum Cycle Chase",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 0,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 256,
+                    "name": "Spectrum Cycle Wave",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 0,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 256,
+                    "name": "Chase Rainbow Pulse",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 0,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 256,
+                    "name": "Random Flicker",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 0,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 256,
+                    "name": "Gentle Transition",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 0,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 256,
+                    "name": "Wave Propagation",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 0,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 256,
+                    "name": "Wave Propagation Pause",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 0,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 256,
+                    "name": "Red Pulse",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
                 }
             ],
             "name": "ASUS TUF GAMING B550-PLUS",
@@ -396,8 +456,8 @@
                 {
                     "display_name": "",
                     "flags": 4158,
-                    "leds_count": 50,
-                    "leds_max": 120,
+                    "leds_count": 30,
+                    "leds_max": 500,
                     "leds_min": 0,
                     "matrix_map": {
                         "height": 0,
@@ -409,6 +469,6 @@
             ]
         }
     ],
-    "profile_name": "simple-white",
+    "profile_name": "simple",
     "profile_version": 6
 }
