@@ -60,8 +60,13 @@ PanelWindow {
         }
     }
 
+    {{- if eq .chezmoi.hostname "arch-laptop" }}
+    implicitWidth: 1000
+    implicitHeight: 600
+    {{- else }}
     implicitWidth: 1200
     implicitHeight: 800
+    {{- end}}
     color: "transparent"
     visible: isActive
     // LayerShell Configs
@@ -321,8 +326,10 @@ PanelWindow {
                                 if (workspaceId === undefined || workspaceId === null)
                                     continue;
 
+                                {{- if ne .chezmoi.hostname "arch-laptop" }}
                                 if (workspaceId === 1)
                                     continue;
+                                {{- end}}    
 
                                 var size = clientInfo && clientInfo.size ? clientInfo.size : [0, 0];
                                 var at = clientInfo && clientInfo.at ? clientInfo.at : [-1000, -1000];
