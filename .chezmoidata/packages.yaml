@@ -69,6 +69,7 @@ packages:
       - libreoffice-fresh-ja
       - ttf-sazanami
       - zenity
+      - rebuild-detector
     aur:
       - quickshell
       - wlogout
