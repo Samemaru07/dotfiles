@@ -64,7 +64,7 @@ packages:
       - vdirsyncer
       - khal
       - qt6-declarative
-      - xor-xrandr
+      - xorg-xrandr
       - libreoffice-fresh
       - libreoffice-fresh-ja
       - ttf-sazanami
