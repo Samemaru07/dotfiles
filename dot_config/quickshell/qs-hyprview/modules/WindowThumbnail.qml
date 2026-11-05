@@ -40,9 +40,12 @@ Item {
         if (!hWin)
             return ;
 
+        var address = String(hWin.address);
+        if (!address.startsWith("0x"))
+            address = "0x" + address;
         root.toggleExpose();
         Qt.callLater(function() {
-            Hyprland.dispatch("focuswindow address:0x" + hWin.address);
+            Hyprland.dispatch('hl.dispatch(hl.dsp.focus { window = "address:' + address + '" })');
         });
     }
 
@@ -50,7 +53,10 @@ Item {
         if (!hWin)
             return ;
 
-        Hyprland.dispatch("closewindow address:0x" + hWin.address);
+        var address = String(hWin.address);
+        if (!address.startsWith("0x"))
+            address = "0x" + address;
+        Hyprland.dispatch('hl.dispatch(hl.dsp.closewindow { window = "address:' + address + '" })');
     }
 
     function refreshThumb() {

@@ -1,0 +1,427 @@
+{{- $laptop := eq .chezmoi.hostname "arch-laptop" -}}
+-- Hyprland 0.57+ (Lua)
+-- ホスト名がarch-laptopならラップトップ、それ以外はデスクトップ向けに分岐する
+
+------------------
+---- MONITORS ----
+------------------
+
+{{- if $laptop }}
+hl.monitor({
+    output = "",
+    mode = "preferred",
+    position = "auto",
+    scale = "auto"
+})
+{{- else }}
+hl.monitor({ output = "DP-1", mode = "1920x1080@60", position = "0x0", scale = 1 })
+hl.monitor({ output = "DP-2", mode = "1920x1080@60", position = "1920x0", scale = 1 })
+
+-- 奇数ワークスペースはDP-1, 偶数はDP-2。1と2が各モニタのデフォルト
+for i = 1, 10 do
+    local mon = (i % 2 == 1) and "DP-1" or "DP-2"
+    hl.workspace_rule({ workspace = tostring(i), monitor = mon, default = (i <= 2) })
+end
+{{- end }}
+
+---------------------
+---- My PROGRAMS ----
+---------------------
+
+local terminal = "ghostty"
+local fileManager = "dolphin"
+local menu = "wofi --show drun"
+
+--------------------
+---- AUTO START ----
+--------------------
+
+hl.on("hyprland.start", function()
+    hl.exec_cmd("fcitx5 -d")
+    hl.exec_cmd("hyprpaper")
+    hl.exec_cmd("nm-applet --indicator")
+    hl.exec_cmd("/usr/lib/polkit-kde-authentication-agent-1")
+    hl.exec_cmd("waybar")
+    hl.exec_cmd("quickshell -c qs-hyprview")
+    hl.exec_cmd("quickshell -c qs-cal")
+    hl.exec_cmd("quickshell -c qs-notif")
+{{- if not $laptop }}
+    hl.exec_cmd("hyprctl setcursor FernCursor 24")
+    hl.exec_cmd("openrgb --startminimized")
+    hl.exec_cmd("spotify")
+    hl.exec_cmd("zen-browser")
+    hl.exec_cmd('kitty --class="cava" -e cava')
+    hl.exec_cmd('kitty --class="asciiquarium" -e asciiquarium')
+    hl.exec_cmd('kitty --class="tty-clock" -e tty-clock -c')
+    hl.exec_cmd('kitty --class="btop" -e btop')
+{{- end}}
+end)
+
+-------------------------------
+---- ENVIRONMENT VARIABLES ----
+-------------------------------
+
+hl.env("QT_IM_MODULE", "fcitx")
+hl.env("XMODIFIERS", "@im=fcitx")
+{{- if $laptop }}
+hl.env("XCURSOR_SIZE", "18")
+hl.env("HYPRCURSOR_SIZE", "18")
+{{- else }}
+hl.env("LIBVA_DRIVER_NAME", "nvidia")
+hl.env("XDG_SESSION_TYPE", "wayland")
+hl.env("GBM_BACKEND", "nvidia-drm")
+hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
+hl.env("GTK_IM_MODULE", "fcitx")
+hl.env("XCURSOR_THEME", "FernCursor")
+hl.env("XCURSOR_SIZE", "24")
+hl.env("HYPRCURSOR_THEME", "FernCursor")
+hl.env("HYPRCURSOR_SIZE", "24")
+{{- end }}
+
+-----------------------
+---- LOOK AND FEEL ----
+-----------------------
+
+hl.config({
+    general = {
+        gaps_in = 5,
+        gaps_out = {{ if $laptop }}5{{ else }}10{{ end }},
+
+        border_size = 2,
+        col = {
+            active_border = "rgba(23,147,209,0.5)",
+            inactive_border = "rgba(595959aa)",
+        },
+
+        resize_on_border = true,
+        allow_tearing = false,
+
+        layout = "dwindle"
+    },
+
+    decoration = {
+        rounding = 10,
+        rounding_power = 2,
+
+        active_opacity = 1.0,
+        inactive_opacity = 1.0,
+
+        shadow = {
+            enabled = true,
+            range = 4,
+            render_power = 3,
+            color = 0xee1a1a1a,
+        },
+
+        blur = {
+            enabled = true,
+            size = 3,
+            passes = 1,
+            vibrancy = 0.1696,
+        },
+    },
+
+    animations = {
+        enabled = true
+    },
+})
+
+hl.curve("easeOutQuint",   { type = "bezier", points = { {0.23, 1},    {0.32, 1} } })
+hl.curve("easeInOutCubic", { type = "bezier", points = { {0.65, 0.05}, {0.36, 1} } })
+hl.curve("linear",         { type = "bezier", points = { {0, 0},       {1, 1}    } })
+hl.curve("almostLinear",   { type = "bezier", points = { {0.5, 0.5},   {0.75, 1} } })
+hl.curve("quick",          { type = "bezier", points = { {0.15, 0},    {0.1, 1}  } })
+hl.curve("easy",           { type = "spring", mass = 1, stiffness = 238.1191, dampening = 24.21279333 })
+
+hl.animation({ leaf = "global",        enabled = true, speed = 10,   bezier = "default" })
+hl.animation({ leaf = "border",        enabled = true, speed = 5.39, bezier = "easeOutQuint" })
+hl.animation({ leaf = "windows",       enabled = true, speed = 4.79, spring = "easy" })
+hl.animation({ leaf = "windowsIn",     enabled = true, speed = 4.1,  spring = "easy",         style = "popin 87%" })
+hl.animation({ leaf = "windowsOut",    enabled = true, speed = 1.49, bezier = "linear",       style = "popin 87%" })
+hl.animation({ leaf = "fadeIn",        enabled = true, speed = 1.73, bezier = "almostLinear" })
+hl.animation({ leaf = "fadeOut",       enabled = true, speed = 1.46, bezier = "almostLinear" })
+hl.animation({ leaf = "fade",          enabled = true, speed = 3.03, bezier = "quick" })
+hl.animation({ leaf = "layers",        enabled = true, speed = 3.81, bezier = "easeOutQuint" })
+hl.animation({ leaf = "layersIn",      enabled = true, speed = 4,    bezier = "easeOutQuint", style = "fade" })
+hl.animation({ leaf = "layersOut",     enabled = true, speed = 1.5,  bezier = "linear",       style = "fade" })
+hl.animation({ leaf = "fadeLayersIn",  enabled = true, speed = 1.79, bezier = "almostLinear" })
+hl.animation({ leaf = "fadeLayersOut", enabled = true, speed = 1.39, bezier = "almostLinear" })
+hl.animation({ leaf = "workspaces",    enabled = true, speed = 1.94, bezier = "almostLinear", style = "slide" })
+hl.animation({ leaf = "workspacesIn",  enabled = true, speed = 1.21, bezier = "almostLinear", style = "slide" })
+hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "almostLinear", style = "slide" })
+hl.animation({ leaf = "zoomFactor",    enabled = true, speed = 7,    bezier = "quick" })
+
+hl.config({
+    dwindle = {
+        preserve_split = true,
+    },
+    master = {
+        new_status = "master",
+    },
+    scrolling = {
+        fullscreen_on_one_column = true,
+    },
+})
+
+----------------
+----  MISC  ----
+----------------
+
+hl.config({
+    misc = {
+        force_default_wallpaper  = 0,
+        disable_hyprland_logo    = true,
+        disable_splash_rendering = true,
+    },
+})
+
+
+---------------
+---- INPUT ----
+---------------
+
+hl.config({
+    input = {
+        kb_layout  = "us",
+        kb_variant = "",
+        kb_model   = "",
+        kb_options = "",
+        kb_rules   = "",
+
+        follow_mouse = 1,
+{{- if $laptop }}
+        sensitivity   = 0.9,
+        accel_profile = "flat",
+{{- else }}
+        sensitivity = 0,
+{{- end }}
+
+        touchpad = {
+            natural_scroll = true,
+            scroll_factor  = 0.1,
+        },
+    },
+})
+
+hl.gesture({
+    fingers   = 3,
+    direction = "horizontal",
+    action    = "workspace",
+})
+
+
+---------------------
+---- KEYBINDINGS ----
+---------------------
+
+local mainMod = "SUPER"
+
+hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
+hl.bind(mainMod .. " + C", hl.dsp.window.close())
+hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
+hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
+hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
+hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
+hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))
+
+hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
+hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
+hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up" }))
+hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
+
+-- mainMod + [0-9] でワークスペース切り替え、mainMod + SHIFT + [0-9] でウィンドウ移動
+for i = 1, 10 do
+    local key = i % 10
+    hl.bind(mainMod .. " + " .. key,         hl.dsp.focus({ workspace = i }))
+    hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
+end
+
+hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
+hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
+
+hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
+hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
+
+hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
+hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
+
+-- 音量・メディアキー
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true })
+hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true, repeating = true })
+hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),   { locked = true, repeating = true })
+
+hl.bind("XF86AudioNext",  hl.dsp.exec_cmd("playerctl next"),       { locked = true })
+hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
+hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
+hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
+
+-- quickshell
+hl.bind(mainMod .. " + TAB", hl.dsp.exec_cmd("quickshell ipc -c qs-hyprview call expose toggle columnar"))
+
+-- 直前にアクティブだったウィンドウへ戻る
+hl.bind("ALT + TAB", hl.dsp.focus({ last = true }))
+
+{{- if $laptop }}
+
+-- 輝度キー
+hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"), { locked = true, repeating = true })
+
+-- カバーを閉じたらロックしてサスペンド (ちらつき防止)
+hl.bind("switch:on:Lid Switch", hl.dsp.exec_cmd("pidof hyprlock || hyprlock & sleep 3; systemctl suspend"), { locked = true })
+
+{{- end }}
+-- スクショ (ファイル名を入力して ~/Pictures/ に保存)
+hl.bind("Print", hl.dsp.exec_cmd([[
+    filename=$(zenity --entry --title="スクショ保存" --text="ファイル名を入力してください（拡張子不要）:")
+    if [ -n "$filename" ]; then
+        grim -g "$(slurp)" "$HOME/Pictures/${filename}.png"
+    fi
+]]))
+hl.bind("SUPER + Print", hl.dsp.exec_cmd([[
+    filename=$(zenity --entry --title="全画面スクショ保存" --text="ファイル名を入力してください（拡張子不要）:")
+    if [ -n "$filename" ]; then
+        grim "$HOME/Pictures/${filename}.png"
+    fi
+]]))
+
+--------------------------------
+---- WINDOWS AND WORKSPACES ----
+--------------------------------
+
+hl.window_rule({
+    name  = "suppress-maximize-events",
+    match = { class = ".*" },
+
+    suppress_event = "maximize",
+})
+
+hl.window_rule({
+    name  = "fix-xwayland-drags",
+    match = {
+        class      = "^$",
+        title      = "^$",
+        xwayland   = true,
+        float      = true,
+        fullscreen = false,
+        pin        = false,
+    },
+
+    no_focus = true,
+})
+
+hl.window_rule({
+    name  = "move-hyprland-run",
+    match = { class = "hyprland-run" },
+
+    move  = { 20, "monitor_h-120" },
+    float = true,
+})
+
+-- 以降のルールで個別に上書きする
+hl.window_rule({
+    name  = "float-center-all",
+    match = { class = ".*" },
+
+    float  = true,
+    center = true,
+})
+
+{{- if $laptop }}
+
+hl.window_rule({
+    name  = "zen-rule",
+    match = { class = "^zen$" },
+
+    float = false,
+})
+
+hl.window_rule({
+    name  = "ghostty-rule",
+    match = { class = "^com[.]mitchellh[.]ghostty$" },
+
+    float  = false,
+})
+{{- else }}
+
+-- WS1 (Dashboard)
+hl.window_rule({
+    name  = "ws1-spotify",
+    match = { class = "^Spotify$" },
+
+    workspace = "1 silent",
+    float     = true,
+    size      = { 1000, 600 },
+    move      = { 50, 50 },
+})
+
+hl.window_rule({
+    name  = "ws1-cava",
+    match = { class = "^cava$" },
+
+    workspace = "1 silent",
+    float     = true,
+    size      = { 1000, 350 },
+    move      = { 50, 680 },
+})
+
+hl.window_rule({
+    name  = "ws1-asciiquarium",
+    match = { class = "^asciiquarium$" },
+
+    workspace = "1 silent",
+    float     = true,
+    size      = { 770, 700 },
+    move      = { 1100, 50 },
+})
+
+hl.window_rule({
+    name  = "ws1-tty-clock",
+    match = { class = "^tty-clock$" },
+
+    workspace = "1 silent",
+    float     = true,
+    size      = { 770, 250 },
+    move      = { 1100, 780 },
+})
+
+-- WS2 (Terminal)
+hl.window_rule({
+    name  = "ws2-ghostty",
+    match = { class = "^com[.]mitchellh[.]ghostty$" },
+
+    workspace = "2 silent",
+    float     = false,
+})
+
+hl.window_rule({
+    name  = "ws2-feh",
+    match = { class = "^feh$" },
+
+    workspace = "2 silent",
+    float     = true,
+    center    = true,
+})
+
+-- WS3 (Browser)
+hl.window_rule({
+    name  = "ws3-zen-browser",
+    match = { class = "^zen$" },
+
+    workspace = "3 silent",
+    float     = false,
+})
+
+-- WS4 (System Monitor)
+hl.window_rule({
+    name  = "ws4-btop",
+    match = { class = "^btop$" },
+
+    workspace = "4 silent",
+    float     = true,
+    size      = { 1800, 1000 },
+    center    = true,
+})
+{{- end }}

@@ -40,7 +40,6 @@ packages:
       - hyprpaper
       - waybar
       - wofi
-      - swaync
       - sddm
       - fcitx5-im
       - fcitx5-skk
@@ -62,10 +61,20 @@ packages:
       - ttf-jetbrains-mono-nerd
       - noto-fonts-cjk
       - noto-fonts-emoji
+      - vdirsyncer
+      - khal
+      - qt6-declarative
+      - xorg-xrandr
+      - libreoffice-fresh
+      - libreoffice-fresh-ja
+      - ttf-sazanami
+      - zenity
+      - rebuild-detector
     aur:
       - quickshell
       - wlogout
       - zen-browser-bin
+      - sddm-astronaut-theme
   desktop_only:
     pacman:
       - openrgb
@@ -74,3 +83,4 @@ packages:
   laptop_only:
     pacman:
       - sof-firmware
+      - brightnessctl

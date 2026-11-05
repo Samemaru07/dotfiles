@@ -1,45 +1,37 @@
-# ssh-agent
-if test -z "$SSH_AUTH_SOCK"
-    eval (ssh-agent -c) > /dev/null
-    ssh-add "$HOME/.ssh/id_ed25519"
+# 非対話シェルのときはexit
+if not status is-interactive
+    exit
 end
 
-# alias
-# Git/GitHubの通信プロトコル。学校ではHTTPSに
-alias gith='git -c url."https://github.com/".insteadOf=git@github.com:'
+# ssh-agentについて、systemdのユーザユニットで動く方を使う
+set -gx SSH_AUTH_SOCK $XDG_RUNTIME_DIR/ssh-agent.socket
 
+# alias
 # fastfetch
 function ff
     clear
-    if set -q TMUX
-        fastfetch --raw ~/.config/fastfetch/asuka_tmux.raw --logo-width 50 --logo-height 20
-    else
-        fastfetch
-    end
+    fastfetch
 end
 
-if status is-interactive
-    # 起動の挨拶
-    set -g fish_greeting
+# 起動の挨拶
+set -g fish_greeting
 
-    # vi key bindings
-    fish_vi_key_bindings
+# vi key bindings
+fish_vi_key_bindings
 
-    # EDITORの設定
-    set -gx EDITOR "nvim"
+# EDITORの設定
+set -gx EDITOR "nvim"
 
-    # デスクトップ環境の設定
-    set -gx DE generic
+# デスクトップ環境の設定
+set -gx DE generic
 
-    # Neovim/Toggleterm 内でない場合のみ fastfetch を実行
-    if not set -q TOGGLETERM_ID
-        and test -z "$NVIM"
-        and not set -q __FF_DONE
-        set -g __FF_DONE 1
-        if not set -q TMUX
-            fastfetch
-        end
-    end
+# Neovim/Toggleterm/Tmux内でない場合のみfastfetchを実行
+if not set -q TOGGLETERM_ID
+    and test -z "$NVIM"
+    and not set -q TMUX
+    and not set -q __FF_DONE
+    set -g __FF_DONE 1
+    fastfetch
 end
 
 # Archのみ, ttyでのログイン成功後, Hyprlandを起動
@@ -48,3 +40,14 @@ if status is-login
         exec start-hyprland
     end
 end
+
+# >>> conda initialize >>>
+# conda (遅延初期化: 初回のconda実行時にだけhookを読み込む)
+if test -f /opt/miniforge/bin/conda
+    function conda
+        functions -e conda
+        eval /opt/miniforge/bin/conda "shell.fish" "hook" | source
+        conda $argv
+    end
+end
+# <<< conda initialize <<<
